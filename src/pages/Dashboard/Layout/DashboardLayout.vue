@@ -7,29 +7,8 @@
     ]"
   >
     <notifications></notifications>
-    <side-bar
-      :active-color="sidebarBackground"
-      :background-image="sidebarBackgroundImage"
-      :data-background-color="sidebarBackgroundColor"
-    >
-      <user-menu></user-menu>
-      <mobile-menu></mobile-menu>
-      <template slot="links">
-        <sidebar-item :link="{ name: 'Dashboard', icon: 'dashboard', path: '/dashboard' }"></sidebar-item>
-      </template>
-    </side-bar>
+    <top-navbar class="md-primary"></top-navbar>
     <div class="main-panel">
-      <top-navbar></top-navbar>
-
-      <fixed-plugin
-        :color.sync="sidebarBackground"
-        :colorBg.sync="sidebarBackgroundColor"
-        :sidebarMini.sync="sidebarMini"
-        :sidebarImg.sync="sidebarImg"
-        :image.sync="sidebarBackgroundImage"
-      >
-      </fixed-plugin>
-
       <div
         :class="{ content: !$route.meta.hideContent }"
         @click="toggleSidebar"
@@ -38,7 +17,7 @@
           <!-- your content here -->
           <router-view></router-view>
         </zoom-center-transition>
-      </div>
+      </div>  
       <content-footer v-if="!$route.meta.hideFooter"></content-footer>
     </div>
   </div>
@@ -52,7 +31,7 @@ function hasElement(className) {
   return document.getElementsByClassName(className).length > 0;
 }
 
-function initScrollbar(className) {
+function initScrollbar(className) { 
   if (hasElement(className)) {
     new PerfectScrollbar(`.${className}`);
     document.getElementsByClassName(className)[0].scrollTop = 0;
@@ -81,18 +60,12 @@ function reinitScrollbar() {
 
 import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
-import MobileMenu from "./Extra/MobileMenu.vue";
-import FixedPlugin from "../../FixedPlugin.vue";
-import UserMenu from "./Extra/UserMenu.vue";
 import { ZoomCenterTransition } from "vue2-transitions";
 
 export default {
   components: {
     TopNavbar,
     ContentFooter,
-    FixedPlugin,
-    MobileMenu,
-    UserMenu,
     ZoomCenterTransition
   },
   data() {
