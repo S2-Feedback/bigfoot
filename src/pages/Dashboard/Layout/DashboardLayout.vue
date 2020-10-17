@@ -1,29 +1,19 @@
 <template>
-  <div
-    class="wrapper"
-    :class="[
-      { 'nav-open': $sidebar.showSidebar },
-      { rtl: $route.meta.rtlActive }
-    ]"
-  >
+  <div class="wrapper" style="overflow-x:hidden;">
     <notifications></notifications>
-    <top-navbar class="md-primary"></top-navbar>
-    <div class="main-panel">
-      <div
-        :class="{ content: !$route.meta.hideContent }"
-        @click="toggleSidebar"
-      >
-        <zoom-center-transition :duration="200" mode="out-in">
-          <!-- your content here -->
-          <router-view></router-view>
+    <top-navbar class="md-primary" style="box-shadow: 0 6px 6px -5px black"></top-navbar>
+    <div class="main-panel" style='width:100%'>
+        <zoom-center-transition :duration="150" mode="out-in">
+          <router-view style="margin-top:30px;"></router-view>
         </zoom-center-transition>
-      </div>  
-      <content-footer v-if="!$route.meta.hideFooter"></content-footer>
+
     </div>
+    <content-footer></content-footer>    
   </div>
 </template>
 <script>
-/* eslint-disable no-new */
+
+
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
@@ -36,7 +26,6 @@ function initScrollbar(className) {
     new PerfectScrollbar(`.${className}`);
     document.getElementsByClassName(className)[0].scrollTop = 0;
   } else {
-    // try to init it later in case this component is loaded async
     setTimeout(() => {
       initScrollbar(className);
     }, 100);
@@ -47,11 +36,9 @@ function reinitScrollbar() {
   let docClasses = document.body.classList;
   let isWindows = navigator.platform.startsWith("Win");
   if (isWindows) {
-    // if we are on windows OS we activate the perfectScrollbar function
     initScrollbar("sidebar");
     initScrollbar("sidebar-wrapper");
     initScrollbar("main-panel");
-
     docClasses.add("perfect-scrollbar-on");
   } else {
     docClasses.add("perfect-scrollbar-off");
@@ -70,11 +57,6 @@ export default {
   },
   data() {
     return {
-      sidebarBackgroundColor: "black",
-      sidebarBackground: "green",
-      sidebarBackgroundImage: "./img/sidebar-2.jpg",
-      sidebarMini: true,
-      sidebarImg: true
     };
   },
   methods: {
@@ -94,11 +76,6 @@ export default {
   },
   mounted() {
     reinitScrollbar();
-  },
-  watch: {
-    sidebarMini() {
-      this.minimizeSidebar();
-    }
   }
 };
 </script>

@@ -5,8 +5,7 @@
         <md-card-header class="md-card-header-text md-card-header-primary" >
           <div class="card-text">
             <div style='display:flex; align-items:flex-end;'>
-              <md-icon>assignment</md-icon>
-              <h4 class="title">Patients</h4>              
+              <h4 class="title">{{patientInfo.lastName}}, {{patientInfo.firstName}}</h4>              
             </div>
           </div>
         </md-card-header>
@@ -55,22 +54,10 @@
               <md-table-cell md-label="Status">{{ item.status }}</md-table-cell>
               <md-table-cell md-label="Actions">
                 <md-button
-                  class="md-just-icon md-info md-simple"
-                  @click.native="handleLike(item)"
+                  class="md-just-icon md-success md-simple"
+                  @click.native="handleViewChecklist(item)"
                 >
-                  <md-icon>favorite</md-icon>
-                </md-button>
-                <md-button
-                  class="md-just-icon md-warning md-simple"
-                  @click.native="handleEdit(item)"
-                >
-                  <md-icon>dvr</md-icon>
-                </md-button>
-                <md-button
-                  class="md-just-icon md-danger md-simple"
-                  @click.native="handleDelete(item)"
-                >
-                  <md-icon>close</md-icon>
+                <svg-icon type="mdi" :path="path"></svg-icon>                  
                 </md-button>
               </md-table-cell>
             </md-table-row>
@@ -100,11 +87,14 @@ import { Pagination } from "@/components";
 import patients from "../Dashboard/Tables/patients";
 import Fuse from "fuse.js";
 import Swal from "sweetalert2";
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiArrowRightDropCircle  } from '@mdi/js'
 
 export default {
-    name:'HelloWorld',
+    name:'PatientView',
     components: {
-      Pagination
+      Pagination,
+      SvgIcon
     },
     
     computed: {
@@ -186,9 +176,14 @@ export default {
         if (indexToDelete >= 0) {
           this.tableData.splice(indexToDelete, 1);
         }
+      }, 
+      handleViewChecklist(event){
+        console.log("event?? ", event)
+        this.$router.push({path:'patientView', params:{patient:event}})
       }
     },
     mounted() {
+        console.log('what is the value ', this.patientInfo)
       // Fuse search initialization.
       this.fuseSearch = new Fuse(this.tableData, {
         keys: ["name", "email"],
@@ -208,7 +203,17 @@ export default {
         }
         this.searchedData = result;
       }
-    },        
+    },  
+    props:{
+        patientInfo:{
+            type:Object,
+            default:()=>{
+                return {
+                firstName:'',
+                lastName:'',
+            }}
+        }
+    },      
     data(){
       return (
           {
@@ -225,7 +230,9 @@ export default {
             propsToSearch: ["lastName", "firstName", "street", "city"],
             tableData: patients,
             searchedData: [],
-            fuseSearch: null          }        
+            fuseSearch: null,
+            path:mdiArrowRightDropCircle 
+          }        
       )
     }
 };

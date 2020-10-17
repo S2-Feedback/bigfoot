@@ -1,7 +1,6 @@
 <template>
 <amplify-authenticator>
-  <router-view></router-view>
-  <amplify-sign-out></amplify-sign-out>
+                                                                                                                                                              <router-view></router-view>
   </amplify-authenticator>
 </template>
 
