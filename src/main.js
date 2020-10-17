@@ -1,20 +1,11 @@
-// =========================================================
-// * Vue Material Dashboard PRO - v1.4.0
-// =========================================================
-//
-// * Product Page: https://www.creative-tim.com/product/vue-material-dashboard-pro
-// * Copyright 2019 Creative Tim (https://www.creative-tim.com)
-//
-// * Coded by Creative Tim
-//
-// =========================================================
-//
-// * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 import Vue from "vue";
 import VueRouter from "vue-router";
 import DashboardPlugin from "./material-dashboard";
+import Amplify from 'aws-amplify';
+import '@aws-amplify/ui-vue';
+import aws_exports from './aws-exports';
 
+Amplify.configure(aws_exports);
 // Plugins
 import App from "./App.vue";
 import Chartist from "chartist";
