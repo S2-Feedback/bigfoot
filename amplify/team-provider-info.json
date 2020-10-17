@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bigfoot-dev-02736-authRole",
+      "UnauthRoleArn": "arn:aws:iam::563233161948:role/amplify-bigfoot-dev-02736-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::563233161948:role/amplify-bigfoot-dev-02736-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-bigfoot-dev-02736-deployment",
+      "UnauthRoleName": "amplify-bigfoot-dev-02736-unauthRole",
+      "StackName": "amplify-bigfoot-dev-02736",
+      "StackId": "arn:aws:cloudformation:us-east-1:563233161948:stack/amplify-bigfoot-dev-02736/3d669750-104a-11eb-b34f-0ee5b74c6229",
+      "AmplifyAppId": "d8vihmqjpws2t"
+    },
+    "categories": {
+      "auth": {
+        "bigfootd334dec5": {}
+      }
+    }
+  }
+}
