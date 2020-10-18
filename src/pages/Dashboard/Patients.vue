@@ -9,7 +9,7 @@
               <h4 class="title">Patient List</h4>              
             </div>
           </div>
-          <md-button class="md-success controlHeight" style="display:flex; flex-direction:column;"><svg-icon type="mdi" :path="mdiPlusCircle"></svg-icon> <span>New Patient</span></md-button>
+          <md-button @click="()=>{showModal=true}" class="md-success controlHeight" style="display:flex; flex-direction:column;"><svg-icon type="mdi" :path="mdiPlusCircle"></svg-icon> <span>New Patient</span></md-button>
         </md-card-header>
         <md-card-content>
           <md-table
@@ -82,10 +82,21 @@
 
       </md-card>
     </div>      
+    <Modal v-if="showModal">
+       <template v-slot:header>
+         <p>New Patient</p>
+       </template>      
+       <template v-slot:body>
+         
+       </template>
+    </Modal>
+    
+  
   </div>
+
 </template>
 <script>
-import { Pagination } from "@/components";
+import { Pagination, Modal } from "@/components";
 import patients from "../Dashboard/Tables/patients";
 import Fuse from "fuse.js";
 import Swal from "sweetalert2";
@@ -93,10 +104,12 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiArrowRightDropCircle,mdiPlusCircle } from '@mdi/js'
 
 
+
 export default {
     name:'Patients',
     components: {
       Pagination,
+      Modal,
       SvgIcon
     },
     data(){
@@ -117,7 +130,8 @@ export default {
             searchedData: [],
             fuseSearch: null,
             mdiArrowRightDropCircle:mdiArrowRightDropCircle,
-            mdiPlusCircle:mdiPlusCircle 
+            mdiPlusCircle:mdiPlusCircle,
+            showModal:false
           }        
       )
     },    
