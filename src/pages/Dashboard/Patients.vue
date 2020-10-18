@@ -1,14 +1,15 @@
 <template>
   <div class='md-layout'>
     <div class="md-layout-item md-size-75 mx-auto">
-      <md-card style="box-shadow: black 0px 0px 16px -7px">
-        <md-card-header class="md-card-header-text md-card-header-green">
-          <div class="card-text" style="box-shadow:black 0px 0px 12px -4px">
-            <div style='display:flex; align-items:flex-end;'>
+      <md-card style="box-shadow: black 0px 0px 16px -7px;">
+        <md-card-header class="md-card-header-text md-card-header-blue" style='display:flex; justify-content:space-between; margin-bottom:30px; margin:none !important;'>
+          <div class="card-text" style="box-shadow:black 0px 0px 12px -4px; display: flex; align-items:center;">
+            <div style='display:flex; align-items:flex-end; width:330px;'>
               <md-icon>assignment</md-icon>
-              <h4 class="title" style="width:150px;">Patient List</h4>              
+              <h4 class="title">Patient List</h4>              
             </div>
           </div>
+          <md-button class="md-success controlHeight" style="display:flex; flex-direction:column;"><svg-icon type="mdi" :path="mdiPlusCircle"></svg-icon> <span>New Patient</span></md-button>
         </md-card-header>
         <md-card-content>
           <md-table
@@ -58,7 +59,7 @@
                   class="md-just-icon md-success md-simple"
                   @click.native="handlePatientViewClick(item)"
                 >
-                <svg-icon type="mdi" :path="path"></svg-icon>                  
+                <svg-icon type="mdi" :path="mdiArrowRightDropCircle"></svg-icon>                  
                 </md-button>
               </md-table-cell>
             </md-table-row>
@@ -89,7 +90,7 @@ import patients from "../Dashboard/Tables/patients";
 import Fuse from "fuse.js";
 import Swal from "sweetalert2";
 import SvgIcon from '@jamescoyle/vue-icon'
-import { mdiArrowRightDropCircle  } from '@mdi/js'
+import { mdiArrowRightDropCircle,mdiPlusCircle } from '@mdi/js'
 
 
 export default {
@@ -115,7 +116,8 @@ export default {
             tableData: patients,
             searchedData: [],
             fuseSearch: null,
-            path:mdiArrowRightDropCircle 
+            mdiArrowRightDropCircle:mdiArrowRightDropCircle,
+            mdiPlusCircle:mdiPlusCircle 
           }        
       )
     },    
@@ -172,7 +174,11 @@ export default {
     }
 };
 </script>
-<style></style>
+<style>
+  .md-icon{
+    margin:0px !important;
+  }
+</style>
 
 
 
