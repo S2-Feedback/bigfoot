@@ -9,7 +9,7 @@
               <h4 class="title">Patient List</h4>              
             </div>
           </div>
-          <md-button @click="()=>{showModal=true}" class="md-success controlHeight" style="display:flex; flex-direction:column;"><svg-icon type="mdi" :path="mdiPlusCircle"></svg-icon> <span>New Patient</span></md-button>
+          <md-button @click="handleNewPatientClick" class="md-success controlHeight" style="display:flex; flex-direction:column;"><svg-icon type="mdi" :path="mdiPlusCircle"></svg-icon> <span>New Patient</span></md-button>
         </md-card-header>
         <md-card-content>
           <md-table
@@ -82,25 +82,16 @@
 
       </md-card>
     </div>      
-    <Modal v-if="showModal">
-       <template v-slot:header>
-         <p>New Patient</p>
-       </template>      
-       <template v-slot:body>
-         
-       </template>
-    </Modal>
-    
-  
   </div>
 
 </template>
 <script>
-import { Pagination, Modal } from "@/components";
+import { Pagination } from "@/components";
 import patients from "../Dashboard/Tables/patients";
 import Fuse from "fuse.js";
 import Swal from "sweetalert2";
 import SvgIcon from '@jamescoyle/vue-icon'
+
 import { mdiArrowRightDropCircle,mdiPlusCircle } from '@mdi/js'
 
 
@@ -109,8 +100,7 @@ export default {
     name:'Patients',
     components: {
       Pagination,
-      Modal,
-      SvgIcon
+      SvgIcon,
     },
     data(){
       return (
@@ -167,6 +157,15 @@ export default {
       }
     },        
     methods: {
+      handleNewPatientClick(){
+        this.$router.push({name:'Add Patient'})
+      },
+      validateStep(ref) {
+        return this.$refs[ref].validate();
+      },
+      onStepValidated(validated, model) {
+        this.wizardModel = { ...this.wizardModel, ...model };
+      },      
       customSort(value) {
         return value.sort((a, b) => {
           const sortBy = this.currentSort;
@@ -191,6 +190,9 @@ export default {
 <style>
   .md-icon{
     margin:0px !important;
+  }
+  .modal-container{
+    max-width: 850px;;
   }
 </style>
 

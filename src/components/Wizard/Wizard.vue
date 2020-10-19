@@ -2,7 +2,7 @@
   <div class="wizard-container">
     <form @submit.prevent>
       <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
-      <md-card class="md-card-wizard active" data-color="green">
+      <md-card class="md-card-wizard active" data-color="blue">
         <md-card-header>
           <slot name="header">
             <h3 class="card-title">{{ title }}</h3>
@@ -100,11 +100,11 @@ export default {
     },
     title: {
       type: String,
-      default: "Title"
+      default: ""
     },
     subTitle: {
       type: String,
-      default: "Subtitle"
+      default: ""
     },
     prevButtonText: {
       type: String,
