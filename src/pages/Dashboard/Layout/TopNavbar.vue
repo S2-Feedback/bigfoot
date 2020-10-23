@@ -1,7 +1,7 @@
 <template>
   <md-toolbar
     md-elevation="1"
-    :class="{'md-toolbar-row md-fixed-top': $route.meta.navbarAbsolute}"
+    :class="{ 'md-toolbar-row md-fixed-top': $route.meta.navbarAbsolute }"
   >
     <div class="md-toolbar-row">
       <div class="md-toolbar-section-start">

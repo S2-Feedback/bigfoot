@@ -1,0 +1,28 @@
+
+
+input:-internal-autofill-selected{
+    background-color: white !important;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+
+}
+.md-layout-item {
+    padding-right: 15px;
+    padding-left:0px !important;
+}
+.md-button .md-ripple {
+    padding: 0px !important;
+  }
+.md-button-content {
+    display: flex !important;
+    flex-direction: row;
+    align-items: flex-end !important;
+}
+.controlHeight {
+    height: 35px;
+    margin-top: 15px !important;
+    margin-right: 0px !important;
+    padding: 5px;
+}

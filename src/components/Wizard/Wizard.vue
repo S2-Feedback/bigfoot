@@ -42,7 +42,7 @@
             class="moving-tab"
             :class="{ 'error-link': activeTab.hasError }"
             v-if="activeTab"
-            style="transition: transform 0.5s cubic-bezier(0.29, 1.42, 0.79, 1); width: 100%;"
+            style="transition: transform 0.5s cubic-bezier(0.29, 1.42, 0.79, 1); width: 100%; padding-left:0px; padding-right:0px; padding-top:12px; padding-bottom:12px;"
             :style="movingTabStyles"
           >
             <tab-item-content
@@ -156,19 +156,25 @@ export default {
       if (this.vertical) {
         width = 100;
       }
+      console.log("returning ", width);
       return { width: `${width}%` };
     },
     activeTab() {
       return this.tabs[this.activeTabIndex];
     },
     movingTabStyles() {
+      console.log(
+        "this.activelaksdfjdskl;fjsd;fjk'",
+        this.activeTabIndex,
+        this.tabLinkWidth,
+        this.tabCount
+      );
       let translateXValue =
         this.activeTabIndex == 0
           ? this.tabLinkWidth * this.activeTabIndex - 8
           : this.activeTabIndex == this.tabCount - 1
           ? this.tabLinkWidth * this.activeTabIndex + 8
           : this.tabLinkWidth * this.activeTabIndex;
-
       let translateYValue = 0;
       if (this.vertical) {
         translateYValue = this.tabLinkHeight * this.activeTabIndex;

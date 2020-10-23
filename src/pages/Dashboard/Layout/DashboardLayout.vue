@@ -1,19 +1,19 @@
 <template>
   <div class="wrapper" style="overflow-x:hidden;">
     <notifications></notifications>
-    <top-navbar class="md-primary" style="box-shadow: 0 6px 6px -5px black"></top-navbar>
-    <div class="main-panel" style='width:100%'>
-        <zoom-center-transition :duration="150" mode="out-in">
-          <router-view style="margin-top:30px;"></router-view>
-        </zoom-center-transition>
-
+    <top-navbar
+      class="md-primary"
+      style="box-shadow: 0 6px 6px -5px black"
+    ></top-navbar>
+    <div class="main-panel" style="width:100%">
+      <zoom-center-transition :duration="150" mode="out-in">
+        <router-view style="margin-top:30px;"></router-view>
+      </zoom-center-transition>
     </div>
-    <content-footer></content-footer>    
+    <content-footer></content-footer>
   </div>
 </template>
 <script>
-
-
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
@@ -21,7 +21,7 @@ function hasElement(className) {
   return document.getElementsByClassName(className).length > 0;
 }
 
-function initScrollbar(className) { 
+function initScrollbar(className) {
   if (hasElement(className)) {
     new PerfectScrollbar(`.${className}`);
     document.getElementsByClassName(className)[0].scrollTop = 0;
@@ -56,8 +56,7 @@ export default {
     ZoomCenterTransition
   },
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     toggleSidebar() {

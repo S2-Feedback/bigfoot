@@ -1,9 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import DashboardPlugin from "./material-dashboard";
-import Amplify from 'aws-amplify';
-import '@aws-amplify/ui-vue';
-import aws_exports from './aws-exports';
+import Amplify from "aws-amplify";
+import "@aws-amplify/ui-vue";
+import aws_exports from "./aws-exports";
 
 Amplify.configure(aws_exports);
 // Plugins

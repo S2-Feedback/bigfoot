@@ -1,8 +1,9 @@
-const DashboardLayout = () => import("@/pages/Dashboard/Layout/DashboardLayout.vue")
-const Patients = () => import("@/pages/Dashboard/Patients.vue")
-const PatientView = () => import("@/pages/Dashboard/PatientView.vue")
-const AddPatient = ()=>import("@/pages/Dashboard/Forms/AddPatient/AddPatient.vue"
-)
+const DashboardLayout = () =>
+  import("@/pages/Dashboard/Layout/DashboardLayout.vue");
+const Patients = () => import("@/pages/Dashboard/Patients.vue");
+const PatientView = () => import("@/pages/Dashboard/PatientView.vue");
+const AddPatient = () =>
+  import("@/pages/Dashboard/Forms/AddPatient/AddPatient.vue");
 
 const routes = [
   {
@@ -31,8 +32,7 @@ const routes = [
         name: "Add Patient",
         props: true,
         component: AddPatient
-      },
-
+      }
     ]
   }
 ];

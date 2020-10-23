@@ -1,84 +1,84 @@
 <template>
+  <div>
+    <div class="md-layout-item md-size-75 mx-auto" style="margin-bottom:30px;">
+      <md-button
+        class="md-success controlHeight"
+        @click="handleBackToPatients"
+        style="display:flex; flex-direction:column;"
+        ><svg-icon type="mdi" :path="mdiArrowLeftCircle"></svg-icon>
+        <span>Back To Patients</span></md-button
+      >
+    </div>
     <div style="display:flex; justify-content:center;">
-      <simple-wizard >
+      <simple-wizard>
         <template slot="header">
           <h3 class="title">New Patient</h3>
-          <h5 class="category">Please enter patient and caregiver information.</h5>          
+          <h5 class="category">
+            Please enter patient and caregiver information.
+          </h5>
         </template>
 
         <wizard-tab :before-change="() => validateStep('step1')">
           <template slot="label">
             Patient Information
           </template>
-          <FirstStep ref="step1" @on-validated="onStepValidated"></FirstStep>
+          <patientInfo
+            ref="step1"
+            @on-validated="onStepValidated"
+          ></patientInfo>
         </wizard-tab>
 
         <wizard-tab :before-change="() => validateStep('step2')">
           <template slot="label">
             Caregiver Information
           </template>
-          <SecondStep ref="step2" @on-validated="onStepValidated"></SecondStep>
+          <secondStep ref="step2" @on-validated="wizardComplete"></secondStep>
         </wizard-tab>
-
-        <div slot="footer">&nbsp;</div>
-        <div slot="footer" style='display:flex;'>
-          <md-button style="display:flex; justify-content:center; align-items:center;">
-            Cancel
-          </md-button>
-          <md-button class="md-success" style="display:flex; justify-content:center; align-items:center;">
-            Next
-          </md-button>
-        </div>
-
       </simple-wizard>
     </div>
+  </div>
 </template>
 <script>
 import { Pagination, Modal, SimpleWizard, WizardTab } from "@/components";
 //import SvgIcon from '@jamescoyle/vue-icon'
-import FirstStep from "./PatientInfo";
+import PatientInfo from "./PatientInfo";
 import SecondStep from "./CaregiverInfo";
 
-
-
 export default {
-    name:'AddPatient',
-    components: {
-      //SvgIcon,
-      WizardTab,
-      SimpleWizard,
-      FirstStep,
-      SecondStep
+  name: "AddPatient",
+  components: {
+    //SvgIcon,
+    WizardTab,
+    SimpleWizard,
+    PatientInfo,
+    SecondStep
+  },
+  data() {
+    return {
+      wizardModel: {}
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    validateStep(ref) {
+      return this.$refs[ref].validate();
     },
-    data(){
-      return (
-          {
-            activeIndex:0
-          }        
-      )
-    },    
-    computed: {
+    handleBackToPatients() {
+      this.$router.push({ name: "Patients" });
     },
-    watch: {
-    },        
-    methods: {
-      validateStep(e){
-        console.log('step ', e)
-      },
-      onStepValidated(e){
-        console.log('step validated?? ', e)
-        this.activeIndex = 1
-      },
-    },    
-    mounted() {
-
+    onStepValidated(validated, model) {
+      this.wizardModel = { ...this.wizardModel, ...model };
+    },
+    wizardComplete() {
+      this.$router.push("Patients");
     }
+  },
+  mounted() {}
 };
 </script>
 <style>
-
+.md-button .md-ripple {
+  justify-content: flex-start;
+}
 </style>
-
-
-
-
