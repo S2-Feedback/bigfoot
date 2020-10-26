@@ -15,13 +15,10 @@
               <h4 class="title">Patient List</h4>
             </div>
           </div>
-          <md-button
-            @click="handleNewPatientClick"
-            class="md-success controlHeight"
-            style="display:flex; flex-direction:column;"
-            ><svg-icon type="mdi" :path="mdiPlusCircle"></svg-icon>
-            <span>New Patient</span></md-button
-          >
+
+          <S2Button :click="handleNewPatientClick" :color="'success'" :width="125" :height="40">
+              <svg-icon slot="buttonIcon" type="mdi" :path="mdiPlusCircle"></svg-icon><span slot="buttonText">New Patient</span>
+          </S2Button>
         </md-card-header>
         <md-card-content>
           <md-table
@@ -116,6 +113,7 @@ import patients from "../Dashboard/Tables/patients";
 import Fuse from "fuse.js";
 import Swal from "sweetalert2";
 import SvgIcon from "@jamescoyle/vue-icon";
+import S2Button from '@/components/S2Button.vue'
 
 import { mdiArrowRightDropCircle, mdiPlusCircle } from "@mdi/js";
 
@@ -123,7 +121,8 @@ export default {
   name: "Patients",
   components: {
     Pagination,
-    SvgIcon
+    SvgIcon,
+    S2Button
   },
   data() {
     return {

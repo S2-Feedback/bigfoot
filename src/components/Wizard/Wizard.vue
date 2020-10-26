@@ -71,16 +71,12 @@
             </div>
 
             <div>
-              <md-button
-                v-if="activeTabIndex < tabCount - 1"
-                @click.native="nextTab"
-                class="btn-next md-success"
-              >
-                {{ nextButtonText }}
-              </md-button>
-              <md-button v-else class="md-success" @click.native="nextTab">{{
-                finishButtonText
-              }}</md-button>
+              <S2Button :style="'color:white;'" v-if="activeTabIndex < tabCount - 1" :positionRight="true" :click="nextTab">
+                <span class='buttonText' slot="buttonText">{{ nextButtonText }}</span><svg-icon slot="buttonIcon" class="ml-10" type="mdi" :path="mdiChevronRightCircle"></svg-icon>
+              </S2Button>
+              <S2Button :style="'color:white;'" v-else :width="165" :positionRight="true" :click="nextTab">
+                <span class='buttonText' slot="buttonText">{{ finishButtonText }}</span><svg-icon slot="buttonIcon" class="ml-10" type="mdi" :path="mdiCheckCircle"></svg-icon>
+              </S2Button>
             </div>
           </slot>
         </md-card-actions>
@@ -90,6 +86,9 @@
 </template>
 <script>
 import { throttle } from "./throttle";
+import S2Button from '@/components/S2Button.vue'
+import { mdiChevronRightCircle, mdiCheckCircle  } from "@mdi/js";
+import SvgIcon from '@jamescoyle/vue-icon'
 
 export default {
   name: "simple-wizard",
@@ -123,6 +122,8 @@ export default {
     }
   },
   components: {
+    S2Button,
+    SvgIcon,
     TabItemContent: {
       props: ["tab", "movingTab"],
       render(h) {
@@ -141,7 +142,9 @@ export default {
       tabs: [],
       activeTabIndex: 0,
       tabLinkWidth: 0,
-      tabLinkHeight: 50
+      tabLinkHeight: 50,
+      mdiChevronRightCircle:mdiChevronRightCircle,
+      mdiCheckCircle:mdiCheckCircle
     };
   },
   computed: {

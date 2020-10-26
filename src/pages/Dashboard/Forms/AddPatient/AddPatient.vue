@@ -1,13 +1,9 @@
 <template>
   <div>
     <div class="md-layout-item md-size-75 mx-auto" style="margin-bottom:30px;">
-      <md-button
-        class="md-success controlHeight"
-        @click="handleBackToPatients"
-        style="display:flex; flex-direction:column;"
-        ><svg-icon type="mdi" :path="mdiArrowLeftCircle"></svg-icon>
-        <span>Back To Patients</span></md-button
-      >
+      <S2Button :style="'color:white;'" :width="165" :click="handleBackToPatients">
+        <svg-icon slot="buttonIcon" class="mr-10" type="mdi" :path="mdiChevronLeftCircle"></svg-icon><span class='buttonText' slot="buttonText">Back To Patients</span>
+      </S2Button>
     </div>
     <div style="display:flex; justify-content:center;">
       <simple-wizard>
@@ -40,22 +36,26 @@
 </template>
 <script>
 import { Pagination, Modal, SimpleWizard, WizardTab } from "@/components";
-//import SvgIcon from '@jamescoyle/vue-icon'
+import SvgIcon from '@jamescoyle/vue-icon'
 import PatientInfo from "./PatientInfo";
 import SecondStep from "./CaregiverInfo";
+import S2Button from '@/components/S2Button.vue'
+import { mdiChevronLeftCircle  } from "@mdi/js";
 
 export default {
   name: "AddPatient",
   components: {
-    //SvgIcon,
+    SvgIcon,
     WizardTab,
     SimpleWizard,
     PatientInfo,
-    SecondStep
+    SecondStep,
+    S2Button
   },
   data() {
     return {
-      wizardModel: {}
+      wizardModel: {},
+      mdiChevronLeftCircle:mdiChevronLeftCircle
     };
   },
   computed: {},

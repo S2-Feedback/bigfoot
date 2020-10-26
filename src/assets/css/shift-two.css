@@ -26,3 +26,33 @@ input:-webkit-autofill {
     margin-right: 0px !important;
     padding: 5px;
 }
+
+.dflex{
+    display:flex;
+}
+.dflex-center-row{
+    display:flex;
+    justify-content: center;
+}
+.dflex-center-col{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+}
+
+.ml-10{
+    margin-left:10px;
+}
+.mr-10{
+    margin-right:10px;
+}
+.mr-15{
+    margin-right:15px;
+}
+.buttonText{
+    font-size: 12px !important;
+    font-weight: 400;
+}
+.whiteIcons{
+    fill: white;
+}
