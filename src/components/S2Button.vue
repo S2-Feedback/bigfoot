@@ -60,4 +60,7 @@ export default {
         box-shadow: 0 14px 26px -12px rgba(76,175,80,.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(76,175,80,.2);
         background-color: #47a44b!important;        
     }
+    .s2default{
+        background-color:var(--md-theme-default-background, #fff);
+    }
 </style>

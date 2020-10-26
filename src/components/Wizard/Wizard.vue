@@ -61,13 +61,9 @@
         <md-card-actions md-alignment="space-between">
           <slot name="footer" :next-tab="nextTab" :prev-tab="prevTab">
             <div>
-              <md-button
-                v-if="activeTabIndex > 0"
-                @click.native="prevTab"
-                class="btn-previous"
-              >
-                {{ prevButtonText }}
-              </md-button>
+              <S2Button v-if="activeTabIndex > 0" :style="'color:white;'" :color="'default_grey'" :click="prevTab">
+                <svg-icon slot="buttonIcon" class="ml-10" type="mdi" :path="mdiChevronLeftCircle"></svg-icon><span class='buttonText' slot="buttonText">{{ prevButtonText }}</span>
+              </S2Button>
             </div>
 
             <div>
@@ -87,7 +83,7 @@
 <script>
 import { throttle } from "./throttle";
 import S2Button from '@/components/S2Button.vue'
-import { mdiChevronRightCircle, mdiCheckCircle  } from "@mdi/js";
+import { mdiChevronRightCircle, mdiCheckCircle, mdiChevronLeftCircle  } from "@mdi/js";
 import SvgIcon from '@jamescoyle/vue-icon'
 
 export default {
