@@ -16,8 +16,19 @@
             </div>
           </div>
 
-          <S2Button :click="handleNewPatientClick" :color="'success'" :width="125" :height="40">
-              <svg-icon slot="buttonIcon" type="mdi" :path="mdiPlusCircle"></svg-icon><span slot="buttonText">New Patient</span>
+          <S2Button
+            :click="handleNewPatientClick"
+            :color="'s2success'"
+            :width="140"
+            :height="40"
+          >
+            <svg-icon
+              class="mr-10"
+              slot="buttonIcon"
+              type="mdi"
+              :path="mdiPlusCircle"
+            ></svg-icon
+            ><span slot="buttonText">New Patient</span>
           </S2Button>
         </md-card-header>
         <md-card-content>
@@ -113,7 +124,7 @@ import patients from "../Dashboard/Tables/patients";
 import Fuse from "fuse.js";
 import Swal from "sweetalert2";
 import SvgIcon from "@jamescoyle/vue-icon";
-import S2Button from '@/components/S2Button.vue'
+import S2Button from "@/components/S2Button.vue";
 
 import { mdiArrowRightDropCircle, mdiPlusCircle } from "@mdi/js";
 

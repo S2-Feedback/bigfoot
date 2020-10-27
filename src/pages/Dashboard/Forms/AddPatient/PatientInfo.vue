@@ -215,7 +215,7 @@
 import { SlideYDownTransition } from "vue2-transitions";
 import { extend } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
-import S2Button from '@/components/S2Button.vue'
+import S2Button from "@/components/S2Button.vue";
 extend("email", email);
 extend("required", required);
 

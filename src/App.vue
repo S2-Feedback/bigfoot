@@ -1,7 +1,5 @@
 <template>
-  <amplify-authenticator>
-    <router-view></router-view>
-  </amplify-authenticator>
+  <router-view></router-view>
 </template>
 
 <script>

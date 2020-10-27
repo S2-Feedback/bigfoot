@@ -61,17 +61,59 @@
         <md-card-actions md-alignment="space-between">
           <slot name="footer" :next-tab="nextTab" :prev-tab="prevTab">
             <div>
-              <S2Button v-if="activeTabIndex > 0" :style="'color:white;'" :color="'default_grey'" :click="prevTab">
-                <svg-icon slot="buttonIcon" class="ml-10" type="mdi" :path="mdiChevronLeftCircle"></svg-icon><span class='buttonText' slot="buttonText">{{ prevButtonText }}</span>
+              <S2Button
+                v-if="activeTabIndex > 0"
+                :style="'color:white;'"
+                :width="120"
+                :color="'s2default'"
+                :click="prevTab"
+              >
+                <svg-icon
+                  slot="buttonIcon"
+                  class="mr-10"
+                  type="mdi"
+                  :path="mdiChevronLeftCircle"
+                ></svg-icon
+                ><span class="buttonText" slot="buttonText">{{
+                  prevButtonText
+                }}</span>
               </S2Button>
             </div>
 
             <div>
-              <S2Button :style="'color:white;'" v-if="activeTabIndex < tabCount - 1" :positionRight="true" :click="nextTab">
-                <span class='buttonText' slot="buttonText">{{ nextButtonText }}</span><svg-icon slot="buttonIcon" class="ml-10" type="mdi" :path="mdiChevronRightCircle"></svg-icon>
+              <S2Button
+                :style="'color:white;'"
+                v-if="activeTabIndex < tabCount - 1"
+                :positionRight="true"
+                :width="120"
+                :click="nextTab"
+              >
+                <span class="buttonText" slot="buttonText">{{
+                  nextButtonText
+                }}</span
+                ><svg-icon
+                  slot="buttonIcon"
+                  class="ml-10"
+                  type="mdi"
+                  :path="mdiChevronRightCircle"
+                ></svg-icon>
               </S2Button>
-              <S2Button :style="'color:white;'" v-else :width="165" :positionRight="true" :click="nextTab">
-                <span class='buttonText' slot="buttonText">{{ finishButtonText }}</span><svg-icon slot="buttonIcon" class="ml-10" type="mdi" :path="mdiCheckCircle"></svg-icon>
+              <S2Button
+                :style="'color:white;'"
+                v-else
+                :width="120"
+                :positionRight="true"
+                :click="nextTab"
+              >
+                <span class="buttonText" slot="buttonText">{{
+                  finishButtonText
+                }}</span
+                ><svg-icon
+                  slot="buttonIcon"
+                  class="ml-10"
+                  type="mdi"
+                  :path="mdiCheckCircle"
+                ></svg-icon>
               </S2Button>
             </div>
           </slot>
@@ -82,9 +124,13 @@
 </template>
 <script>
 import { throttle } from "./throttle";
-import S2Button from '@/components/S2Button.vue'
-import { mdiChevronRightCircle, mdiCheckCircle, mdiChevronLeftCircle  } from "@mdi/js";
-import SvgIcon from '@jamescoyle/vue-icon'
+import S2Button from "@/components/S2Button.vue";
+import {
+  mdiChevronRightCircle,
+  mdiCheckCircle,
+  mdiChevronLeftCircle
+} from "@mdi/js";
+import SvgIcon from "@jamescoyle/vue-icon";
 
 export default {
   name: "simple-wizard",
@@ -139,8 +185,9 @@ export default {
       activeTabIndex: 0,
       tabLinkWidth: 0,
       tabLinkHeight: 50,
-      mdiChevronRightCircle:mdiChevronRightCircle,
-      mdiCheckCircle:mdiCheckCircle
+      mdiChevronRightCircle: mdiChevronRightCircle,
+      mdiCheckCircle: mdiCheckCircle,
+      mdiChevronLeftCircle: mdiChevronLeftCircle
     };
   },
   computed: {

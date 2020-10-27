@@ -11,15 +11,25 @@
         <md-button
           class="md-just-icon md-round md-simple md-toolbar-toggle"
           :class="{ toggled: $sidebar.showSidebar }"
+          style="fill:white"
           @click="toggleSidebar"
-        >
+        > 
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </md-button>
-
+        
         <div class="md-collapse">
           <md-list>
+            <md-list-item href="#/">
+               <svg-icon
+                 slot="buttonIcon"
+                 class="mr-10"
+                 type="mdi"
+                 :path="mdiPhone"
+               ></svg-icon>
+               <p class="hidden-lg hidden-md">Secure Call</p>
+            </md-list-item>            
             <md-list-item href="#/">
               <i class="material-icons">dashboard</i>
               <p class="hidden-lg hidden-md">Dashboard</p>
@@ -37,10 +47,13 @@
 </template>
 
 <script>
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiPhone } from "@mdi/js";
 export default {
   data() {
     return {
       selectedEmployee: "",
+      mdiPhone:mdiPhone,
       employees: [
         "Jim Halpert",
         "Dwight Schrute",
