@@ -4,7 +4,7 @@ const Patients = () => import("@/pages/Dashboard/Patients.vue");
 const PatientView = () => import("@/pages/Dashboard/PatientView.vue");
 const AddPatient = () =>
   import("@/pages/Dashboard/Forms/AddPatient/AddPatient.vue");
-
+const MakeCall = () => import("@/pages/Dashboard/MakeCall.vue");
 const routes = [
   {
     path: "/",
@@ -32,6 +32,12 @@ const routes = [
         name: "Add Patient",
         props: true,
         component: AddPatient
+      },
+      {
+        path: "makeACall",
+        name: "Make A Call",
+        props: true,
+        component: MakeCall
       }
     ]
   }
