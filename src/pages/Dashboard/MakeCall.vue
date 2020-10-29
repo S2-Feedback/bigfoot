@@ -1,12 +1,12 @@
 <template>
   <div>
-      Hello World
+    Hello World
   </div>
 </template>
 
 <script>
 export default {
-    name:'MakeCall'
+  name: "MakeCall"
 };
 </script>
 

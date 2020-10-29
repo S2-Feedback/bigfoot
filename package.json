@@ -21,6 +21,7 @@
     "@mdi/js": "^5.7.55",
     "@tweenjs/tween.js": "18.5.0",
     "aws-amplify": "^3.3.4",
+    "aws-amplify-vue": "^2.1.2",
     "chartist": "0.11.4",
     "es6-promise": "4.2.8",
     "fuse.js": "3.6.1",

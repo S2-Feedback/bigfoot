@@ -30,11 +30,12 @@
               <p class="hidden-lg hidden-md">Dashboard</p>
             </md-list-item>
 
-            <md-list-item href="#/pages/user">
+            <md-list-item @click="handleSignout">
               <i class="material-icons">person</i>
               <p class="hidden-lg hidden-md">Profile</p>
             </md-list-item>
           </md-list>
+          
         </div>
       </div>
     </div>
@@ -44,6 +45,7 @@
 <script>
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiPhone } from "@mdi/js";
+import {Auth} from 'aws-amplify'
 export default {
   data() {
     return {
@@ -62,6 +64,10 @@ export default {
     };
   },
   methods: {
+    async handleSignout(){
+      await Auth.signOut()
+      this.$router.push({ name: "Login" });
+    },
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },

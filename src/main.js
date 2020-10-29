@@ -1,35 +1,20 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
-import DashboardPlugin from "./material-dashboard";
-import Amplify from "aws-amplify";
-import "@aws-amplify/ui-vue";
-import aws_exports from "./aws-exports";
 
-Amplify.configure(aws_exports);
+import DashboardPlugin from "./material-dashboard";
+import Amplify, * as AmplifyModules from "aws-amplify";
+import { AmplifyPlugin } from "aws-amplify-vue";
+import awsmobile from "@/aws-exports";
+import router from '../src/routes/routes'
+
+
+Amplify.configure(awsmobile);
+Vue.use(AmplifyPlugin, AmplifyModules);
 // Plugins
 import App from "./App.vue";
 import Chartist from "chartist";
 
-// router setup
-import routes from "./routes/routes";
-
-// plugin setup
-Vue.use(VueRouter);
 Vue.use(DashboardPlugin);
-
-// configure router
-const router = new VueRouter({
-  routes, // short for routes: routes
-  scrollBehavior: to => {
-    if (to.hash) {
-      return { selector: to.hash };
-    } else {
-      return { x: 0, y: 0 };
-    }
-  },
-  linkExactActiveClass: "nav-item active"
-});
-
+Vue.use(router)
 // global library setup
 Vue.prototype.$Chartist = Chartist;
 
