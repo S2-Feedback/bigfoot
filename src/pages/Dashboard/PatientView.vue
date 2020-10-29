@@ -1,13 +1,19 @@
 <template>
   <div class="md-layout">
     <div class="md-layout-item md-size-75 mx-auto" style="margin-bottom:30px;">
-      <md-button
-        class="md-success controlHeight"
-        @click="handleBackToPatients"
-        style="display:flex; flex-direction:column;"
-        ><svg-icon type="mdi" :path="mdiArrowLeftCircle"></svg-icon>
-        <span>Back To Patients</span></md-button
-      >
+        <S2Button
+          :style="'color:white;'"
+          :width="165"
+          :click="handleBackToPatients"
+        >
+          <svg-icon
+            slot="buttonIcon"
+            class="mr-10"
+            type="mdi"
+            :path="mdiChevronLeftCircle"
+          ></svg-icon
+          ><span class="buttonText" slot="buttonText">Back To Patients</span>
+        </S2Button>      
     </div>
     <div class="md-layout-item md-size-75 mx-auto">
       <md-card style="box-shadow: black 0px 0px 16px -7px">
@@ -28,12 +34,19 @@
               </h5>
             </div>
           </div>
-          <md-button
-            class="md-success controlHeight"
-            style="display:flex; flex-direction:column;"
-            ><svg-icon type="mdi" :path="mdiPlusCircle"></svg-icon>
-            <span>New Assessment</span></md-button
+          <S2Button
+            :style="'color:white;'"
+            :width="165"
+            class="mt-8"
           >
+            <svg-icon
+              slot="buttonIcon"
+              class="mr-10"
+              type="mdi"
+              :path="mdiPlusCircle"
+            ></svg-icon
+            ><span class="buttonText" slot="buttonText">New Assessment</span>
+          </S2Button>          
         </md-card-header>
         <md-card-content>
           <md-table
@@ -119,17 +132,15 @@ import assessments from "../Dashboard/Tables/assessments";
 import Fuse from "fuse.js";
 import Swal from "sweetalert2";
 import SvgIcon from "@jamescoyle/vue-icon";
-import {
-  mdiArrowRightDropCircle,
-  mdiPlusCircle,
-  mdiArrowLeftCircle
-} from "@mdi/js";
+import S2Button from "@/components/S2Button.vue";
+import { mdiChevronLeftCircle, mdiPlusCircle, mdiArrowRightDropCircle } from "@mdi/js";
 
 export default {
   name: "PatientView",
   components: {
     Pagination,
-    SvgIcon
+    SvgIcon,
+    S2Button
   },
   data() {
     return {
@@ -146,9 +157,9 @@ export default {
       tableData: assessments,
       searchedData: [],
       fuseSearch: null,
-      mdiArrowRightDropCircle: mdiArrowRightDropCircle,
-      mdiPlusCircle: mdiPlusCircle,
-      mdiArrowLeftCircle: mdiArrowLeftCircle
+      mdiChevronLeftCircle:mdiChevronLeftCircle,
+      mdiPlusCircle:mdiPlusCircle,
+      mdiArrowRightDropCircle:mdiArrowRightDropCircle
     };
   },
   computed: {

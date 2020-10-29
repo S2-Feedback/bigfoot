@@ -38,7 +38,8 @@ export default {
       default: "s2success"
     },
     click: {
-      type: Function
+      type: Function,
+      default:()=>{}
     },
     positionRight: {
       type: Boolean,
