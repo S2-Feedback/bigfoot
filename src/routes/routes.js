@@ -39,21 +39,21 @@ const router = new VueRouter({
           name: "Patient View",
           props: true,
           component: PatientView,
-          //meta: { requiresAuth: true }
+          meta: { requiresAuth: true }
         },
         {
           path: "addPatient",
           name: "Add Patient",
           props: true,
           component: AddPatient,
-          //meta: { requiresAuth: true }
+          meta: { requiresAuth: true }
         },
         {
           path: "makeACall",
           name: "Make A Call",
           props: true,
           component: MakeCall,
-          //meta: { requiresAuth: true }
+          meta: { requiresAuth: true }
         }
       ]
     }

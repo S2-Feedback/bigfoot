@@ -40,6 +40,12 @@ input:-webkit-autofill {
     justify-content: center;
     align-items: center;
 }
+.mt-8{
+    margin-top:8px;
+}
+.mt-15{
+    margin-top:15px;
+}
 
 .ml-10{
     margin-left:10px;

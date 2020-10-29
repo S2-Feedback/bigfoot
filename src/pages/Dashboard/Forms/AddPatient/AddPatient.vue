@@ -1,21 +1,22 @@
 <template>
-  <div>
-    <div class="md-layout-item md-size-75 mx-auto" style="margin-bottom:30px;">
-      <S2Button
-        :style="'color:white;'"
-        :width="165"
-        :click="handleBackToPatients"
-      >
-        <svg-icon
-          slot="buttonIcon"
-          class="mr-10"
-          type="mdi"
-          :path="mdiChevronLeftCircle"
-        ></svg-icon
-        ><span class="buttonText" slot="buttonText">Back To Patients</span>
-      </S2Button>
-    </div>
-    <div style="display:flex; justify-content:center;">
+  <div class="dflex-center-col">
+    <div class="md-size-30">&nbsp;</div>
+    <div class="md-size-60 dflex-center-col">
+      <div class="dflex" style="justify-content:flex-start; width:100%;">
+        <S2Button
+          :style="'color:white;'"
+          :width="165"
+          :click="handleBackToPatients"
+        >
+          <svg-icon
+            slot="buttonIcon"
+            class="mr-10"
+            type="mdi"
+            :path="mdiChevronLeftCircle"
+          ></svg-icon
+          ><span class="buttonText" slot="buttonText">Back To Patients</span>
+        </S2Button>
+      </div>
       <simple-wizard>
         <template slot="header">
           <h3 class="title">New Patient</h3>
@@ -42,6 +43,7 @@
         </wizard-tab>
       </simple-wizard>
     </div>
+    <div class="md-size-30">&nbsp;</div>
   </div>
 </template>
 <script>

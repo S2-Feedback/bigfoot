@@ -17,6 +17,7 @@
           </div>
 
           <S2Button
+            class="mt-8"
             :click="handleNewPatientClick"
             :color="'s2success'"
             :width="140"

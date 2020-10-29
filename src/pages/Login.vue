@@ -14,13 +14,12 @@ export default {
         try {
             user = await Auth.currentAuthenticatedUser()
         } catch (error) {
-            console.log(error)    
+            console.log(error) //todo add some logging   
         }
         if(Object.keys(user).length>0)
         {
             this.$router.push({ name: "Patients" });
         }
-
         AmplifyEventBus.$on("authState", eventInfo => {
         if (eventInfo === "signedIn") {
             this.$router.push({ name: "Patients" });
