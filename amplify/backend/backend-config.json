@@ -13,10 +13,23 @@
       "providerPlugin": "awscloudformation"
     }
   },
-  "storage": {
-    "bigfootDB": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
+  "storage": {},
+  "api": {
+    "bigfoot": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": ""
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
     }
   }
 }
