@@ -1,19 +1,19 @@
 <template>
   <div class="md-layout">
     <div class="md-layout-item md-size-75 mx-auto" style="margin-bottom:30px;">
-        <S2Button
-          :style="'color:white;'"
-          :width="165"
-          :click="handleBackToPatients"
-        >
-          <svg-icon
-            slot="buttonIcon"
-            class="mr-10"
-            type="mdi"
-            :path="mdiChevronLeftCircle"
-          ></svg-icon
-          ><span class="buttonText" slot="buttonText">Back To Patients</span>
-        </S2Button>      
+      <S2Button
+        :style="'color:white;'"
+        :width="165"
+        :click="handleBackToPatients"
+      >
+        <svg-icon
+          slot="buttonIcon"
+          class="mr-10"
+          type="mdi"
+          :path="mdiChevronLeftCircle"
+        ></svg-icon
+        ><span class="buttonText" slot="buttonText">Back To Patients</span>
+      </S2Button>
     </div>
     <div class="md-layout-item md-size-75 mx-auto">
       <md-card style="box-shadow: black 0px 0px 16px -7px">
@@ -34,11 +34,7 @@
               </h5>
             </div>
           </div>
-          <S2Button
-            :style="'color:white;'"
-            :width="165"
-            class="mt-8"
-          >
+          <S2Button :style="'color:white;'" :width="165" class="mt-8">
             <svg-icon
               slot="buttonIcon"
               class="mr-10"
@@ -46,7 +42,7 @@
               :path="mdiPlusCircle"
             ></svg-icon
             ><span class="buttonText" slot="buttonText">New Assessment</span>
-          </S2Button>          
+          </S2Button>
         </md-card-header>
         <md-card-content>
           <md-table
@@ -133,7 +129,11 @@ import Fuse from "fuse.js";
 import Swal from "sweetalert2";
 import SvgIcon from "@jamescoyle/vue-icon";
 import S2Button from "@/components/S2Button.vue";
-import { mdiChevronLeftCircle, mdiPlusCircle, mdiArrowRightDropCircle } from "@mdi/js";
+import {
+  mdiChevronLeftCircle,
+  mdiPlusCircle,
+  mdiArrowRightDropCircle
+} from "@mdi/js";
 
 export default {
   name: "PatientView",
@@ -157,9 +157,9 @@ export default {
       tableData: assessments,
       searchedData: [],
       fuseSearch: null,
-      mdiChevronLeftCircle:mdiChevronLeftCircle,
-      mdiPlusCircle:mdiPlusCircle,
-      mdiArrowRightDropCircle:mdiArrowRightDropCircle
+      mdiChevronLeftCircle: mdiChevronLeftCircle,
+      mdiPlusCircle: mdiPlusCircle,
+      mdiArrowRightDropCircle: mdiArrowRightDropCircle
     };
   },
   computed: {

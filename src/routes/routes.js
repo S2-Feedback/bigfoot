@@ -9,11 +9,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "@/pages/Login.vue";
 
-
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
-  routes:[
+  routes: [
     {
       path: "/",
       redirect: "/login"
@@ -58,7 +57,7 @@ const router = new VueRouter({
       ]
     }
   ]
-})
+});
 router.beforeResolve(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     try {

@@ -4,8 +4,7 @@ import DashboardPlugin from "./material-dashboard";
 import Amplify, * as AmplifyModules from "aws-amplify";
 import { AmplifyPlugin } from "aws-amplify-vue";
 import awsmobile from "@/aws-exports";
-import router from '../src/routes/routes'
-
+import router from "../src/routes/routes";
 
 Amplify.configure(awsmobile);
 Vue.use(AmplifyPlugin, AmplifyModules);
@@ -14,7 +13,7 @@ import App from "./App.vue";
 import Chartist from "chartist";
 
 Vue.use(DashboardPlugin);
-Vue.use(router)
+Vue.use(router);
 // global library setup
 Vue.prototype.$Chartist = Chartist;
 

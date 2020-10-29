@@ -39,7 +39,7 @@ export default {
     },
     click: {
       type: Function,
-      default:()=>{}
+      default: () => {}
     },
     positionRight: {
       type: Boolean,

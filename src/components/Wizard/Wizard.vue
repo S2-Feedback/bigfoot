@@ -202,19 +202,12 @@ export default {
       if (this.vertical) {
         width = 100;
       }
-      console.log("returning ", width);
       return { width: `${width}%` };
     },
     activeTab() {
       return this.tabs[this.activeTabIndex];
     },
     movingTabStyles() {
-      console.log(
-        "this.activelaksdfjdskl;fjsd;fjk'",
-        this.activeTabIndex,
-        this.tabLinkWidth,
-        this.tabCount
-      );
       let translateXValue =
         this.activeTabIndex == 0
           ? this.tabLinkWidth * this.activeTabIndex - 8

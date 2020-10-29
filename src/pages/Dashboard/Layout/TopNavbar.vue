@@ -35,7 +35,6 @@
               <p class="hidden-lg hidden-md">Profile</p>
             </md-list-item>
           </md-list>
-          
         </div>
       </div>
     </div>
@@ -45,7 +44,7 @@
 <script>
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiPhone } from "@mdi/js";
-import {Auth} from 'aws-amplify'
+import { Auth } from "aws-amplify";
 export default {
   data() {
     return {
@@ -64,8 +63,8 @@ export default {
     };
   },
   methods: {
-    async handleSignout(){
-      await Auth.signOut()
+    async handleSignout() {
+      await Auth.signOut();
       this.$router.push({ name: "Login" });
     },
     toggleSidebar() {

@@ -69,7 +69,7 @@ export default {
     return {
       wizardModel: {},
       mdiChevronLeftCircle: mdiChevronLeftCircle,
-      showWizard:true
+      showWizard: true
     };
   },
   computed: {},
@@ -79,7 +79,7 @@ export default {
       return this.$refs[ref].validate();
     },
     handleBackToPatients() {
-      this.showWizard=false;
+      this.showWizard = false;
       this.$router.push({ name: "Patients" });
     },
     onStepValidated(validated, model) {
