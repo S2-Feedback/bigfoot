@@ -4,6 +4,7 @@
     <div class="md-size-60 dflex-center-col">
       <div class="dflex" style="justify-content:flex-start; width:100%;">
         <S2Button
+          v-show="showWizard"
           :style="'color:white;'"
           :width="165"
           :click="handleBackToPatients"
@@ -17,7 +18,7 @@
           ><span class="buttonText" slot="buttonText">Back To Patients</span>
         </S2Button>
       </div>
-      <simple-wizard>
+      <simple-wizard v-show="showWizard">
         <template slot="header">
           <h3 class="title">New Patient</h3>
           <h5 class="category">
@@ -67,7 +68,8 @@ export default {
   data() {
     return {
       wizardModel: {},
-      mdiChevronLeftCircle: mdiChevronLeftCircle
+      mdiChevronLeftCircle: mdiChevronLeftCircle,
+      showWizard:true
     };
   },
   computed: {},
@@ -77,6 +79,7 @@ export default {
       return this.$refs[ref].validate();
     },
     handleBackToPatients() {
+      this.showWizard=false;
       this.$router.push({ name: "Patients" });
     },
     onStepValidated(validated, model) {
