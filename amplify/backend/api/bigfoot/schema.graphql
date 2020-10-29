@@ -1,0 +1,13 @@
+type Patient @model {
+  id: ID!
+  lastName: String!
+  firstName: String!
+  dob: String!
+  street: String!
+  city: String!
+  state: String!
+  status: String!
+  email: String!
+  phone: String!
+  provider: String!
+}
