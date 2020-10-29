@@ -1,0 +1,5 @@
+{
+    "tableName": "bigfootDB",
+    "partitionKeyName": "Email",
+    "partitionKeyType": "S"
+}
