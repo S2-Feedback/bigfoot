@@ -126,7 +126,8 @@ import Fuse from "fuse.js";
 import Swal from "sweetalert2";
 import SvgIcon from "@jamescoyle/vue-icon";
 import S2Button from "@/components/S2Button.vue";
-
+import { runQuery } from "../../apis/gql.js"
+import { listAllPatients } from '../../graphql/custom/patient'
 import { mdiArrowRightDropCircle, mdiPlusCircle } from "@mdi/js";
 
 export default {
@@ -221,11 +222,16 @@ export default {
       this.$router.push({ name: "Patient View", params: { patientInfo: e } });
     }
   },
-  mounted() {
+ async mounted() {
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["lastName", "firstName", "street", "city", "state"],
       threshold: 0.3
     });
+
+    
+    
+    let x = await runQuery(listAllPatients)
+  console.log('x?',x)
   }
 };
 </script>
