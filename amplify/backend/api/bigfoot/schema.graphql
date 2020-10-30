@@ -1,23 +1,23 @@
 type Patient @model {
-  id: ID!
-  patient_lastName: String!
-  patient_firstName: String!
-  patient_dob: String!
-  patient_street: String!
-  patient_city: String!
-  patient_state: String!
-  patient_status: String!
+  id: ID
+  patient_lastName: String
+  patient_firstName: String
+  patient_dob: String
+  patient_street: String
+  patient_city: String
+  patient_state: String
+  patient_status: String
   patient_email: String!
-  patient_phone: String!
-  patient_provider: String!
-  careGiver_lastName: String!
-  careGiver_firstName: String!
-  careGiver_dob: String!
-  careGiver_street: String!
-  careGiver_city: String!
-  careGiver_state: String!
-  careGiver_status: String!
-  careGiver_email: String!
-  careGiver_phone: String!
-  careGiver_provider: String!  
+  patient_phone: String
+  patient_provider: String
+  careGiver_lastName: String
+  careGiver_firstName: String
+  careGiver_dob: String
+  careGiver_street: String
+  careGiver_city: String
+  careGiver_state: String
+  careGiver_status: String
+  careGiver_email: String
+  careGiver_phone: String
+  careGiver_provider: String  
 }

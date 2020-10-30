@@ -49,6 +49,7 @@
 </template>
 <script>
 import { Pagination, Modal, SimpleWizard, WizardTab } from "@/components";
+import SpinnerService from '../../../../services/spinnerService'
 import SvgIcon from "@jamescoyle/vue-icon";
 import PatientInfo from "./PatientInfo";
 import SecondStep from "./CaregiverInfo";
@@ -92,8 +93,9 @@ export default {
       }
     },
     async wizardComplete() {
+        const spinner = SpinnerService(this)
         await runQuery(createPatient,{input: {
-            id: '111111',
+            id: Math.floor(Math.random() * 2545121254),
             patient_lastName: this.wizardModel.patientInfo.lastName,
             patient_firstName: this.wizardModel.patientInfo.firstName,
             patient_dob: this.wizardModel.patientInfo.dob,
@@ -115,7 +117,8 @@ export default {
             careGiver_phone:this.wizardModel.careGiverInfo.phone,
             careGiver_provider:this.wizardModel.careGiverInfo.provider           
            
-        }}).then(()=>{this.$router.push("Patients");}).catch((error)=>{console.log('error', error)})
+        }}).then(()=>{this.showWizard = false; spinner.hide(); this.$router.push("Patients");}).catch((error)=>{//console.log('error', error)
+        })
         
     }
   },

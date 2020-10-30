@@ -70,22 +70,22 @@
 
             <md-table-row slot="md-table-row" slot-scope="{ item }">
               <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
-                item.lastName
+                item.patient_lastName
               }}</md-table-cell>
               <md-table-cell md-label="First Name" md-sort-by="firstName">{{
-                item.firstName
+                item.patient_firstName
               }}</md-table-cell>
               <md-table-cell md-label="Street" md-sort-by="street">{{
-                item.street
+                item.patient_street
               }}</md-table-cell>
               <md-table-cell md-label="City" md-sort-by="city">{{
-                item.city
+                item.patient_city
               }}</md-table-cell>
               <md-table-cell md-label="State" md-sort-by="state">{{
-                item.state
+                item.patient_state
               }}</md-table-cell>
               <md-table-cell md-label="Status" md-sort-by="status">{{
-                item.status
+                item.patient_status
               }}</md-table-cell>
               <md-table-cell md-label="">
                 <md-button
@@ -129,13 +129,14 @@ import S2Button from "@/components/S2Button.vue";
 import { runQuery } from "../../apis/gql.js"
 import { listAllPatients } from '../../graphql/custom/patient'
 import { mdiArrowRightDropCircle, mdiPlusCircle } from "@mdi/js";
+import SpinnerService from '../../services/spinnerService'
 
 export default {
   name: "Patients",
   components: {
     Pagination,
     SvgIcon,
-    S2Button
+    S2Button,
   },
   data() {
     return {
@@ -158,12 +159,13 @@ export default {
       ],
       searchQuery: "",
       propsToSearch: ["lastName", "firstName", "street", "city", "state"],
-      tableData: patients,
+      tableData: [],
       searchedData: [],
       fuseSearch: null,
       mdiArrowRightDropCircle: mdiArrowRightDropCircle,
       mdiPlusCircle: mdiPlusCircle,
-      showModal: false
+      showModal: false,
+      fullPage:true
     };
   },
   computed: {
@@ -220,14 +222,24 @@ export default {
     },
     handlePatientViewClick(e) {
       this.$router.push({ name: "Patient View", params: { patientInfo: e } });
+    },
+    async getPatients(){
+      await runQuery(listAllPatients).then((res)=>{
+        this.tableData = res.data.listPatients.items
+      }).catch((error)=>{console.log('error ', error)})
     }
   },
- async mounted() {
+ mounted() {
+
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["lastName", "firstName", "street", "city", "state"],
       threshold: 0.3
     });
-
+  },
+  async created(){
+    let spinner = SpinnerService(this)
+    await this.getPatients()
+    spinner.hide()  
   }
 };
 </script>
