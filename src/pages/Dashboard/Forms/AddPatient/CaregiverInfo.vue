@@ -245,7 +245,8 @@ export default {
       dob: "",
       email: "",
       phone: "",
-      provider: ""
+      provider: "",
+      status:"Active"
     };
   },
   computed: {},
@@ -253,7 +254,21 @@ export default {
   methods: {
     validate() {
       return this.$refs.form.validate().then(res => {
-        this.$emit("on-validated", res);
+        this.$emit("on-validated", res, { careGiverInfo:
+          {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            street: this.address,
+            city: this.city,
+            state: this.state,
+            zipcode: this.zipcode,
+            dob: this.dob,
+            email: this.email,
+            phone: this.phone,
+            provider: this.provider,
+            status:this.status           
+          }          
+        },true);
         return res;
       });
     }

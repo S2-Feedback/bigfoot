@@ -228,10 +228,6 @@ export default {
       threshold: 0.3
     });
 
-    
-    
-    let x = await runQuery(listAllPatients)
-  console.log('x?',x)
   }
 };
 </script>
