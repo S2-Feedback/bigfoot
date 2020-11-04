@@ -1,23 +1,67 @@
-type Patient @model {
-  id: ID
-  patient_lastName: String
-  patient_firstName: String
-  patient_dob: String
-  patient_street: String
-  patient_city: String
-  patient_state: String
-  patient_status: String
-  patient_email: String!
-  patient_phone: String
-  patient_provider: String
-  careGiver_lastName: String
-  careGiver_firstName: String
-  careGiver_dob: String
-  careGiver_street: String
-  careGiver_city: String
-  careGiver_state: String
-  careGiver_status: String
-  careGiver_email: String
-  careGiver_phone: String
-  careGiver_provider: String  
+type Organization @model
+{
+  id:ID!
+  addressId:ID!
+  name: String!
+  address: Address @connection(fields:["addressId"])
+  locations: [Location] @connection(keyName: "byOrganizationId",fields:["id"])
+  status: String
+}                                                                                                                                               
+type Address @model
+{
+  id:ID!
+  street: String
+  city: String
+  state: String
+  zipCode: String
+  isActive: Boolean
 }
+type Location @model
+@key(name: "byOrganizationId", fields: ["organizationid"]) 
+{
+  id:ID!
+  organizationid:ID!
+  addressId:ID!
+  description: String 
+
+}
+type Patient @model 
+@key(name: "byLocationId", fields: ["locationId"]) 
+{
+  id: ID!
+  locationId: ID!
+  userId: ID! 
+  user: User @connection(fields:["userId"])
+  address: Address @connection(fields:["id"])
+  
+}
+type StaffAssignment @model
+@key(name: "byPatientId", fields: ["patientId"]) 
+{
+  id: ID!
+  patientId: ID!
+  staffId: ID!
+}
+
+type Staff @model
+@key(name: "byLocationId", fields: ["locationId"])
+{
+  id:ID!
+  userId: ID!
+  locationId: ID!
+}
+type User @model 
+{
+  id: ID!
+  cognitoId: String!
+  addressId: ID
+  firstName: String
+  lastName: String
+  dob: String
+  email: String!
+  phone: String
+  status: String
+  
+}
+
+

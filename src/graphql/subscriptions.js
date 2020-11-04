@@ -1,30 +1,212 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateOrganization = /* GraphQL */ `
+  subscription OnCreateOrganization {
+    onCreateOrganization {
+      id
+      addressId
+      name
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      locations {
+        items {
+          id
+          organizationid
+          addressId
+          description
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateOrganization = /* GraphQL */ `
+  subscription OnUpdateOrganization {
+    onUpdateOrganization {
+      id
+      addressId
+      name
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      locations {
+        items {
+          id
+          organizationid
+          addressId
+          description
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteOrganization = /* GraphQL */ `
+  subscription OnDeleteOrganization {
+    onDeleteOrganization {
+      id
+      addressId
+      name
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      locations {
+        items {
+          id
+          organizationid
+          addressId
+          description
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAddress = /* GraphQL */ `
+  subscription OnCreateAddress {
+    onCreateAddress {
+      id
+      street
+      city
+      state
+      zipCode
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAddress = /* GraphQL */ `
+  subscription OnUpdateAddress {
+    onUpdateAddress {
+      id
+      street
+      city
+      state
+      zipCode
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAddress = /* GraphQL */ `
+  subscription OnDeleteAddress {
+    onDeleteAddress {
+      id
+      street
+      city
+      state
+      zipCode
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateLocation = /* GraphQL */ `
+  subscription OnCreateLocation {
+    onCreateLocation {
+      id
+      organizationid
+      addressId
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLocation = /* GraphQL */ `
+  subscription OnUpdateLocation {
+    onUpdateLocation {
+      id
+      organizationid
+      addressId
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLocation = /* GraphQL */ `
+  subscription OnDeleteLocation {
+    onDeleteLocation {
+      id
+      organizationid
+      addressId
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreatePatient = /* GraphQL */ `
   subscription OnCreatePatient {
     onCreatePatient {
       id
-      patient_lastName
-      patient_firstName
-      patient_dob
-      patient_street
-      patient_city
-      patient_state
-      patient_status
-      patient_email
-      patient_phone
-      patient_provider
-      careGiver_lastName
-      careGiver_firstName
-      careGiver_dob
-      careGiver_street
-      careGiver_city
-      careGiver_state
-      careGiver_status
-      careGiver_email
-      careGiver_phone
-      careGiver_provider
+      locationId
+      userId
+      user {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        status
+        createdAt
+        updatedAt
+      }
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -34,26 +216,31 @@ export const onUpdatePatient = /* GraphQL */ `
   subscription OnUpdatePatient {
     onUpdatePatient {
       id
-      patient_lastName
-      patient_firstName
-      patient_dob
-      patient_street
-      patient_city
-      patient_state
-      patient_status
-      patient_email
-      patient_phone
-      patient_provider
-      careGiver_lastName
-      careGiver_firstName
-      careGiver_dob
-      careGiver_street
-      careGiver_city
-      careGiver_state
-      careGiver_status
-      careGiver_email
-      careGiver_phone
-      careGiver_provider
+      locationId
+      userId
+      user {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        status
+        createdAt
+        updatedAt
+      }
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -63,26 +250,148 @@ export const onDeletePatient = /* GraphQL */ `
   subscription OnDeletePatient {
     onDeletePatient {
       id
-      patient_lastName
-      patient_firstName
-      patient_dob
-      patient_street
-      patient_city
-      patient_state
-      patient_status
-      patient_email
-      patient_phone
-      patient_provider
-      careGiver_lastName
-      careGiver_firstName
-      careGiver_dob
-      careGiver_street
-      careGiver_city
-      careGiver_state
-      careGiver_status
-      careGiver_email
-      careGiver_phone
-      careGiver_provider
+      locationId
+      userId
+      user {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        status
+        createdAt
+        updatedAt
+      }
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateStaffAssignment = /* GraphQL */ `
+  subscription OnCreateStaffAssignment {
+    onCreateStaffAssignment {
+      id
+      patientId
+      staffId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateStaffAssignment = /* GraphQL */ `
+  subscription OnUpdateStaffAssignment {
+    onUpdateStaffAssignment {
+      id
+      patientId
+      staffId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteStaffAssignment = /* GraphQL */ `
+  subscription OnDeleteStaffAssignment {
+    onDeleteStaffAssignment {
+      id
+      patientId
+      staffId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateStaff = /* GraphQL */ `
+  subscription OnCreateStaff {
+    onCreateStaff {
+      id
+      userId
+      locationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateStaff = /* GraphQL */ `
+  subscription OnUpdateStaff {
+    onUpdateStaff {
+      id
+      userId
+      locationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteStaff = /* GraphQL */ `
+  subscription OnDeleteStaff {
+    onDeleteStaff {
+      id
+      userId
+      locationId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      cognitoId
+      addressId
+      firstName
+      lastName
+      dob
+      email
+      phone
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      cognitoId
+      addressId
+      firstName
+      lastName
+      dob
+      email
+      phone
+      status
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      cognitoId
+      addressId
+      firstName
+      lastName
+      dob
+      email
+      phone
+      status
       createdAt
       updatedAt
     }

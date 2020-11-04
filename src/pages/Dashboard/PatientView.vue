@@ -26,15 +26,15 @@
               style="display:flex; align-items:flex-end; flex-direction:column;"
             >
               <h3 class="title" style="width:300px;">
-                {{ patientInfo.lastName }}, {{ patientInfo.firstName }}
+                {{ patientInfo.patient_lastName }}, {{ patientInfo.patient_firstName }}
               </h3>
               <h5 class="title" style="width:300px;">
-                {{ patientInfo.street }} {{ patientInfo.city }},
-                {{ patientInfo.state }}
+                {{ patientInfo.patient_street }} {{ patientInfo.patient_city }},
+                {{ patientInfo.patient_state }}
               </h5>
             </div>
           </div>
-          <S2Button :style="'color:white;'" :width="165" class="mt-8">
+          <S2Button :click="handleNewAssessmentClick" :style="'color:white;'" :width="165" class="mt-8">
             <svg-icon
               slot="buttonIcon"
               class="mr-10"
@@ -126,7 +126,6 @@
 import { Pagination } from "@/components";
 import assessments from "../Dashboard/Tables/assessments";
 import Fuse from "fuse.js";
-import Swal from "sweetalert2";
 import SvgIcon from "@jamescoyle/vue-icon";
 import S2Button from "@/components/S2Button.vue";
 import {
@@ -216,6 +215,7 @@ export default {
     patientInfo: {}
   },
   mounted() {
+    console.log("patient info", this.patientInfo)
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["startDate", "caregiver", "status"],
       threshold: 0.3

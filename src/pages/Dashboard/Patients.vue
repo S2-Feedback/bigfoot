@@ -226,10 +226,11 @@ export default {
     async getPatients(){
       await runQuery(listAllPatients).then((res)=>{
         this.tableData = res.data.listPatients.items
-      }).catch((error)=>{console.log('error ', error)})
+      }).catch((error)=>{//console.log('error ', error)
+      })
     }
   },
- mounted() {
+  mounted() {
 
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["lastName", "firstName", "street", "city", "state"],
@@ -241,7 +242,7 @@ export default {
     await this.getPatients()
     spinner.hide()  
   }
-};
+}
 </script>
 <style>
 .md-icon {
