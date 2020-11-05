@@ -59,19 +59,19 @@ const router = new VueRouter({
   ]
 });
 router.beforeResolve(async (to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    try {
-      await Vue.prototype.$Amplify.Auth.currentAuthenticatedUser();
-      next();
-    } catch (e) {
-      next({
-        path: "/",
-        query: {
-          redirect: to.fullPath
-        }
-      });
-    }
-  }
+  // if (to.matched.some(record => record.meta.requiresAuth)) {
+  //   try {
+  //     await Vue.prototype.$Amplify.Auth.currentAuthenticatedUser();
+  //     next();
+  //   } catch (e) {
+  //     next({
+  //       path: "/",
+  //       query: {
+  //         redirect: to.fullPath
+  //       }
+  //     });
+  //   }
+  // }
   next();
 });
 export default router;

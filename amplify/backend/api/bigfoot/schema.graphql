@@ -14,6 +14,7 @@ type Address @model
   city: String
   state: String
   zipCode: String
+  isfavorite: String
   isActive: Boolean
 }
 type Location @model
@@ -21,9 +22,8 @@ type Location @model
 {
   id:ID!
   organizationid:ID!
-  addressId:ID!
+  addressId:ID
   description: String 
-
 }
 type Patient @model 
 @key(name: "byLocationId", fields: ["locationId"]) 

@@ -130,6 +130,7 @@ import { runQuery } from "../../apis/gql.js"
 import { listAllPatients } from '../../graphql/custom/patient'
 import { mdiArrowRightDropCircle, mdiPlusCircle } from "@mdi/js";
 import SpinnerService from '../../services/spinnerService'
+import { createOrganization, createAddress, createLocation } from '../../graphql/mutations'
 
 export default {
   name: "Patients",
@@ -228,10 +229,17 @@ export default {
         this.tableData = res.data.listPatients.items
       }).catch((error)=>{//console.log('error ', error)
       })
+    },
+    async generateEverything(){
+      const {data: {createAddress:address}} = await runQuery(createAddress,{input:{street:'101 First St', city:'Test City', state:'TX', zipCode:'75111', isActive:true}})
+      const {data: {createOrganization:organization}} = await runQuery(createOrganization,{input:{addressId:address.id, name:'Test Organization'}})
+      const {data: {createLocation:locationA}} = await runQuery(createLocation, {input: {organizationid:organization.id, description:'Location A'}})
+      const {data: {createLocation:locationB}} = await runQuery(createLocation, {input: {organizationid:organization.id, description:'Location B'}})
+      console.log('what do you got?', organization)
     }
   },
   mounted() {
-
+    this.generateEverything()
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["lastName", "firstName", "street", "city", "state"],
       threshold: 0.3

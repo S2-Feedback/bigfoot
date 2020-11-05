@@ -13,6 +13,7 @@ export const getOrganization = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
@@ -51,6 +52,7 @@ export const listOrganizations = /* GraphQL */ `
           city
           state
           zipCode
+          isfavorite
           isActive
           createdAt
           updatedAt
@@ -74,6 +76,7 @@ export const getAddress = /* GraphQL */ `
       city
       state
       zipCode
+      isfavorite
       isActive
       createdAt
       updatedAt
@@ -93,6 +96,7 @@ export const listAddresss = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
@@ -157,6 +161,7 @@ export const getPatient = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
@@ -196,6 +201,7 @@ export const listPatients = /* GraphQL */ `
           city
           state
           zipCode
+          isfavorite
           isActive
           createdAt
           updatedAt

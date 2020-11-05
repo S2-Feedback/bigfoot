@@ -1,18 +1,13 @@
 {
   "auth": {
-    "bigfootd334dec5": {
+    "bigfoot2182e58f": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false
     }
   },
-  "hosting": {
-    "S3AndCloudFront": {
-      "service": "S3AndCloudFront",
-      "providerPlugin": "awscloudformation"
-    }
-  },
+  "hosting": {},
   "storage": {},
   "api": {
     "bigfoot": {
@@ -24,7 +19,7 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 7,
-              "description": ""
+              "description": "bigfootAPI"
             }
           },
           "additionalAuthenticationProviders": []

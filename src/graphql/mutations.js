@@ -16,6 +16,7 @@ export const createOrganization = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
@@ -52,6 +53,7 @@ export const updateOrganization = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
@@ -88,6 +90,7 @@ export const deleteOrganization = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
@@ -120,6 +123,7 @@ export const createAddress = /* GraphQL */ `
       city
       state
       zipCode
+      isfavorite
       isActive
       createdAt
       updatedAt
@@ -137,6 +141,7 @@ export const updateAddress = /* GraphQL */ `
       city
       state
       zipCode
+      isfavorite
       isActive
       createdAt
       updatedAt
@@ -154,6 +159,7 @@ export const deleteAddress = /* GraphQL */ `
       city
       state
       zipCode
+      isfavorite
       isActive
       createdAt
       updatedAt
@@ -233,6 +239,7 @@ export const createPatient = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
@@ -270,6 +277,7 @@ export const updatePatient = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
@@ -307,6 +315,7 @@ export const deletePatient = /* GraphQL */ `
         city
         state
         zipCode
+        isfavorite
         isActive
         createdAt
         updatedAt
