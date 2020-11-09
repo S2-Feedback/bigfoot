@@ -25,9 +25,14 @@ export const listAllPatients = /* GraphQL */ `
   }
 `;
 
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
+export const listUsersByCognitoId = /* GraphQL */ `
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
       id
       cognitoId
       addressId
@@ -41,5 +46,7 @@ export const getUser = /* GraphQL */ `
       createdAt
       updatedAt
     }
+    nextToken
   }
+}
 `;

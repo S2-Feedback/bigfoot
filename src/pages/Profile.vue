@@ -22,22 +22,22 @@
             class="md-layout"
             style="display:flex; margin-top:30px; justify-content:center;"
           >
-            <span class="card-description" style="font-size:large;"
+            <span class="card-description" style="font-size:xx-large;"
               >I am registering as a</span
             >
             <br />
             <div
               class="dflex"
-              style="width:100%; margin-top:30px; margin-bottom:30px; justify-content:space-evenly;"
+              style="width:100%; margin-top:60px; margin-bottom:60px; justify-content:space-evenly;"
             >
               <S2Button
                 class="mt-8"
                 :click="
                   () => {
-                    handleTypeSelection('pa');
+                    handleTypeSelection(lookupValues.patient);
                   }
                 "
-                :color="activeTab === 'pa' ? 's2success' : 's2default'"
+                :color="activeTab === lookupValues.patient ? 's2success' : 's2default'"
                 :width="140"
                 :height="40"
               >
@@ -47,10 +47,10 @@
                 class="mt-8"
                 :click="
                   () => {
-                    handleTypeSelection('cm');
+                    handleTypeSelection(lookupValues.careManager);
                   }
                 "
-                :color="activeTab === 'cm' ? 's2success' : 's2default'"
+                :color="activeTab === lookupValues.careManager ? 's2success' : 's2default'"
                 :width="140"
                 :height="40"
               >
@@ -60,10 +60,10 @@
                 class="mt-8"
                 :click="
                   () => {
-                    handleTypeSelection('psy');
+                    handleTypeSelection(lookupValues.psychiatrist);
                   }
                 "
-                :color="activeTab === 'psy' ? 's2success' : 's2default'"
+                :color="activeTab === lookupValues.psychiatrist ? 's2success' : 's2default'"
                 :width="140"
                 :height="40"
               >
@@ -73,10 +73,10 @@
                 class="mt-8"
                 :click="
                   () => {
-                    handleTypeSelection('cp');
+                    handleTypeSelection(lookupValues.pcp);
                   }
                 "
-                :color="activeTab === 'cp' ? 's2success' : 's2default'"
+                :color="activeTab === lookupValues.pcp ? 's2success' : 's2default'"
                 :width="140"
                 :height="40"
               >
@@ -270,7 +270,7 @@
                   >
                     <label>Email Address</label>
                     <div class="md-layout-item">
-                      <md-input v-model="email"></md-input>
+                      <md-input v-model="profileEmail"></md-input>
                     </div>
                     <slide-y-down-transition>
                       <md-icon class="error" v-show="failed">close</md-icon>
@@ -329,24 +329,71 @@
 
 <script>
 import S2Button from "@/components/S2Button.vue";
+import { createUser } from '../graphql/mutations';
+import { SlideYDownTransition } from "vue2-transitions";
+import {lookupValues} from '../constants/lookups'
 
 export default {
+  name:'Profile',
   components: {
-    S2Button
+    S2Button,
+    SlideYDownTransition
   },
   data() {
     return {
-      activeTab: ""
+      activeTab: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      profileEmail:'',
+      city: "",
+      state: "",
+      zipcode: "",
+      dob: "",
+      phone: "",
+      provider: "",
+      status: "Active", 
+      lookupValues:{} 
     };
   },
+  props:{
+      email: {
+      },
+      phoneNumber: {
+      },
+      cognitoId: {
+      }
+  }, 
   methods: {
     handleTypeSelection(selectedType) {
       this.activeTab = selectedType;
     },
-    handleFinishClick() {
-      this.$router.push("Patients");
-    }
-  }
+    async handleFinishClick() {
+      await this.$runQuery(createUser,{input:{cognitoId:this.cognitoId, email:this.email, type: this.activeTab}})
+      switch (this.activeTab) {
+        case this.lookupValues.patient:
+            this.$router.push({name:"Patient Portal"})
+            break;
+        case this.lookupValues.careManager:
+            this.$router.push({name:"Care Manager Portal"})
+            break;
+        case this.lookupValues.pcp:
+            this.$router.push({name:"Primary Care Portal"})
+            break;
+        case this.lookupValues.psychiatrist:
+            this.$router.push({name:"Psychiatric Portal"})
+            break;
+        default:
+            this.$router.push("/")
+            break;
+      }
+    }, 
+    validate(){
+    },
+  }, 
+  mounted(){
+      this.lookupValues = lookupValues.userTypes
+  } 
 };
 </script>
 

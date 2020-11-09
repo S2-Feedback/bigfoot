@@ -1,9 +1,12 @@
-const DashboardLayout = () =>
-  import("@/pages/Dashboard/Layout/DashboardLayout.vue");
+const DashboardLayout = () => import("@/pages/Dashboard/Layout/DashboardLayout.vue");
 const Patients = () => import("@/pages/Dashboard/Patients.vue");
-const PatientView = () => import("@/pages/Dashboard/PatientView.vue");
-const AddPatient = () =>
-  import("@/pages/Dashboard/Forms/AddPatient/AddPatient.vue");
+
+const PatientView = () => import("@/views/PatientView.vue");
+const CareManView = () => import("@/views/CareManView.vue");
+const PCPView = () => import("@/views/PCPView.vue");
+const PsychView = () => import("@/views/PsychView.vue");
+
+const AddPatient = () => import("@/pages/Dashboard/Forms/AddPatient/AddPatient.vue");
 const MakeCall = () => import("@/pages/Dashboard/MakeCall.vue");
 const Profile = () => import("@/pages/Profile.vue");
 
@@ -29,10 +32,38 @@ const router = new VueRouter({
       component: DashboardLayout,
       children: [
         {
+          path: "/patient",
+          name: "Patient Portal",
+          props: true,
+          component: PatientView ,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: "/careManager",
+          name: "Care Manager Portal",
+          props: true,
+          component: CareManView ,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: "/pcp",
+          name: "Primary Care Portal",
+          props: true,
+          component: PCPView ,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: "/psych",
+          name: "Psychiatric Portal",
+          props: true,
+          component: PsychView ,
+          meta: { requiresAuth: true }
+        },
+        {
           path: "/profile",
           name: "Profile",
           props: true,
-          components: { default: Profile },
+          component: Profile ,
           meta: { requiresAuth: true }
         },
         {
@@ -40,13 +71,6 @@ const router = new VueRouter({
           name: "Patients",
           props: true,
           components: { default: Patients },
-          meta: { requiresAuth: true }
-        },
-        {
-          path: "patientView",
-          name: "Patient View",
-          props: true,
-          component: PatientView,
           meta: { requiresAuth: true }
         },
         {
