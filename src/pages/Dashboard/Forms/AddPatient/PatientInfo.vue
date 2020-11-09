@@ -236,16 +236,16 @@ export default {
       email: "",
       phone: "",
       provider: "",
-      status:"Active"
+      status: "Active"
     };
   },
   computed: {},
   watch: {},
   methods: {
     validate() {
-        return this.$refs.form.validate().then(res => {
-        this.$emit("on-validated", res, {patientInfo:
-          {
+      return this.$refs.form.validate().then(res => {
+        this.$emit("on-validated", res, {
+          patientInfo: {
             firstName: this.firstName,
             lastName: this.lastName,
             street: this.address,
@@ -256,8 +256,8 @@ export default {
             email: this.email,
             phone: this.phone,
             provider: this.provider,
-            status:this.status 
-          }        
+            status: this.status
+          }
         });
         return res;
       });

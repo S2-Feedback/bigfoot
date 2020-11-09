@@ -26,7 +26,8 @@
               style="display:flex; align-items:flex-end; flex-direction:column;"
             >
               <h3 class="title" style="width:300px;">
-                {{ patientInfo.patient_lastName }}, {{ patientInfo.patient_firstName }}
+                {{ patientInfo.patient_lastName }},
+                {{ patientInfo.patient_firstName }}
               </h3>
               <h5 class="title" style="width:300px;">
                 {{ patientInfo.patient_street }} {{ patientInfo.patient_city }},
@@ -34,7 +35,12 @@
               </h5>
             </div>
           </div>
-          <S2Button :click="handleNewAssessmentClick" :style="'color:white;'" :width="165" class="mt-8">
+          <S2Button
+            :click="handleNewAssessmentClick"
+            :style="'color:white;'"
+            :width="165"
+            class="mt-8"
+          >
             <svg-icon
               slot="buttonIcon"
               class="mr-10"
@@ -215,7 +221,7 @@ export default {
     patientInfo: {}
   },
   mounted() {
-    console.log("patient info", this.patientInfo)
+    console.log("patient info", this.patientInfo);
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["startDate", "caregiver", "status"],
       threshold: 0.3

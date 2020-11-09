@@ -13,7 +13,6 @@ export const onCreateOrganization = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -30,6 +29,7 @@ export const onCreateOrganization = /* GraphQL */ `
         nextToken
       }
       status
+      isActive
       createdAt
       updatedAt
     }
@@ -47,7 +47,6 @@ export const onUpdateOrganization = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -64,6 +63,7 @@ export const onUpdateOrganization = /* GraphQL */ `
         nextToken
       }
       status
+      isActive
       createdAt
       updatedAt
     }
@@ -81,7 +81,6 @@ export const onDeleteOrganization = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -98,6 +97,7 @@ export const onDeleteOrganization = /* GraphQL */ `
         nextToken
       }
       status
+      isActive
       createdAt
       updatedAt
     }
@@ -111,7 +111,6 @@ export const onCreateAddress = /* GraphQL */ `
       city
       state
       zipCode
-      isfavorite
       isActive
       createdAt
       updatedAt
@@ -126,7 +125,6 @@ export const onUpdateAddress = /* GraphQL */ `
       city
       state
       zipCode
-      isfavorite
       isActive
       createdAt
       updatedAt
@@ -141,7 +139,6 @@ export const onDeleteAddress = /* GraphQL */ `
       city
       state
       zipCode
-      isfavorite
       isActive
       createdAt
       updatedAt
@@ -199,7 +196,8 @@ export const onCreatePatient = /* GraphQL */ `
         dob
         email
         phone
-        status
+        type
+        isActive
         createdAt
         updatedAt
       }
@@ -209,7 +207,6 @@ export const onCreatePatient = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -234,7 +231,8 @@ export const onUpdatePatient = /* GraphQL */ `
         dob
         email
         phone
-        status
+        type
+        isActive
         createdAt
         updatedAt
       }
@@ -244,7 +242,6 @@ export const onUpdatePatient = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -269,7 +266,8 @@ export const onDeletePatient = /* GraphQL */ `
         dob
         email
         phone
-        status
+        type
+        isActive
         createdAt
         updatedAt
       }
@@ -279,7 +277,6 @@ export const onDeletePatient = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -366,7 +363,8 @@ export const onCreateUser = /* GraphQL */ `
       dob
       email
       phone
-      status
+      type
+      isActive
       createdAt
       updatedAt
     }
@@ -383,7 +381,8 @@ export const onUpdateUser = /* GraphQL */ `
       dob
       email
       phone
-      status
+      type
+      isActive
       createdAt
       updatedAt
     }
@@ -400,7 +399,188 @@ export const onDeleteUser = /* GraphQL */ `
       dob
       email
       phone
-      status
+      type
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAssessmentQuestion = /* GraphQL */ `
+  subscription OnCreateAssessmentQuestion {
+    onCreateAssessmentQuestion {
+      id
+      assessmentId
+      questionId
+      answerId
+      sequenceNumber
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAssessmentQuestion = /* GraphQL */ `
+  subscription OnUpdateAssessmentQuestion {
+    onUpdateAssessmentQuestion {
+      id
+      assessmentId
+      questionId
+      answerId
+      sequenceNumber
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAssessmentQuestion = /* GraphQL */ `
+  subscription OnDeleteAssessmentQuestion {
+    onDeleteAssessmentQuestion {
+      id
+      assessmentId
+      questionId
+      answerId
+      sequenceNumber
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAnswer = /* GraphQL */ `
+  subscription OnCreateAnswer {
+    onCreateAnswer {
+      id
+      answerText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAnswer = /* GraphQL */ `
+  subscription OnUpdateAnswer {
+    onUpdateAnswer {
+      id
+      answerText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAnswer = /* GraphQL */ `
+  subscription OnDeleteAnswer {
+    onDeleteAnswer {
+      id
+      answerText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateQuestion = /* GraphQL */ `
+  subscription OnCreateQuestion {
+    onCreateQuestion {
+      id
+      questionText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateQuestion = /* GraphQL */ `
+  subscription OnUpdateQuestion {
+    onUpdateQuestion {
+      id
+      questionText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteQuestion = /* GraphQL */ `
+  subscription OnDeleteQuestion {
+    onDeleteQuestion {
+      id
+      questionText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAssessment = /* GraphQL */ `
+  subscription OnCreateAssessment {
+    onCreateAssessment {
+      id
+      title
+      questions {
+        items {
+          id
+          assessmentId
+          questionId
+          answerId
+          sequenceNumber
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAssessment = /* GraphQL */ `
+  subscription OnUpdateAssessment {
+    onUpdateAssessment {
+      id
+      title
+      questions {
+        items {
+          id
+          assessmentId
+          questionId
+          answerId
+          sequenceNumber
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAssessment = /* GraphQL */ `
+  subscription OnDeleteAssessment {
+    onDeleteAssessment {
+      id
+      title
+      questions {
+        items {
+          id
+          assessmentId
+          questionId
+          answerId
+          sequenceNumber
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      isActive
       createdAt
       updatedAt
     }

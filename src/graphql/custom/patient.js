@@ -24,3 +24,22 @@ export const listAllPatients = /* GraphQL */ `
     }
   }
 `;
+
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      cognitoId
+      addressId
+      firstName
+      lastName
+      dob
+      email
+      phone
+      type
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;

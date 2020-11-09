@@ -49,15 +49,14 @@
 </template>
 <script>
 import { Pagination, Modal, SimpleWizard, WizardTab } from "@/components";
-import SpinnerService from '../../../../services/spinnerService'
+import SpinnerService from "../../../../services/spinnerService";
 import SvgIcon from "@jamescoyle/vue-icon";
 import PatientInfo from "./PatientInfo";
 import SecondStep from "./CaregiverInfo";
 import S2Button from "@/components/S2Button.vue";
 import { mdiChevronLeftCircle } from "@mdi/js";
-import { runQuery } from "../../../../apis/gql"
-import { createPatient } from '../../../../graphql/custom/patient'
-
+import { runQuery } from "../../../../apis/gql";
+import { createPatient } from "../../../../graphql/custom/patient";
 
 export default {
   name: "AddPatient",
@@ -89,37 +88,44 @@ export default {
     async onStepValidated(validated, model, finalStep) {
       this.wizardModel = { ...this.wizardModel, ...model };
       if (finalStep) {
-        await this.wizardComplete()
+        await this.wizardComplete();
       }
     },
     async wizardComplete() {
-        const spinner = SpinnerService(this)
-        await runQuery(createPatient,{input: {
-            id: Math.floor(Math.random() * 2545121254),
-            patient_lastName: this.wizardModel.patientInfo.lastName,
-            patient_firstName: this.wizardModel.patientInfo.firstName,
-            patient_dob: this.wizardModel.patientInfo.dob,
-            patient_street: this.wizardModel.patientInfo.street,
-            patient_city: this.wizardModel.patientInfo.city,
-            patient_state: this.wizardModel.patientInfo.state,
-            patient_status: this.wizardModel.patientInfo.status,
-            patient_email: this.wizardModel.patientInfo.email,
-            patient_phone: this.wizardModel.patientInfo.phone,
-            patient_provider: this.wizardModel.patientInfo.provider,
-            careGiver_lastName:this.wizardModel.careGiverInfo.lastName,
-            careGiver_firstName:this.wizardModel.careGiverInfo.firstName,
-            careGiver_dob:this.wizardModel.careGiverInfo.dob,
-            careGiver_street:this.wizardModel.careGiverInfo.street,
-            careGiver_city:this.wizardModel.careGiverInfo.city,
-            careGiver_state:this.wizardModel.careGiverInfo.state,
-            careGiver_status:this.wizardModel.careGiverInfo.status,
-            careGiver_email:this.wizardModel.careGiverInfo.email,
-            careGiver_phone:this.wizardModel.careGiverInfo.phone,
-            careGiver_provider:this.wizardModel.careGiverInfo.provider           
-           
-        }}).then(()=>{this.showWizard = false; spinner.hide(); this.$router.push("Patients");}).catch((error)=>{//console.log('error', error)
+      const spinner = SpinnerService(this);
+      await runQuery(createPatient, {
+        input: {
+          id: Math.floor(Math.random() * 2545121254),
+          patient_lastName: this.wizardModel.patientInfo.lastName,
+          patient_firstName: this.wizardModel.patientInfo.firstName,
+          patient_dob: this.wizardModel.patientInfo.dob,
+          patient_street: this.wizardModel.patientInfo.street,
+          patient_city: this.wizardModel.patientInfo.city,
+          patient_state: this.wizardModel.patientInfo.state,
+          patient_status: this.wizardModel.patientInfo.status,
+          patient_email: this.wizardModel.patientInfo.email,
+          patient_phone: this.wizardModel.patientInfo.phone,
+          patient_provider: this.wizardModel.patientInfo.provider,
+          careGiver_lastName: this.wizardModel.careGiverInfo.lastName,
+          careGiver_firstName: this.wizardModel.careGiverInfo.firstName,
+          careGiver_dob: this.wizardModel.careGiverInfo.dob,
+          careGiver_street: this.wizardModel.careGiverInfo.street,
+          careGiver_city: this.wizardModel.careGiverInfo.city,
+          careGiver_state: this.wizardModel.careGiverInfo.state,
+          careGiver_status: this.wizardModel.careGiverInfo.status,
+          careGiver_email: this.wizardModel.careGiverInfo.email,
+          careGiver_phone: this.wizardModel.careGiverInfo.phone,
+          careGiver_provider: this.wizardModel.careGiverInfo.provider
+        }
+      })
+        .then(() => {
+          this.showWizard = false;
+          spinner.hide();
+          this.$router.push("Patients");
         })
-        
+        .catch(error => {
+          //console.log('error', error)
+        });
     }
   },
   mounted() {}

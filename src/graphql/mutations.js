@@ -16,7 +16,6 @@ export const createOrganization = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -33,6 +32,7 @@ export const createOrganization = /* GraphQL */ `
         nextToken
       }
       status
+      isActive
       createdAt
       updatedAt
     }
@@ -53,7 +53,6 @@ export const updateOrganization = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -70,6 +69,7 @@ export const updateOrganization = /* GraphQL */ `
         nextToken
       }
       status
+      isActive
       createdAt
       updatedAt
     }
@@ -90,7 +90,6 @@ export const deleteOrganization = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -107,6 +106,7 @@ export const deleteOrganization = /* GraphQL */ `
         nextToken
       }
       status
+      isActive
       createdAt
       updatedAt
     }
@@ -123,7 +123,6 @@ export const createAddress = /* GraphQL */ `
       city
       state
       zipCode
-      isfavorite
       isActive
       createdAt
       updatedAt
@@ -141,7 +140,6 @@ export const updateAddress = /* GraphQL */ `
       city
       state
       zipCode
-      isfavorite
       isActive
       createdAt
       updatedAt
@@ -159,7 +157,6 @@ export const deleteAddress = /* GraphQL */ `
       city
       state
       zipCode
-      isfavorite
       isActive
       createdAt
       updatedAt
@@ -229,7 +226,8 @@ export const createPatient = /* GraphQL */ `
         dob
         email
         phone
-        status
+        type
+        isActive
         createdAt
         updatedAt
       }
@@ -239,7 +237,6 @@ export const createPatient = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -267,7 +264,8 @@ export const updatePatient = /* GraphQL */ `
         dob
         email
         phone
-        status
+        type
+        isActive
         createdAt
         updatedAt
       }
@@ -277,7 +275,6 @@ export const updatePatient = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -305,7 +302,8 @@ export const deletePatient = /* GraphQL */ `
         dob
         email
         phone
-        status
+        type
+        isActive
         createdAt
         updatedAt
       }
@@ -315,7 +313,6 @@ export const deletePatient = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -423,7 +420,8 @@ export const createUser = /* GraphQL */ `
       dob
       email
       phone
-      status
+      type
+      isActive
       createdAt
       updatedAt
     }
@@ -443,7 +441,8 @@ export const updateUser = /* GraphQL */ `
       dob
       email
       phone
-      status
+      type
+      isActive
       createdAt
       updatedAt
     }
@@ -463,7 +462,224 @@ export const deleteUser = /* GraphQL */ `
       dob
       email
       phone
-      status
+      type
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAssessmentQuestion = /* GraphQL */ `
+  mutation CreateAssessmentQuestion(
+    $input: CreateAssessmentQuestionInput!
+    $condition: ModelAssessmentQuestionConditionInput
+  ) {
+    createAssessmentQuestion(input: $input, condition: $condition) {
+      id
+      assessmentId
+      questionId
+      answerId
+      sequenceNumber
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAssessmentQuestion = /* GraphQL */ `
+  mutation UpdateAssessmentQuestion(
+    $input: UpdateAssessmentQuestionInput!
+    $condition: ModelAssessmentQuestionConditionInput
+  ) {
+    updateAssessmentQuestion(input: $input, condition: $condition) {
+      id
+      assessmentId
+      questionId
+      answerId
+      sequenceNumber
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAssessmentQuestion = /* GraphQL */ `
+  mutation DeleteAssessmentQuestion(
+    $input: DeleteAssessmentQuestionInput!
+    $condition: ModelAssessmentQuestionConditionInput
+  ) {
+    deleteAssessmentQuestion(input: $input, condition: $condition) {
+      id
+      assessmentId
+      questionId
+      answerId
+      sequenceNumber
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAnswer = /* GraphQL */ `
+  mutation CreateAnswer(
+    $input: CreateAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    createAnswer(input: $input, condition: $condition) {
+      id
+      answerText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAnswer = /* GraphQL */ `
+  mutation UpdateAnswer(
+    $input: UpdateAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    updateAnswer(input: $input, condition: $condition) {
+      id
+      answerText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAnswer = /* GraphQL */ `
+  mutation DeleteAnswer(
+    $input: DeleteAnswerInput!
+    $condition: ModelAnswerConditionInput
+  ) {
+    deleteAnswer(input: $input, condition: $condition) {
+      id
+      answerText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createQuestion = /* GraphQL */ `
+  mutation CreateQuestion(
+    $input: CreateQuestionInput!
+    $condition: ModelQuestionConditionInput
+  ) {
+    createQuestion(input: $input, condition: $condition) {
+      id
+      questionText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateQuestion = /* GraphQL */ `
+  mutation UpdateQuestion(
+    $input: UpdateQuestionInput!
+    $condition: ModelQuestionConditionInput
+  ) {
+    updateQuestion(input: $input, condition: $condition) {
+      id
+      questionText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteQuestion = /* GraphQL */ `
+  mutation DeleteQuestion(
+    $input: DeleteQuestionInput!
+    $condition: ModelQuestionConditionInput
+  ) {
+    deleteQuestion(input: $input, condition: $condition) {
+      id
+      questionText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAssessment = /* GraphQL */ `
+  mutation CreateAssessment(
+    $input: CreateAssessmentInput!
+    $condition: ModelAssessmentConditionInput
+  ) {
+    createAssessment(input: $input, condition: $condition) {
+      id
+      title
+      questions {
+        items {
+          id
+          assessmentId
+          questionId
+          answerId
+          sequenceNumber
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAssessment = /* GraphQL */ `
+  mutation UpdateAssessment(
+    $input: UpdateAssessmentInput!
+    $condition: ModelAssessmentConditionInput
+  ) {
+    updateAssessment(input: $input, condition: $condition) {
+      id
+      title
+      questions {
+        items {
+          id
+          assessmentId
+          questionId
+          answerId
+          sequenceNumber
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAssessment = /* GraphQL */ `
+  mutation DeleteAssessment(
+    $input: DeleteAssessmentInput!
+    $condition: ModelAssessmentConditionInput
+  ) {
+    deleteAssessment(input: $input, condition: $condition) {
+      id
+      title
+      questions {
+        items {
+          id
+          assessmentId
+          questionId
+          answerId
+          sequenceNumber
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      isActive
       createdAt
       updatedAt
     }

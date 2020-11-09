@@ -6,6 +6,7 @@ type Organization @model
   address: Address @connection(fields:["addressId"])
   locations: [Location] @connection(keyName: "byOrganizationId",fields:["id"])
   status: String
+  isActive: Boolean
 }                                                                                                                                               
 type Address @model
 {
@@ -14,7 +15,6 @@ type Address @model
   city: String
   state: String
   zipCode: String
-  isfavorite: String
   isActive: Boolean
 }
 type Location @model
@@ -33,24 +33,26 @@ type Patient @model
   userId: ID! 
   user: User @connection(fields:["userId"])
   address: Address @connection(fields:["id"])
-  
 }
 type StaffAssignment @model
-@key(name: "byPatientId", fields: ["patientId"]) 
+@key(name: "byPatientId", fields: ["patientId"])
+@key(name: "byStaffId", fields: ["staffId"]) 
 {
   id: ID!
   patientId: ID!
   staffId: ID!
 }
-
 type Staff @model
 @key(name: "byLocationId", fields: ["locationId"])
+@key(name: "byUserId", fields: ["userId"])
 {
   id:ID!
   userId: ID!
   locationId: ID!
 }
 type User @model 
+@key(name: "byType", fields: ["type"])
+@key(name: "byCognitoId", fields:["cognitoId"])
 {
   id: ID!
   cognitoId: String!
@@ -60,8 +62,36 @@ type User @model
   dob: String
   email: String!
   phone: String
-  status: String
-  
+  type: Int
+  isActive: Boolean
 }
+
+type AssessmentQuestion @model
+@key(name: "byAssessmentId", fields: ["assessmentId"])
+{
+  id:ID!
+  assessmentId: ID!
+  questionId:ID!
+  answerId:ID!
+  sequenceNumber: Int
+  isActive:Boolean!
+}
+type Answer @model{
+  id:ID!
+  answerText:String
+  isActive:Boolean!
+}
+type Question @model{
+  id:ID!
+  questionText: String
+  isActive:Boolean!
+}
+type Assessment @model{
+  id:ID!
+  title:String
+  questions: [AssessmentQuestion] @connection(keyName:"byAssessmentId", fields:["id"])
+  isActive: Boolean
+}
+
 
 

@@ -5,6 +5,8 @@ const PatientView = () => import("@/pages/Dashboard/PatientView.vue");
 const AddPatient = () =>
   import("@/pages/Dashboard/Forms/AddPatient/AddPatient.vue");
 const MakeCall = () => import("@/pages/Dashboard/MakeCall.vue");
+const Profile = () => import("@/pages/Profile.vue");
+
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "@/pages/Login.vue";
@@ -26,6 +28,13 @@ const router = new VueRouter({
       path: "/",
       component: DashboardLayout,
       children: [
+        {
+          path: "/profile",
+          name: "Profile",
+          props: true,
+          components: { default: Profile },
+          meta: { requiresAuth: true }
+        },
         {
           path: "/patients",
           name: "Patients",

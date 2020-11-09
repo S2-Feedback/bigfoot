@@ -2,8 +2,7 @@
   <div class="wrapper" style="overflow-x:hidden;">
     <notifications></notifications>
     <top-navbar
-      class="md-primary"
-      style="box-shadow: 0 6px 6px -5px black"
+      style="box-shadow: 0 6px 6px -5px black; background-color:#404040 !important;"
     ></top-navbar>
     <div class="main-panel" style="width:100%">
       <zoom-center-transition :duration="150" mode="out-in">

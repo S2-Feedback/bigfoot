@@ -13,7 +13,6 @@ export const getOrganization = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -30,6 +29,7 @@ export const getOrganization = /* GraphQL */ `
         nextToken
       }
       status
+      isActive
       createdAt
       updatedAt
     }
@@ -52,7 +52,6 @@ export const listOrganizations = /* GraphQL */ `
           city
           state
           zipCode
-          isfavorite
           isActive
           createdAt
           updatedAt
@@ -61,6 +60,7 @@ export const listOrganizations = /* GraphQL */ `
           nextToken
         }
         status
+        isActive
         createdAt
         updatedAt
       }
@@ -76,7 +76,6 @@ export const getAddress = /* GraphQL */ `
       city
       state
       zipCode
-      isfavorite
       isActive
       createdAt
       updatedAt
@@ -96,7 +95,6 @@ export const listAddresss = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -151,7 +149,8 @@ export const getPatient = /* GraphQL */ `
         dob
         email
         phone
-        status
+        type
+        isActive
         createdAt
         updatedAt
       }
@@ -161,7 +160,6 @@ export const getPatient = /* GraphQL */ `
         city
         state
         zipCode
-        isfavorite
         isActive
         createdAt
         updatedAt
@@ -191,7 +189,8 @@ export const listPatients = /* GraphQL */ `
           dob
           email
           phone
-          status
+          type
+          isActive
           createdAt
           updatedAt
         }
@@ -201,7 +200,6 @@ export const listPatients = /* GraphQL */ `
           city
           state
           zipCode
-          isfavorite
           isActive
           createdAt
           updatedAt
@@ -286,7 +284,8 @@ export const getUser = /* GraphQL */ `
       dob
       email
       phone
-      status
+      type
+      isActive
       createdAt
       updatedAt
     }
@@ -308,7 +307,150 @@ export const listUsers = /* GraphQL */ `
         dob
         email
         phone
-        status
+        type
+        isActive
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAssessmentQuestion = /* GraphQL */ `
+  query GetAssessmentQuestion($id: ID!) {
+    getAssessmentQuestion(id: $id) {
+      id
+      assessmentId
+      questionId
+      answerId
+      sequenceNumber
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAssessmentQuestions = /* GraphQL */ `
+  query ListAssessmentQuestions(
+    $filter: ModelAssessmentQuestionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAssessmentQuestions(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        assessmentId
+        questionId
+        answerId
+        sequenceNumber
+        isActive
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAnswer = /* GraphQL */ `
+  query GetAnswer($id: ID!) {
+    getAnswer(id: $id) {
+      id
+      answerText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAnswers = /* GraphQL */ `
+  query ListAnswers(
+    $filter: ModelAnswerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        answerText
+        isActive
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getQuestion = /* GraphQL */ `
+  query GetQuestion($id: ID!) {
+    getQuestion(id: $id) {
+      id
+      questionText
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listQuestions = /* GraphQL */ `
+  query ListQuestions(
+    $filter: ModelQuestionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listQuestions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        questionText
+        isActive
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAssessment = /* GraphQL */ `
+  query GetAssessment($id: ID!) {
+    getAssessment(id: $id) {
+      id
+      title
+      questions {
+        items {
+          id
+          assessmentId
+          questionId
+          answerId
+          sequenceNumber
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAssessments = /* GraphQL */ `
+  query ListAssessments(
+    $filter: ModelAssessmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAssessments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        questions {
+          nextToken
+        }
+        isActive
         createdAt
         updatedAt
       }

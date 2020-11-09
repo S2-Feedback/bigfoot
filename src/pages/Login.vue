@@ -6,7 +6,8 @@
 
 <script>
 import { AmplifyEventBus } from "aws-amplify-vue";
-import { Auth } from "aws-amplify";
+import { Auth, API, graphqlOperation } from "aws-amplify";
+import { getUsers } from "../graphql/custom/patient";
 
 export default {
   async mounted() {
@@ -16,12 +17,20 @@ export default {
     } catch (error) {
       //console.log(error) //todo add some logging
     }
+
+    console.log("what do you have for user", user);
     if (Object.keys(user).length > 0) {
       this.$router.push({ name: "Patients" });
     }
-    AmplifyEventBus.$on("authState", eventInfo => {
+    AmplifyEventBus.$on("authState", async eventInfo => {
       if (eventInfo === "signedIn") {
-        this.$router.push({ name: "Patients" });
+        //user = await Auth.currentAuthenticatedUser();
+        //console.log("what is the last event hat was fired ", user.attributes.sub)
+        //let s = await API.graphql(graphqlOperation(getUsers))
+        //let x = this.$runQuery(getUserByCognitoId, {cognitoId: user.attributes.sub})
+        //console.log('what do you have for user now', s)
+
+        this.$router.push({ name: "Profile" });
       } else if (eventInfo === "signedOut") {
       }
     });
