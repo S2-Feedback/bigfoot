@@ -33,8 +33,10 @@ input:-webkit-autofill {
 .dflex-center-row{
     display:flex;
     justify-content: center;
+    align-items: center;
 }
 .dflex-center-col{
+    width:100%;
     display:flex;
     flex-direction:column;
     justify-content: center;

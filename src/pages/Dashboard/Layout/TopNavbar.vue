@@ -21,10 +21,10 @@
 
         <div class="md-collapse">
           <md-list>
-            <md-list-item @click="handlePhoneClick">
+            <!-- <md-list-item @click="handlePhoneClick">
               <i class="material-icons">phone</i>
               <p class="hidden-lg hidden-md">Secure Call</p>
-            </md-list-item>
+            </md-list-item> -->
             <md-list-item href="#/">
               <i class="material-icons">dashboard</i>
               <p class="hidden-lg hidden-md">Dashboard</p>

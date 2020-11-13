@@ -22,7 +22,7 @@
         <template slot="header">
           <h3 class="title">New Patient</h3>
           <h5 class="category">
-            Please enter patient and caregiver information.
+            Please enter patient and care manager information.
           </h5>
         </template>
 
@@ -38,7 +38,7 @@
 
         <wizard-tab :before-change="() => validateStep('step2')">
           <template slot="label">
-            Caregiver Information
+            Care Manager Information
           </template>
           <secondStep ref="step2" @on-validated="onStepValidated"></secondStep>
         </wizard-tab>
@@ -52,7 +52,7 @@ import { Pagination, Modal, SimpleWizard, WizardTab } from "@/components";
 import SpinnerService from "../../../../services/spinnerService";
 import SvgIcon from "@jamescoyle/vue-icon";
 import PatientInfo from "./PatientInfo";
-import SecondStep from "./CaregiverInfo";
+import SecondStep from "./CareManagerInfo";
 import S2Button from "@/components/S2Button.vue";
 import { mdiChevronLeftCircle } from "@mdi/js";
 import { runQuery } from "../../../../apis/gql";
@@ -92,10 +92,9 @@ export default {
       }
     },
     async wizardComplete() {
-      const spinner = SpinnerService(this);
+       const spinner = SpinnerService(this);
       await runQuery(createPatient, {
         input: {
-          id: Math.floor(Math.random() * 2545121254),
           patient_lastName: this.wizardModel.patientInfo.lastName,
           patient_firstName: this.wizardModel.patientInfo.firstName,
           patient_dob: this.wizardModel.patientInfo.dob,
@@ -106,29 +105,28 @@ export default {
           patient_email: this.wizardModel.patientInfo.email,
           patient_phone: this.wizardModel.patientInfo.phone,
           patient_provider: this.wizardModel.patientInfo.provider,
-          careGiver_lastName: this.wizardModel.careGiverInfo.lastName,
-          careGiver_firstName: this.wizardModel.careGiverInfo.firstName,
-          careGiver_dob: this.wizardModel.careGiverInfo.dob,
-          careGiver_street: this.wizardModel.careGiverInfo.street,
-          careGiver_city: this.wizardModel.careGiverInfo.city,
-          careGiver_state: this.wizardModel.careGiverInfo.state,
-          careGiver_status: this.wizardModel.careGiverInfo.status,
-          careGiver_email: this.wizardModel.careGiverInfo.email,
-          careGiver_phone: this.wizardModel.careGiverInfo.phone,
-          careGiver_provider: this.wizardModel.careGiverInfo.provider
+         
         }
       })
         .then(() => {
           this.showWizard = false;
           spinner.hide();
-          this.$router.push("Patients");
+          this.$router.push(this.returnTo);
         })
         .catch(error => {
           //console.log('error', error)
         });
+      spinner.hide();
+      this.$router.push({name: this.returnTo} );
     }
   },
-  mounted() {}
+  props:{
+    returnTo:{
+      type:String
+    }
+  },
+  mounted() {
+  }
 };
 </script>
 <style>
