@@ -51,15 +51,18 @@
       
 </template>
 <script>
+import {notify} from '../../../../services/notificationService'
 import { Pagination, Modal, SimpleWizard, WizardTab } from "@/components";
 import SpinnerService from "../../../../services/spinnerService";
 import SvgIcon from "@jamescoyle/vue-icon";
 import PatientInfo from "./PatientInfo";
 import SecondStep from "./CareManagerInfo";
 import S2Button from "@/components/S2Button.vue";
-import { mdiChevronLeftCircle } from "@mdi/js";
+import { mdiChevronLeftCircle, mdiSubdirectoryArrowLeft } from "@mdi/js";
 import { runQuery } from "../../../../apis/gql";
-import { createPatient } from "../../../../graphql/custom/patient";
+import { createAddress, createUser } from "../../../../graphql/mutations"
+import {  CognitoUser, CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js'
+import { lookupValues } from '../../../../constants/lookups';
 
 export default {
   name: "AddPatient",
@@ -102,33 +105,73 @@ export default {
     async wizardComplete() {
        const spinner = SpinnerService(this);
        this.showWizard = false; 
-       setTimeout(async() => {
 
-         console.log('this is the wizard  odel', this.wizardModel)
-          await runQuery(createPatient, {
-            input: {
-              patient_lastName: this.wizardModel.patientInfo.lastName,
-              patient_firstName: this.wizardModel.patientInfo.firstName,
-              patient_dob: this.wizardModel.patientInfo.dob,
-              patient_street: this.wizardModel.patientInfo.street,
-              patient_city: this.wizardModel.patientInfo.city,
-              patient_state: this.wizardModel.patientInfo.state,
-              patient_status: this.wizardModel.patientInfo.status,
-              patient_email: this.wizardModel.patientInfo.email,
-              patient_phone: this.wizardModel.patientInfo.phone,
-              patient_provider: this.wizardModel.patientInfo.provider
-            }
-          })
-            .then(() => {
-              //create the referral
-            })
-            .catch(error => {
-              //console.log('error', error)
-            });
-          spinner.hide();
-          this.$router.push({name: this.returnTo} );         
+       setTimeout(async() => {
+         const userSub = await this.createCognitoUser()
+
+         const addressId = await this.$runQuery(createAddress,{input:{
+           street:this.wizardModel.patientInfo.street,
+           city: this.wizardModel.patientInfo.city,
+           state: this.wizardModel.patientInfo.state,
+           zipCode: this.wizardModel.patientInfo.zipCode,
+           isActive:1
+         }}).then(result=>{return result.data.createAddress.id}).catch((err)=>{console.log('errrrr', err)})
+        
+
+         const user = await this.$runQuery(createUser, {input:{
+           cognitoId:userSub,
+           addressId:addressId,
+           firstName: this.wizardModel.patientInfo.firstName,
+           lastName: this.wizardModel.patientInfo.lastName,
+           dob: this.wizardModel.patientInfo.dob,
+           email: this.wizardModel.patientInfo.email,
+           phone: this.wizardModel.patientInfo.phone,
+           type: lookupValues.userTypes.patient,
+           isActive:1
+         }}).then(result =>{return result.data.createUser.id}).catch((err)=>{console.log('errrrr', err)})
+        
+         spinner.hide();
+         notify('top', 'right', 'New Patient Created', 'success',this)
+         this.triggerReferral()
+         this.$router.push({name: this.returnTo} );         
        }, 50);
       
+    },
+    triggerReferral(){
+      notify('top', 'right', 'BHI Referral Sent To Patient', 'success',this)
+    },
+    async createCognitoUser(){
+      const poolData = {
+        UserPoolId:'us-east-1_PoH70Lysw',
+        ClientId:'67i78koc22f2gfbjvhm0iqdsq4'
+      }
+      let userPool = new CognitoUserPool(poolData);
+      let attributeList = []
+      let dataEmail = {
+        Name:'email',
+        Value:this.wizardModel.patientInfo.email
+      }
+      let dataPhone = {
+        Name: 'phone_number',
+        value:this.wizardModel.patientInfo.phone
+      }
+
+      let attributeEmail = new CognitoUserAttribute(dataEmail)
+      let attributePhone = new CognitoUserAttribute(dataPhone)
+
+      attributeList.push(attributeEmail);
+      attributeList.push(attributePhone);
+
+      return new Promise((resolve, reject)=>{
+          userPool.signUp(`${this.wizardModel.patientInfo.firstName}.${this.wizardModel.patientInfo.lastName}`, 'password', attributeList,null,(err,result)=>{
+              resolve(result.userSub)
+          })
+
+          
+      })
+
+      
+  
     }
   },
   props:{

@@ -62,7 +62,7 @@
             <div style="width:75%">
               <md-field>
                 <label>Enter Patient Name</label>
-                <md-input v-model="emailadress" type="email"></md-input>
+                <md-input v-model="patientSearchText" type="email"></md-input>
               </md-field>
             </div>
             <S2Button
@@ -262,6 +262,7 @@ export default {
     return {
       currentSort: "lastName",
       currentSortOrder: "asc",
+      patientSearchText:'',
       pagination: {
         perPage: 10,
         currentPage: 1,
