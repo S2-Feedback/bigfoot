@@ -10,7 +10,11 @@
         >
           <md-field :class="[{ 'md-error': failed }, { 'md-valid': passed }]">
             <label for="provider">Assign Care Manager</label>
-            <md-select v-model="careManager" name="careManager" id="careManager">
+            <md-select
+              v-model="careManager"
+              name="careManager"
+              id="careManager"
+            >
               <md-option value="1">Fight Club</md-option>
               <md-option value="2">Godfather</md-option>
               <md-option value="3">Godfather II</md-option>
@@ -24,7 +28,6 @@
       </div>
       <br />
       <br />
-     
     </form>
   </ValidationObserver>
 </template>
@@ -37,12 +40,10 @@ extend("required", required);
 
 export default {
   name: "CareManagerInfo",
-  components: {
-    
-  },
+  components: {},
   data() {
     return {
-      careManager:' '
+      careManager: " "
     };
   },
   computed: {},

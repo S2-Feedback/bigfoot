@@ -37,7 +37,9 @@
                     handleTypeSelection(lookupValues.patient);
                   }
                 "
-                :color="activeTab === lookupValues.patient ? 's2success' : 's2default'"
+                :color="
+                  activeTab === lookupValues.patient ? 's2success' : 's2default'
+                "
                 :width="140"
                 :height="40"
               >
@@ -50,7 +52,11 @@
                     handleTypeSelection(lookupValues.careManager);
                   }
                 "
-                :color="activeTab === lookupValues.careManager ? 's2success' : 's2default'"
+                :color="
+                  activeTab === lookupValues.careManager
+                    ? 's2success'
+                    : 's2default'
+                "
                 :width="140"
                 :height="40"
               >
@@ -63,7 +69,11 @@
                     handleTypeSelection(lookupValues.psychiatrist);
                   }
                 "
-                :color="activeTab === lookupValues.psychiatrist ? 's2success' : 's2default'"
+                :color="
+                  activeTab === lookupValues.psychiatrist
+                    ? 's2success'
+                    : 's2default'
+                "
                 :width="140"
                 :height="40"
               >
@@ -76,7 +86,9 @@
                     handleTypeSelection(lookupValues.pcp);
                   }
                 "
-                :color="activeTab === lookupValues.pcp ? 's2success' : 's2default'"
+                :color="
+                  activeTab === lookupValues.pcp ? 's2success' : 's2default'
+                "
                 :width="140"
                 :height="40"
               >
@@ -329,12 +341,12 @@
 
 <script>
 import S2Button from "@/components/S2Button.vue";
-import { createUser } from '../graphql/mutations';
+import { createUser } from "../graphql/mutations";
 import { SlideYDownTransition } from "vue2-transitions";
-import {lookupValues} from '../constants/lookups'
+import { lookupValues } from "../constants/lookups";
 
 export default {
-  name:'Profile',
+  name: "Profile",
   components: {
     S2Button,
     SlideYDownTransition
@@ -345,55 +357,57 @@ export default {
       firstName: "",
       lastName: "",
       address: "",
-      profileEmail:'',
+      profileEmail: "",
       city: "",
       state: "",
       zipcode: "",
       dob: "",
       phone: "",
       provider: "",
-      status: "Active", 
-      lookupValues:{} 
+      status: "Active",
+      lookupValues: {}
     };
   },
-  props:{
-      email: {
-      },
-      phoneNumber: {
-      },
-      cognitoId: {
-      }
-  }, 
+  props: {
+    email: {},
+    phoneNumber: {},
+    cognitoId: {}
+  },
   methods: {
     handleTypeSelection(selectedType) {
       this.activeTab = selectedType;
     },
     async handleFinishClick() {
-      await this.$runQuery(createUser,{input:{cognitoId:this.cognitoId, email:this.email, type: this.activeTab}})
+      await this.$runQuery(createUser, {
+        input: {
+          cognitoId: this.cognitoId,
+          email: this.email,
+          type: this.activeTab
+        }
+      });
       switch (this.activeTab) {
         case this.lookupValues.patient:
-            this.$router.push({name:"Patient Portal"})
-            break;
+          this.$router.push({ name: "Patient Portal" });
+          break;
         case this.lookupValues.careManager:
-            this.$router.push({name:"Care Manager Portal"})
-            break;
+          this.$router.push({ name: "Care Manager Portal" });
+          break;
         case this.lookupValues.pcp:
-            this.$router.push({name:"Primary Care Portal"})
-            break;
+          this.$router.push({ name: "Primary Care Portal" });
+          break;
         case this.lookupValues.psychiatrist:
-            this.$router.push({name:"Psychiatric Portal"})
-            break;
+          this.$router.push({ name: "Psychiatric Portal" });
+          break;
         default:
-            this.$router.push("/")
-            break;
+          this.$router.push("/");
+          break;
       }
-    }, 
-    validate(){
     },
-  }, 
-  mounted(){
-      this.lookupValues = lookupValues.userTypes
-  } 
+    validate() {}
+  },
+  mounted() {
+    this.lookupValues = lookupValues.userTypes;
+  }
 };
 </script>
 

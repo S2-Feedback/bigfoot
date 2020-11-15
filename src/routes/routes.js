@@ -1,4 +1,5 @@
-const DashboardLayout = () => import("@/pages/Dashboard/Layout/DashboardLayout.vue");
+const DashboardLayout = () =>
+  import("@/pages/Dashboard/Layout/DashboardLayout.vue");
 const Patients = () => import("@/pages/Dashboard/Patients.vue");
 
 const PatientView = () => import("@/views/PatientView.vue");
@@ -6,7 +7,8 @@ const CareManView = () => import("@/views/CareManView.vue");
 const PCPView = () => import("@/views/PCPView.vue");
 const PsychView = () => import("@/views/PsychView.vue");
 
-const AddPatient = () => import("@/pages/Dashboard/Forms/AddPatient/AddPatient.vue");
+const AddPatient = () =>
+  import("@/pages/Dashboard/Forms/AddPatient/AddPatient.vue");
 const MakeCall = () => import("@/pages/Dashboard/MakeCall.vue");
 const Profile = () => import("@/pages/Profile.vue");
 
@@ -35,35 +37,35 @@ const router = new VueRouter({
           path: "/patient",
           name: "Patient Portal",
           props: true,
-          component: PatientView ,
+          component: PatientView,
           meta: { requiresAuth: true }
         },
         {
           path: "/careManager",
           name: "Care Manager Portal",
           props: true,
-          component: CareManView ,
+          component: CareManView,
           meta: { requiresAuth: true }
         },
         {
           path: "/pcp",
           name: "Primary Care Portal",
           props: true,
-          component: PCPView ,
+          component: PCPView,
           meta: { requiresAuth: true }
         },
         {
           path: "/psych",
           name: "Psychiatric Portal",
           props: true,
-          component: PsychView ,
+          component: PsychView,
           meta: { requiresAuth: true }
         },
         {
           path: "/profile",
           name: "Profile",
           props: true,
-          component: Profile ,
+          component: Profile,
           meta: { requiresAuth: true }
         },
         {

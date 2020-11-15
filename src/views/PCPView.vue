@@ -1,8 +1,9 @@
 <template>
   <div class="md-layout">
     <div class="md-layout-item md-size-75 mx-auto">
-
-      <md-card style="box-shadow: black 0px 0px 16px -7px; margin-top:100px; width:100%;">
+      <md-card
+        style="box-shadow: black 0px 0px 16px -7px; margin-top:100px; width:100%;"
+      >
         <md-card-header
           class="md-card-header-text md-card-header-blue"
           style="display:flex; justify-content:space-between; margin-bottom:30px; margin:none !important;"
@@ -17,7 +18,9 @@
             </div>
           </div>
         </md-card-header>
-        <md-card-content style="padding-right:16px; padding-left:16px; padding-top:0px; padding-bottom:24px;">
+        <md-card-content
+          style="padding-right:16px; padding-left:16px; padding-top:0px; padding-bottom:24px;"
+        >
           <div class="dflex-center-row" style="justify-content:space-between;">
             <div style="width:75%">
               <md-field>
@@ -38,13 +41,12 @@
                 :path="mdiAccountSearch"
               ></svg-icon
               ><span slot="buttonText">Search</span>
-            </S2Button>          
-
+            </S2Button>
           </div>
         </md-card-content>
-      </md-card>  
-      <br>
-      <br>    
+      </md-card>
+      <br />
+      <br />
       <md-card style="box-shadow: black 0px 0px 16px -7px;">
         <md-card-header
           class="md-card-header-text md-card-header-blue"
@@ -172,7 +174,11 @@ import SvgIcon from "@jamescoyle/vue-icon";
 import S2Button from "@/components/S2Button.vue";
 import { API, graphqlOperation } from "aws-amplify";
 import { listAllPatients } from "../graphql/custom/patient";
-import { mdiArrowRightDropCircle, mdiPlusCircle, mdiAccountSearch } from "@mdi/js";
+import {
+  mdiArrowRightDropCircle,
+  mdiPlusCircle,
+  mdiAccountSearch
+} from "@mdi/js";
 import SpinnerService from "../services/spinnerService";
 import {
   createOrganization,
@@ -186,7 +192,7 @@ export default {
   components: {
     Pagination,
     SvgIcon,
-    S2Button    
+    S2Button
   },
   data() {
     return {
@@ -214,11 +220,10 @@ export default {
       fuseSearch: null,
       mdiArrowRightDropCircle: mdiArrowRightDropCircle,
       mdiPlusCircle: mdiPlusCircle,
-      mdiAccountSearch:mdiAccountSearch,
+      mdiAccountSearch: mdiAccountSearch,
       showModal: false,
       fullPage: true,
-      patientSearchText:'',
-
+      patientSearchText: ""
     };
   },
   computed: {
@@ -256,7 +261,10 @@ export default {
   },
   methods: {
     handleNewPatientClick() {
-      this.$router.push({ name: "Add Patient", params: {returnTo:'Primary Care Portal'} });
+      this.$router.push({
+        name: "Add Patient",
+        params: { returnTo: "Primary Care Portal" }
+      });
     },
     validateStep(ref) {
       return this.$refs[ref].validate();
@@ -277,31 +285,35 @@ export default {
       this.$router.push({ name: "Patient View", params: { patientInfo: e } });
     },
     async getPatients() {
-      // await runQuery(listAllPatients).then((res)=>{
-      //   this.tableData = res.data.listPatients.items
-      // }).catch((error)=>{//console.log('error ', error)
-      // })
+      await this.$runQuery(listAllPatients).then((res)=>{
+          return res
+      }).catch((error)=>{console.log('error ', error)
+      })
     },
-    async generateEverything() {
-      // const {data: {createAddress:address}} = await runQuery(createAddress,{input:{street:'101 First St', city:'Test City', state:'TX', zipCode:'75111', isActive:true}})
-      // const {data: {createOrganization:organization}} = await runQuery(createOrganization,{input:{addressId:address.id, name:'Test Organization'}})
-      // const {data: {createLocation:locationA}} = await runQuery(createLocation, {input: {organizationid:organization.id, description:'Location A'}})
-      // const {data: {createLocation:locationB}} = await runQuery(createLocation, {input: {organizationid:organization.id, description:'Location B'}})
-      //console.log('what do you got?', await runQuery(getOrganization,{id:'419527ba-fad3-4d95-b5ec-8a707df60b4a'}))
-    }
+    // async generateEverything() {
+    //   // const {data: {createAddress:address}} = await runQuery(createAddress,{input:{street:'101 First St', city:'Test City', state:'TX', zipCode:'75111', isActive:true}})
+    //   // const {data: {createOrganization:organization}} = await runQuery(createOrganization,{input:{addressId:address.id, name:'Test Organization'}})
+    //   // const {data: {createLocation:locationA}} = await runQuery(createLocation, {input: {organizationid:organization.id, description:'Location A'}})
+    //   // const {data: {createLocation:locationB}} = await runQuery(createLocation, {input: {organizationid:organization.id, description:'Location B'}})
+    //   //console.log('what do you got?', await runQuery(getOrganization,{id:'419527ba-fad3-4d95-b5ec-8a707df60b4a'}))
+    // },
   },
   mounted() {
+    this.tableData = this.getPatients();
+
+
+
     this.generateEverything();
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["lastName", "firstName", "street", "city", "state"],
       threshold: 0.3
     });
   },
-  async created() {
-    let spinner = SpinnerService(this);
-    await this.getPatients();
-    spinner.hide();
-  }
+  // async created() {
+  //   let spinner = SpinnerService(this);
+  //   await this.getPatients();
+  //   spinner.hide();
+  // }
 };
 </script>
 <style>

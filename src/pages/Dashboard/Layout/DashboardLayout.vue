@@ -13,12 +13,9 @@
   </div>
 </template>
 <script>
-
 function hasElement(className) {
   return document.getElementsByClassName(className).length > 0;
 }
-
-
 
 import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
@@ -45,10 +42,8 @@ export default {
       }
     }
   },
-  updated() {
-  },
-  mounted() {
-  }
+  updated() {},
+  mounted() {}
 };
 </script>
 <style lang="scss">
