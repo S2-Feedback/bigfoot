@@ -23,20 +23,20 @@ export default {
     try {
       user = await Auth.currentAuthenticatedUser();
     } catch (error) {
-      //console.log(error) //todo add some logging
+      console.log(error) //todo add some logging
     }
 
 
-    if (Object.keys(user).length > 0) {
-      this.$router.push({ name: "Patients" });
-    }
+
     AmplifyEventBus.$on("authState", async eventInfo => {
+      console.log(eventInfo)
       if (eventInfo === "signedIn") {
         user = await Auth.currentAuthenticatedUser();
+        console.log(user)
         const email = user.attributes.email
         const phoneNumber = user.attributes.phone_number
         const {data:{listUsers:{items}}} = await this.$runQuery(listUsers,{filter:{cognitoId:{eq:user.attributes.sub}}})
-
+        console.log(items[0].type)
         if(items.length>0){
           switch (items[0].type) {
               case this.lookupValues.patient:
@@ -52,13 +52,13 @@ export default {
                   this.$router.push({name:"Psychiatric Portal"})
                   break;
               default:
-                  this.$router.push("/")
+                  this.$router.push("/patients")
                   break;
           }          
         } else {
           this.$router.push({ name: "Profile", params: {'email':email, 'phoneNumber':phoneNumber, 'cognitoId':user.attributes.sub}});
         }
-      } 
+       } 
     });
   }
 };

@@ -9,7 +9,7 @@ input:-webkit-autofill {
 
 }
 .md-layout-item {
-    padding-right: 15px;
+    padding-right: 0px !important;
     padding-left:0px !important;
 }
 .md-button .md-ripple {
@@ -51,6 +51,9 @@ input:-webkit-autofill {
 
 .ml-10{
     margin-left:10px;
+}
+.ml-35{
+    margin-left:35px;
 }
 .mr-10{
     margin-right:10px;
