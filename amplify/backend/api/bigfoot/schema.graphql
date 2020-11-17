@@ -1,13 +1,3 @@
-type Organization @model
-{
-  id:ID!
-  addressId:ID!
-  name: String!
-  address: Address @connection(fields:["addressId"])
-  locations: [Location] @connection(keyName: "byOrganizationId",fields:["id"])
-  status: String
-  isActive: Boolean
-}                                                                                                                                               
 type Address @model
 {
   id:ID!
@@ -17,46 +7,45 @@ type Address @model
   zipCode: String
   isActive: Boolean
 }
-type Location @model
-@key(name: "byOrganizationId", fields: ["organizationid"]) 
+type Organization @model
+{
+  id:ID! 
+  name: String
+  addressId: ID
+  isActive: Boolean
+}
+type Physician @model
 {
   id:ID!
-  organizationid:ID!
-  addressId:ID
-  description: String 
+  organizationId: ID!
+  name: String
+  isActive: Boolean
+  organization: Organization @connection(fields:["organizationId"])
 }
-type Patient @model 
-@key(name: "byLocationId", fields: ["locationId"]) 
-{
-  id: ID!
-  locationId: ID!
-  userId: ID! 
-  user: User @connection(fields:["userId"])
-  address: Address @connection(fields:["id"])
-}
-type StaffAssignment @model
-@key(name: "byPatientId", fields: ["patientId"])
-@key(name: "byStaffId", fields: ["staffId"]) 
-{
-  id: ID!
-  patientId: ID!
-  staffId: ID!
-}
-type Staff @model
-@key(name: "byLocationId", fields: ["locationId"])
-@key(name: "byUserId", fields: ["userId"])
+type PatientReferral @model
 {
   id:ID!
-  userId: ID!
-  locationId: ID!
+  patientId:ID!
+  referredBy:ID! 
+  referredDate: String!
+  patientReferrer: User @connection(fields:["referredBy"])
+}
+type Patient @model
+{
+  id:ID!
+  patientId:ID!
+  physicianId:ID
+  careManagerId:ID
+  psychiatristId: ID
+  patient: User @connection(fields:["patientId"])
 }
 type User @model 
-@key(name: "byType", fields: ["type"])
-@key(name: "byCognitoId", fields:["cognitoId"])
+@key(name: "byType", fields:["type"])
 {
   id: ID!
-  cognitoId: String!
+  cognitoId: ID
   addressId: ID
+  organizationId: ID
   firstName: String
   lastName: String
   dob: String
@@ -66,32 +55,6 @@ type User @model
   isActive: Boolean
 }
 
-type AssessmentQuestion @model
-@key(name: "byAssessmentId", fields: ["assessmentId"])
-{
-  id:ID!
-  assessmentId: ID!
-  questionId:ID!
-  answerId:ID!
-  sequenceNumber: Int
-  isActive:Boolean!
-}
-type Answer @model{
-  id:ID!
-  answerText:String
-  isActive:Boolean!
-}
-type Question @model{
-  id:ID!
-  questionText: String
-  isActive:Boolean!
-}
-type Assessment @model{
-  id:ID!
-  title:String
-  questions: [AssessmentQuestion] @connection(keyName:"byAssessmentId", fields:["id"])
-  isActive: Boolean
-}
 
 
 

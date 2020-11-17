@@ -1,117 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createOrganization = /* GraphQL */ `
-  mutation CreateOrganization(
-    $input: CreateOrganizationInput!
-    $condition: ModelOrganizationConditionInput
-  ) {
-    createOrganization(input: $input, condition: $condition) {
-      id
-      addressId
-      name
-      address {
-        id
-        street
-        city
-        state
-        zipCode
-        isActive
-        createdAt
-        updatedAt
-      }
-      locations {
-        items {
-          id
-          organizationid
-          addressId
-          description
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      status
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateOrganization = /* GraphQL */ `
-  mutation UpdateOrganization(
-    $input: UpdateOrganizationInput!
-    $condition: ModelOrganizationConditionInput
-  ) {
-    updateOrganization(input: $input, condition: $condition) {
-      id
-      addressId
-      name
-      address {
-        id
-        street
-        city
-        state
-        zipCode
-        isActive
-        createdAt
-        updatedAt
-      }
-      locations {
-        items {
-          id
-          organizationid
-          addressId
-          description
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      status
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteOrganization = /* GraphQL */ `
-  mutation DeleteOrganization(
-    $input: DeleteOrganizationInput!
-    $condition: ModelOrganizationConditionInput
-  ) {
-    deleteOrganization(input: $input, condition: $condition) {
-      id
-      addressId
-      name
-      address {
-        id
-        street
-        city
-        state
-        zipCode
-        isActive
-        createdAt
-        updatedAt
-      }
-      locations {
-        items {
-          id
-          organizationid
-          addressId
-          description
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      status
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createAddress = /* GraphQL */ `
   mutation CreateAddress(
     $input: CreateAddressInput!
@@ -163,46 +52,205 @@ export const deleteAddress = /* GraphQL */ `
     }
   }
 `;
-export const createLocation = /* GraphQL */ `
-  mutation CreateLocation(
-    $input: CreateLocationInput!
-    $condition: ModelLocationConditionInput
+export const createOrganization = /* GraphQL */ `
+  mutation CreateOrganization(
+    $input: CreateOrganizationInput!
+    $condition: ModelOrganizationConditionInput
   ) {
-    createLocation(input: $input, condition: $condition) {
+    createOrganization(input: $input, condition: $condition) {
       id
-      organizationid
+      name
       addressId
-      description
+      isActive
       createdAt
       updatedAt
     }
   }
 `;
-export const updateLocation = /* GraphQL */ `
-  mutation UpdateLocation(
-    $input: UpdateLocationInput!
-    $condition: ModelLocationConditionInput
+export const updateOrganization = /* GraphQL */ `
+  mutation UpdateOrganization(
+    $input: UpdateOrganizationInput!
+    $condition: ModelOrganizationConditionInput
   ) {
-    updateLocation(input: $input, condition: $condition) {
+    updateOrganization(input: $input, condition: $condition) {
       id
-      organizationid
+      name
       addressId
-      description
+      isActive
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteLocation = /* GraphQL */ `
-  mutation DeleteLocation(
-    $input: DeleteLocationInput!
-    $condition: ModelLocationConditionInput
+export const deleteOrganization = /* GraphQL */ `
+  mutation DeleteOrganization(
+    $input: DeleteOrganizationInput!
+    $condition: ModelOrganizationConditionInput
   ) {
-    deleteLocation(input: $input, condition: $condition) {
+    deleteOrganization(input: $input, condition: $condition) {
       id
-      organizationid
+      name
       addressId
-      description
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPhysician = /* GraphQL */ `
+  mutation CreatePhysician(
+    $input: CreatePhysicianInput!
+    $condition: ModelPhysicianConditionInput
+  ) {
+    createPhysician(input: $input, condition: $condition) {
+      id
+      organizationId
+      name
+      isActive
+      organization {
+        id
+        name
+        addressId
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePhysician = /* GraphQL */ `
+  mutation UpdatePhysician(
+    $input: UpdatePhysicianInput!
+    $condition: ModelPhysicianConditionInput
+  ) {
+    updatePhysician(input: $input, condition: $condition) {
+      id
+      organizationId
+      name
+      isActive
+      organization {
+        id
+        name
+        addressId
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePhysician = /* GraphQL */ `
+  mutation DeletePhysician(
+    $input: DeletePhysicianInput!
+    $condition: ModelPhysicianConditionInput
+  ) {
+    deletePhysician(input: $input, condition: $condition) {
+      id
+      organizationId
+      name
+      isActive
+      organization {
+        id
+        name
+        addressId
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPatientReferral = /* GraphQL */ `
+  mutation CreatePatientReferral(
+    $input: CreatePatientReferralInput!
+    $condition: ModelPatientReferralConditionInput
+  ) {
+    createPatientReferral(input: $input, condition: $condition) {
+      id
+      patientId
+      referredBy
+      referredDate
+      patientReferrer {
+        id
+        cognitoId
+        addressId
+        organizationId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePatientReferral = /* GraphQL */ `
+  mutation UpdatePatientReferral(
+    $input: UpdatePatientReferralInput!
+    $condition: ModelPatientReferralConditionInput
+  ) {
+    updatePatientReferral(input: $input, condition: $condition) {
+      id
+      patientId
+      referredBy
+      referredDate
+      patientReferrer {
+        id
+        cognitoId
+        addressId
+        organizationId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePatientReferral = /* GraphQL */ `
+  mutation DeletePatientReferral(
+    $input: DeletePatientReferralInput!
+    $condition: ModelPatientReferralConditionInput
+  ) {
+    deletePatientReferral(input: $input, condition: $condition) {
+      id
+      patientId
+      referredBy
+      referredDate
+      patientReferrer {
+        id
+        cognitoId
+        addressId
+        organizationId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -215,28 +263,21 @@ export const createPatient = /* GraphQL */ `
   ) {
     createPatient(input: $input, condition: $condition) {
       id
-      locationId
-      userId
-      user {
+      patientId
+      physicianId
+      careManagerId
+      psychiatristId
+      patient {
         id
         cognitoId
         addressId
+        organizationId
         firstName
         lastName
         dob
         email
         phone
         type
-        isActive
-        createdAt
-        updatedAt
-      }
-      address {
-        id
-        street
-        city
-        state
-        zipCode
         isActive
         createdAt
         updatedAt
@@ -253,28 +294,21 @@ export const updatePatient = /* GraphQL */ `
   ) {
     updatePatient(input: $input, condition: $condition) {
       id
-      locationId
-      userId
-      user {
+      patientId
+      physicianId
+      careManagerId
+      psychiatristId
+      patient {
         id
         cognitoId
         addressId
+        organizationId
         firstName
         lastName
         dob
         email
         phone
         type
-        isActive
-        createdAt
-        updatedAt
-      }
-      address {
-        id
-        street
-        city
-        state
-        zipCode
         isActive
         createdAt
         updatedAt
@@ -291,12 +325,15 @@ export const deletePatient = /* GraphQL */ `
   ) {
     deletePatient(input: $input, condition: $condition) {
       id
-      locationId
-      userId
-      user {
+      patientId
+      physicianId
+      careManagerId
+      psychiatristId
+      patient {
         id
         cognitoId
         addressId
+        organizationId
         firstName
         lastName
         dob
@@ -307,100 +344,6 @@ export const deletePatient = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      address {
-        id
-        street
-        city
-        state
-        zipCode
-        isActive
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createStaffAssignment = /* GraphQL */ `
-  mutation CreateStaffAssignment(
-    $input: CreateStaffAssignmentInput!
-    $condition: ModelStaffAssignmentConditionInput
-  ) {
-    createStaffAssignment(input: $input, condition: $condition) {
-      id
-      patientId
-      staffId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateStaffAssignment = /* GraphQL */ `
-  mutation UpdateStaffAssignment(
-    $input: UpdateStaffAssignmentInput!
-    $condition: ModelStaffAssignmentConditionInput
-  ) {
-    updateStaffAssignment(input: $input, condition: $condition) {
-      id
-      patientId
-      staffId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteStaffAssignment = /* GraphQL */ `
-  mutation DeleteStaffAssignment(
-    $input: DeleteStaffAssignmentInput!
-    $condition: ModelStaffAssignmentConditionInput
-  ) {
-    deleteStaffAssignment(input: $input, condition: $condition) {
-      id
-      patientId
-      staffId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createStaff = /* GraphQL */ `
-  mutation CreateStaff(
-    $input: CreateStaffInput!
-    $condition: ModelStaffConditionInput
-  ) {
-    createStaff(input: $input, condition: $condition) {
-      id
-      userId
-      locationId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateStaff = /* GraphQL */ `
-  mutation UpdateStaff(
-    $input: UpdateStaffInput!
-    $condition: ModelStaffConditionInput
-  ) {
-    updateStaff(input: $input, condition: $condition) {
-      id
-      userId
-      locationId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteStaff = /* GraphQL */ `
-  mutation DeleteStaff(
-    $input: DeleteStaffInput!
-    $condition: ModelStaffConditionInput
-  ) {
-    deleteStaff(input: $input, condition: $condition) {
-      id
-      userId
-      locationId
       createdAt
       updatedAt
     }
@@ -415,6 +358,7 @@ export const createUser = /* GraphQL */ `
       id
       cognitoId
       addressId
+      organizationId
       firstName
       lastName
       dob
@@ -436,6 +380,7 @@ export const updateUser = /* GraphQL */ `
       id
       cognitoId
       addressId
+      organizationId
       firstName
       lastName
       dob
@@ -457,228 +402,13 @@ export const deleteUser = /* GraphQL */ `
       id
       cognitoId
       addressId
+      organizationId
       firstName
       lastName
       dob
       email
       phone
       type
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createAssessmentQuestion = /* GraphQL */ `
-  mutation CreateAssessmentQuestion(
-    $input: CreateAssessmentQuestionInput!
-    $condition: ModelAssessmentQuestionConditionInput
-  ) {
-    createAssessmentQuestion(input: $input, condition: $condition) {
-      id
-      assessmentId
-      questionId
-      answerId
-      sequenceNumber
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateAssessmentQuestion = /* GraphQL */ `
-  mutation UpdateAssessmentQuestion(
-    $input: UpdateAssessmentQuestionInput!
-    $condition: ModelAssessmentQuestionConditionInput
-  ) {
-    updateAssessmentQuestion(input: $input, condition: $condition) {
-      id
-      assessmentId
-      questionId
-      answerId
-      sequenceNumber
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteAssessmentQuestion = /* GraphQL */ `
-  mutation DeleteAssessmentQuestion(
-    $input: DeleteAssessmentQuestionInput!
-    $condition: ModelAssessmentQuestionConditionInput
-  ) {
-    deleteAssessmentQuestion(input: $input, condition: $condition) {
-      id
-      assessmentId
-      questionId
-      answerId
-      sequenceNumber
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createAnswer = /* GraphQL */ `
-  mutation CreateAnswer(
-    $input: CreateAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    createAnswer(input: $input, condition: $condition) {
-      id
-      answerText
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateAnswer = /* GraphQL */ `
-  mutation UpdateAnswer(
-    $input: UpdateAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    updateAnswer(input: $input, condition: $condition) {
-      id
-      answerText
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteAnswer = /* GraphQL */ `
-  mutation DeleteAnswer(
-    $input: DeleteAnswerInput!
-    $condition: ModelAnswerConditionInput
-  ) {
-    deleteAnswer(input: $input, condition: $condition) {
-      id
-      answerText
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createQuestion = /* GraphQL */ `
-  mutation CreateQuestion(
-    $input: CreateQuestionInput!
-    $condition: ModelQuestionConditionInput
-  ) {
-    createQuestion(input: $input, condition: $condition) {
-      id
-      questionText
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateQuestion = /* GraphQL */ `
-  mutation UpdateQuestion(
-    $input: UpdateQuestionInput!
-    $condition: ModelQuestionConditionInput
-  ) {
-    updateQuestion(input: $input, condition: $condition) {
-      id
-      questionText
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteQuestion = /* GraphQL */ `
-  mutation DeleteQuestion(
-    $input: DeleteQuestionInput!
-    $condition: ModelQuestionConditionInput
-  ) {
-    deleteQuestion(input: $input, condition: $condition) {
-      id
-      questionText
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createAssessment = /* GraphQL */ `
-  mutation CreateAssessment(
-    $input: CreateAssessmentInput!
-    $condition: ModelAssessmentConditionInput
-  ) {
-    createAssessment(input: $input, condition: $condition) {
-      id
-      title
-      questions {
-        items {
-          id
-          assessmentId
-          questionId
-          answerId
-          sequenceNumber
-          isActive
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateAssessment = /* GraphQL */ `
-  mutation UpdateAssessment(
-    $input: UpdateAssessmentInput!
-    $condition: ModelAssessmentConditionInput
-  ) {
-    updateAssessment(input: $input, condition: $condition) {
-      id
-      title
-      questions {
-        items {
-          id
-          assessmentId
-          questionId
-          answerId
-          sequenceNumber
-          isActive
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteAssessment = /* GraphQL */ `
-  mutation DeleteAssessment(
-    $input: DeleteAssessmentInput!
-    $condition: ModelAssessmentConditionInput
-  ) {
-    deleteAssessment(input: $input, condition: $condition) {
-      id
-      title
-      questions {
-        items {
-          id
-          assessmentId
-          questionId
-          answerId
-          sequenceNumber
-          isActive
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       isActive
       createdAt
       updatedAt

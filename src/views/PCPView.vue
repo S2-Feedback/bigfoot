@@ -116,22 +116,22 @@
 
             <md-table-row slot="md-table-row" slot-scope="{ item }">
               <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
-                item.patient_lastName
+                item.user.lastName
               }}</md-table-cell>
               <md-table-cell md-label="First Name" md-sort-by="firstName">{{
-                item.patient_firstName
+                item.user.firstName
               }}</md-table-cell>
               <md-table-cell md-label="Street" md-sort-by="street">{{
-                item.patient_street
+                item.address.street
               }}</md-table-cell>
               <md-table-cell md-label="City" md-sort-by="city">{{
-                item.patient_city
+                item.address.city
               }}</md-table-cell>
               <md-table-cell md-label="State" md-sort-by="state">{{
-                item.patient_state
+                item.address.state
               }}</md-table-cell>
               <md-table-cell md-label="Status" md-sort-by="status">{{
-                item.patient_status
+                item.address.isActive
               }}</md-table-cell>
               <md-table-cell md-label="">
                 <md-button
@@ -285,35 +285,22 @@ export default {
       this.$router.push({ name: "Patient View", params: { patientInfo: e } });
     },
     async getPatients() {
-      await this.$runQuery(listAllPatients).then((res)=>{
-          return res
-      }).catch((error)=>{console.log('error ', error)
-      })
+      return await this.$runQuery(listAllPatients)
     },
-    // async generateEverything() {
-    //   // const {data: {createAddress:address}} = await runQuery(createAddress,{input:{street:'101 First St', city:'Test City', state:'TX', zipCode:'75111', isActive:true}})
-    //   // const {data: {createOrganization:organization}} = await runQuery(createOrganization,{input:{addressId:address.id, name:'Test Organization'}})
-    //   // const {data: {createLocation:locationA}} = await runQuery(createLocation, {input: {organizationid:organization.id, description:'Location A'}})
-    //   // const {data: {createLocation:locationB}} = await runQuery(createLocation, {input: {organizationid:organization.id, description:'Location B'}})
-    //   //console.log('what do you got?', await runQuery(getOrganization,{id:'419527ba-fad3-4d95-b5ec-8a707df60b4a'}))
-    // },
+    handleSearchForPatient(){
+
+    },
+
   },
-  mounted() {
-    this.tableData = this.getPatients();
-
-
-
-    this.generateEverything();
+  async mounted() {
+    const tmp = await this.getPatients();
+    this.tableData = tmp.data.listPatients.items
+    console.log('what did you get back', this.tableData)
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["lastName", "firstName", "street", "city", "state"],
       threshold: 0.3
     });
   },
-  // async created() {
-  //   let spinner = SpinnerService(this);
-  //   await this.getPatients();
-  //   spinner.hide();
-  // }
 };
 </script>
 <style>

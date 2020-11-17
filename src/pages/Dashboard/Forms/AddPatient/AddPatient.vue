@@ -55,13 +55,14 @@ import SecondStep from "./CareManagerInfo";
 import S2Button from "@/components/S2Button.vue";
 import { mdiChevronLeftCircle, mdiSubdirectoryArrowLeft } from "@mdi/js";
 import { runQuery } from "../../../../apis/gql";
-import { createAddress, createUser } from "../../../../graphql/mutations";
+import { createAddress, createUser, createPatient, createPatientReferral } from "../../../../graphql/mutations";
 import {
   CognitoUser,
   CognitoUserPool,
   CognitoUserAttribute
 } from "amazon-cognito-identity-js";
 import { lookupValues } from "../../../../constants/lookups";
+import { Auth } from "aws-amplify";
 
 export default {
   name: "AddPatient",
@@ -105,8 +106,6 @@ export default {
       this.showWizard = false;
 
       setTimeout(async () => {
-        const userSub = await this.createCognitoUser();
-
         const addressId = await this.$runQuery(createAddress, {
           input: {
             street: this.wizardModel.patientInfo.street,
@@ -125,7 +124,7 @@ export default {
 
         const user = await this.$runQuery(createUser, {
           input: {
-            cognitoId: userSub,
+            cognitoId: '',
             addressId: addressId,
             firstName: this.wizardModel.patientInfo.firstName,
             lastName: this.wizardModel.patientInfo.lastName,
@@ -142,49 +141,25 @@ export default {
           .catch(err => {
             console.log("errrrr", err);
           });
-
+        const patient = await this.$runQuery(createPatient,{input:{
+          patientId: user
+        }})
         spinner.hide();
         notify("top", "right", "New Patient Created", "success", this);
-        this.triggerReferral();
+        this.triggerReferral(user);
         this.$router.push({ name: this.returnTo });
       }, 50);
     },
-    triggerReferral() {
+    async triggerReferral(patientId) {
+      const loggedInUser = await Auth.currentAuthenticatedUser();
+      await this.$runQuery(createPatientReferral,{input:{
+        patientId:patientId,
+        referredBy:loggedInUser.attributes.sub,
+        referredDate:new Date()
+      }})
+
+
       notify("top", "right", "BHI Referral Sent To Patient", "success", this);
-    },
-    async createCognitoUser() {
-      const poolData = {
-        UserPoolId: "us-east-1_PoH70Lysw",
-        ClientId: "67i78koc22f2gfbjvhm0iqdsq4"
-      };
-      let userPool = new CognitoUserPool(poolData);
-      let attributeList = [];
-      let dataEmail = {
-        Name: "email",
-        Value: this.wizardModel.patientInfo.email
-      };
-      let dataPhone = {
-        Name: "phone_number",
-        value: this.wizardModel.patientInfo.phone
-      };
-
-      let attributeEmail = new CognitoUserAttribute(dataEmail);
-      let attributePhone = new CognitoUserAttribute(dataPhone);
-
-      attributeList.push(attributeEmail);
-      attributeList.push(attributePhone);
-
-      return new Promise((resolve, reject) => {
-        userPool.signUp(
-          `${this.wizardModel.patientInfo.firstName}.${this.wizardModel.patientInfo.lastName}`,
-          "password",
-          attributeList,
-          null,
-          (err, result) => {
-            resolve(result.userSub);
-          }
-        );
-      });
     }
   },
   props: {

@@ -7,6 +7,30 @@ export const listAllPatients = /* GraphQL */ `
     listPatients(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        user {
+          id
+          cognitoId
+          addressId
+          firstName
+          lastName
+          dob
+          email
+          phone
+          type
+          isActive
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }        
         createdAt
         updatedAt
       }
