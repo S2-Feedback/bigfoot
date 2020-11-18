@@ -119,7 +119,7 @@ export default {
             return result.data.createAddress.id;
           })
           .catch(err => {
-            console.log("errrrr", err);
+            //console.log("errrrr", err);
           });
 
         const user = await this.$runQuery(createUser, {
@@ -139,7 +139,7 @@ export default {
             return result.data.createUser.id;
           })
           .catch(err => {
-            console.log("errrrr", err);
+            //console.log("errrrr", err);
           });
         const patient = await this.$runQuery(createPatient,{input:{
           patientId: user
@@ -155,10 +155,10 @@ export default {
       await this.$runQuery(createPatientReferral,{input:{
         patientId:patientId,
         referredBy:loggedInUser.attributes.sub,
-        referredDate:new Date()
+        referredDate:new Date(),
+        patientEmail: this.wizardModel.patientInfo.email,
+        patientName: `${this.wizardModel.patientInfo.firstName} ${this.wizardModel.patientInfo.lastName}`
       }})
-
-
       notify("top", "right", "BHI Referral Sent To Patient", "success", this);
     }
   },

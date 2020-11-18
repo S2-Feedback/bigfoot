@@ -121,6 +121,8 @@ export const getPatientReferral = /* GraphQL */ `
       patientId
       referredBy
       referredDate
+      patientEmail
+      patientName
       patientReferrer {
         id
         cognitoId
@@ -157,6 +159,8 @@ export const listPatientReferrals = /* GraphQL */ `
         patientId
         referredBy
         referredDate
+        patientEmail
+        patientName
         patientReferrer {
           id
           cognitoId

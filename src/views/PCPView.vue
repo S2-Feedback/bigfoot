@@ -116,12 +116,12 @@
 
             <md-table-row slot="md-table-row" slot-scope="{ item }">
               <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
-                item.user.lastName
+                item.patient.lastName
               }}</md-table-cell>
               <md-table-cell md-label="First Name" md-sort-by="firstName">{{
-                item.user.firstName
+                item.patient.firstName
               }}</md-table-cell>
-              <md-table-cell md-label="Street" md-sort-by="street">{{
+              <!-- <md-table-cell md-label="Street" md-sort-by="street">{{
                 item.address.street
               }}</md-table-cell>
               <md-table-cell md-label="City" md-sort-by="city">{{
@@ -132,7 +132,7 @@
               }}</md-table-cell>
               <md-table-cell md-label="Status" md-sort-by="status">{{
                 item.address.isActive
-              }}</md-table-cell>
+              }}</md-table-cell> -->
               <md-table-cell md-label="">
                 <md-button
                   class="md-just-icon md-success md-simple"
@@ -173,7 +173,7 @@ import Swal from "sweetalert2";
 import SvgIcon from "@jamescoyle/vue-icon";
 import S2Button from "@/components/S2Button.vue";
 import { API, graphqlOperation } from "aws-amplify";
-import { listAllPatients } from "../graphql/custom/patient";
+
 import {
   mdiArrowRightDropCircle,
   mdiPlusCircle,
@@ -185,7 +185,7 @@ import {
   createAddress,
   createLocation
 } from "../graphql/mutations";
-import { getOrganization } from "../graphql/queries";
+import { getOrganization, listPatients } from "../graphql/queries";
 
 export default {
   name: "PCPView",
@@ -284,20 +284,18 @@ export default {
     handlePatientViewClick(e) {
       this.$router.push({ name: "Patient View", params: { patientInfo: e } });
     },
-    async getPatients() {
-      return await this.$runQuery(listAllPatients)
-    },
     handleSearchForPatient(){
 
     },
 
   },
   async mounted() {
-    const tmp = await this.getPatients();
+    const tmp = await this.$runQuery(listPatients)
+    console.log('what is temp', tmp)
+    console.log('tmp.data.listPatients.itemstmp.data.listPatients.itemstmp.data.listPatients.items', tmp.data.listPatients.items)
     this.tableData = tmp.data.listPatients.items
-    console.log('what did you get back', this.tableData)
     this.fuseSearch = new Fuse(this.tableData, {
-      keys: ["lastName", "firstName", "street", "city", "state"],
+      keys: ["lastName", "firstName", "street", "city", "state"], 
       threshold: 0.3
     });
   },

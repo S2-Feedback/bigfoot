@@ -176,6 +176,8 @@ export const createPatientReferral = /* GraphQL */ `
       patientId
       referredBy
       referredDate
+      patientEmail
+      patientName
       patientReferrer {
         id
         cognitoId
@@ -206,6 +208,8 @@ export const updatePatientReferral = /* GraphQL */ `
       patientId
       referredBy
       referredDate
+      patientEmail
+      patientName
       patientReferrer {
         id
         cognitoId
@@ -236,6 +240,8 @@ export const deletePatientReferral = /* GraphQL */ `
       patientId
       referredBy
       referredDate
+      patientEmail
+      patientName
       patientReferrer {
         id
         cognitoId

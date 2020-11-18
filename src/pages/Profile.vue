@@ -407,6 +407,8 @@ export default {
   },
   mounted() {
     this.lookupValues = lookupValues.userTypes;
+    
+    
   }
 };
 </script>

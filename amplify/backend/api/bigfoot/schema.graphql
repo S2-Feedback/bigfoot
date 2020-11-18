@@ -28,6 +28,8 @@ type PatientReferral @model
   patientId:ID!
   referredBy:ID! 
   referredDate: String!
+  patientEmail: String!
+  patientName: String!
   patientReferrer: User @connection(fields:["referredBy"])
 }
 type Patient @model

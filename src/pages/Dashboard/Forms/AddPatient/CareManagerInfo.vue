@@ -3,13 +3,14 @@
     <form @submit.prevent="validate">
       <div class="md-layout" style="display:flex; justify-content:center;">
         <ValidationProvider
-          name="provider"
+          name="careManager"
           rules="required"
           v-slot="{ passed, failed }"
           style="width:660px;"
         >
+        <div class="md-layout-item">
           <md-field :class="[{ 'md-error': failed }, { 'md-valid': passed }]">
-            <label for="provider">Assign Care Manager</label>
+            <label for="careManager">Assign Care Manager</label>
             <md-select
               v-model="careManager"
               name="careManager"
@@ -24,6 +25,7 @@
               <md-option value="7">Scarface</md-option>
             </md-select>
           </md-field>
+          </div>
         </ValidationProvider>
       </div>
       <br />
@@ -43,7 +45,7 @@ export default {
   components: {},
   data() {
     return {
-      careManager: " "
+      careManager: ""
     };
   },
   computed: {},
