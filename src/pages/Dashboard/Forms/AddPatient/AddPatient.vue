@@ -144,22 +144,29 @@ export default {
         const patient = await this.$runQuery(createPatient,{input:{
           patientId: user
         }})
-        spinner.hide();
-        notify("top", "right", "New Patient Created", "success", this);
+        
+        
         this.triggerReferral(user);
+        spinner.hide();
         this.$router.push({ name: this.returnTo });
       }, 50);
     },
     async triggerReferral(patientId) {
+      notify("top", "right", "New Patient Created", "success", this);
       const loggedInUser = await Auth.currentAuthenticatedUser();
+      
       await this.$runQuery(createPatientReferral,{input:{
         patientId:patientId,
         referredBy:loggedInUser.attributes.sub,
         referredDate:new Date(),
         patientEmail: this.wizardModel.patientInfo.email,
         patientName: `${this.wizardModel.patientInfo.firstName} ${this.wizardModel.patientInfo.lastName}`
-      }})
-      notify("top", "right", "BHI Referral Sent To Patient", "success", this);
+      }}).then(()=>{
+        notify("top", "right", "BHI Referral Sent To Patient", "success", this); 
+      }).catch((err)=>{
+        notify("top", "right", err, "danger", this);
+      })
+      
     }
   },
   props: {

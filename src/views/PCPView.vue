@@ -291,8 +291,6 @@ export default {
   },
   async mounted() {
     const tmp = await this.$runQuery(listPatients)
-    console.log('what is temp', tmp)
-    console.log('tmp.data.listPatients.itemstmp.data.listPatients.itemstmp.data.listPatients.items', tmp.data.listPatients.items)
     this.tableData = tmp.data.listPatients.items
     this.fuseSearch = new Fuse(this.tableData, {
       keys: ["lastName", "firstName", "street", "city", "state"], 

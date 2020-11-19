@@ -20,6 +20,9 @@ input:-webkit-autofill {
     flex-direction: row;
     align-items: flex-end !important;
 }
+.md-tabs-navigation {
+    padding-left:20px;
+}
 .controlHeight {
     height: 35px;
     margin-top: 15px !important;
@@ -51,6 +54,9 @@ input:-webkit-autofill {
 
 .ml-10{
     margin-left:10px;
+}
+.ml-15{
+    margin-left:15px;
 }
 .ml-35{
     margin-left:35px;

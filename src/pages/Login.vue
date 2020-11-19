@@ -33,7 +33,6 @@ export default {
     AmplifyEventBus.$on("authState", async eventInfo => {
       if (eventInfo === "signedIn") {
         user = await Auth.currentAuthenticatedUser();
-        console.log('what ist the user?', user.attributes.sub)
         if (this.patientId){
           this.updateUserProfile(user)
         }
@@ -47,8 +46,8 @@ export default {
         } else {
           items = await this.$runQuery(listUsers, {filter: { cognitoId: { eq: user.attributes.sub } }});
         }
-        console.log("here..", items.data.listUsers.items[0].type)
         if (items.data.listUsers.items.length > 0) {
+          
           switch (items.data.listUsers.items[0].type) {
             case this.lookupValues.patient:
               this.$router.push({ name: "Patient Portal" });
@@ -57,7 +56,6 @@ export default {
               this.$router.push({ name: "Care Manager Portal" });
               break;
             case this.lookupValues.pcp:
-              console.log('pushingggggggg', this.lookupValues.pcp)
               this.$router.push({ name: "Primary Care Portal" });
               break;
             case this.lookupValues.psychiatrist:
@@ -82,7 +80,6 @@ export default {
   },
   methods:{
     async updateUserProfile(cognitoUser){
-        console.log('-0----------------------------cog', cognitioUser)
       await this.$runQuery(updateUser, {input:{id:this.patientId, cognitoId:cognitoUser.attributes.sub}},{filter:{id: {eq: this.patientId}}})
     }
   }
