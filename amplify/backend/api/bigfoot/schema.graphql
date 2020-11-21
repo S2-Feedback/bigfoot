@@ -56,19 +56,31 @@ type Patient @model
   user: User @connection(fields:["userId"])
   status: Lookup @connection(fields:["luStatusId"])
 }
+type StaffAssignment @model
+{
+  id:ID!
+  staffMemberId:ID!
+  locationId:ID!
+  isPermanent:Boolean
+  startDate: String
+  startTime: String
+  endDate: String
+  endTime:String
+  staffMember: User @connection(fields:["staffMemberId])
+  location: Location @connection(fields:["locationId"])
+}
 type User @model 
 @key(name: "byType", fields:["type"])
 {
   id: ID!
   cognitoId: ID
   addressId: ID
-  locationId: ID
   firstName: String
   lastName: String
   dob: String
   email: String!
   phone: String
-  type: Int
+  type: Int!
   isActive: Boolean
 }
 type UserRole @model
