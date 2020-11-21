@@ -52,6 +52,31 @@ export const deleteAddress = /* GraphQL */ `
     }
   }
 `;
+export const listUsersByCognitoId = /* GraphQL */ `
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      cognitoId
+      addressId
+      firstName
+      lastName
+      dob
+      email
+      phone
+      type
+      isActive
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+`;
 export const createOrganization = /* GraphQL */ `
   mutation CreateOrganization(
     $input: CreateOrganizationInput!
@@ -59,9 +84,19 @@ export const createOrganization = /* GraphQL */ `
   ) {
     createOrganization(input: $input, condition: $condition) {
       id
-      name
       addressId
+      name
       isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -74,9 +109,19 @@ export const updateOrganization = /* GraphQL */ `
   ) {
     updateOrganization(input: $input, condition: $condition) {
       id
-      name
       addressId
+      name
       isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -89,9 +134,154 @@ export const deleteOrganization = /* GraphQL */ `
   ) {
     deleteOrganization(input: $input, condition: $condition) {
       id
-      name
       addressId
+      name
       isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createLocation = /* GraphQL */ `
+  mutation CreateLocation(
+    $input: CreateLocationInput!
+    $condition: ModelLocationConditionInput
+  ) {
+    createLocation(input: $input, condition: $condition) {
+      id
+      organizationId
+      addressId
+      description
+      costCenterCode
+      isActive
+      organization {
+        id
+        addressId
+        name
+        isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLocation = /* GraphQL */ `
+  mutation UpdateLocation(
+    $input: UpdateLocationInput!
+    $condition: ModelLocationConditionInput
+  ) {
+    updateLocation(input: $input, condition: $condition) {
+      id
+      organizationId
+      addressId
+      description
+      costCenterCode
+      isActive
+      organization {
+        id
+        addressId
+        name
+        isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLocation = /* GraphQL */ `
+  mutation DeleteLocation(
+    $input: DeleteLocationInput!
+    $condition: ModelLocationConditionInput
+  ) {
+    deleteLocation(input: $input, condition: $condition) {
+      id
+      organizationId
+      addressId
+      description
+      costCenterCode
+      isActive
+      organization {
+        id
+        addressId
+        name
+        isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -109,9 +299,19 @@ export const createPhysician = /* GraphQL */ `
       isActive
       organization {
         id
-        name
         addressId
+        name
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -132,9 +332,19 @@ export const updatePhysician = /* GraphQL */ `
       isActive
       organization {
         id
-        name
         addressId
+        name
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -155,9 +365,19 @@ export const deletePhysician = /* GraphQL */ `
       isActive
       organization {
         id
-        name
         addressId
+        name
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -182,7 +402,7 @@ export const createPatientReferral = /* GraphQL */ `
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -214,7 +434,7 @@ export const updatePatientReferral = /* GraphQL */ `
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -246,7 +466,7 @@ export const deletePatientReferral = /* GraphQL */ `
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -269,15 +489,17 @@ export const createPatient = /* GraphQL */ `
   ) {
     createPatient(input: $input, condition: $condition) {
       id
-      patientId
+      userId
+      luStatusId
       physicianId
       careManagerId
       psychiatristId
-      patient {
+      locationId
+      user {
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -285,6 +507,22 @@ export const createPatient = /* GraphQL */ `
         phone
         type
         isActive
+        createdAt
+        updatedAt
+      }
+      status {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -300,15 +538,17 @@ export const updatePatient = /* GraphQL */ `
   ) {
     updatePatient(input: $input, condition: $condition) {
       id
-      patientId
+      userId
+      luStatusId
       physicianId
       careManagerId
       psychiatristId
-      patient {
+      locationId
+      user {
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -316,6 +556,22 @@ export const updatePatient = /* GraphQL */ `
         phone
         type
         isActive
+        createdAt
+        updatedAt
+      }
+      status {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -331,15 +587,17 @@ export const deletePatient = /* GraphQL */ `
   ) {
     deletePatient(input: $input, condition: $condition) {
       id
-      patientId
+      userId
+      luStatusId
       physicianId
       careManagerId
       psychiatristId
-      patient {
+      locationId
+      user {
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -347,6 +605,22 @@ export const deletePatient = /* GraphQL */ `
         phone
         type
         isActive
+        createdAt
+        updatedAt
+      }
+      status {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -364,7 +638,7 @@ export const createUser = /* GraphQL */ `
       id
       cognitoId
       addressId
-      organizationId
+      locationId
       firstName
       lastName
       dob
@@ -386,7 +660,7 @@ export const updateUser = /* GraphQL */ `
       id
       cognitoId
       addressId
-      organizationId
+      locationId
       firstName
       lastName
       dob
@@ -408,7 +682,7 @@ export const deleteUser = /* GraphQL */ `
       id
       cognitoId
       addressId
-      organizationId
+      locationId
       firstName
       lastName
       dob
@@ -416,6 +690,345 @@ export const deleteUser = /* GraphQL */ `
       phone
       type
       isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUserRole = /* GraphQL */ `
+  mutation CreateUserRole(
+    $input: CreateUserRoleInput!
+    $condition: ModelUserRoleConditionInput
+  ) {
+    createUserRole(input: $input, condition: $condition) {
+      id
+      userId
+      luRoleId
+      role {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUserRole = /* GraphQL */ `
+  mutation UpdateUserRole(
+    $input: UpdateUserRoleInput!
+    $condition: ModelUserRoleConditionInput
+  ) {
+    updateUserRole(input: $input, condition: $condition) {
+      id
+      userId
+      luRoleId
+      role {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUserRole = /* GraphQL */ `
+  mutation DeleteUserRole(
+    $input: DeleteUserRoleInput!
+    $condition: ModelUserRoleConditionInput
+  ) {
+    deleteUserRole(input: $input, condition: $condition) {
+      id
+      userId
+      luRoleId
+      role {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAudit = /* GraphQL */ `
+  mutation CreateAudit(
+    $input: CreateAuditInput!
+    $condition: ModelAuditConditionInput
+  ) {
+    createAudit(input: $input, condition: $condition) {
+      id
+      luEventId
+      initiatingUserId
+      eventDate
+      event {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      initiatedBy {
+        id
+        cognitoId
+        addressId
+        locationId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAudit = /* GraphQL */ `
+  mutation UpdateAudit(
+    $input: UpdateAuditInput!
+    $condition: ModelAuditConditionInput
+  ) {
+    updateAudit(input: $input, condition: $condition) {
+      id
+      luEventId
+      initiatingUserId
+      eventDate
+      event {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      initiatedBy {
+        id
+        cognitoId
+        addressId
+        locationId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAudit = /* GraphQL */ `
+  mutation DeleteAudit(
+    $input: DeleteAuditInput!
+    $condition: ModelAuditConditionInput
+  ) {
+    deleteAudit(input: $input, condition: $condition) {
+      id
+      luEventId
+      initiatingUserId
+      eventDate
+      event {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      initiatedBy {
+        id
+        cognitoId
+        addressId
+        locationId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createLookupCategory = /* GraphQL */ `
+  mutation CreateLookupCategory(
+    $input: CreateLookupCategoryInput!
+    $condition: ModelLookupCategoryConditionInput
+  ) {
+    createLookupCategory(input: $input, condition: $condition) {
+      id
+      description
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLookupCategory = /* GraphQL */ `
+  mutation UpdateLookupCategory(
+    $input: UpdateLookupCategoryInput!
+    $condition: ModelLookupCategoryConditionInput
+  ) {
+    updateLookupCategory(input: $input, condition: $condition) {
+      id
+      description
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLookupCategory = /* GraphQL */ `
+  mutation DeleteLookupCategory(
+    $input: DeleteLookupCategoryInput!
+    $condition: ModelLookupCategoryConditionInput
+  ) {
+    deleteLookupCategory(input: $input, condition: $condition) {
+      id
+      description
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createLookup = /* GraphQL */ `
+  mutation CreateLookup(
+    $input: CreateLookupInput!
+    $condition: ModelLookupConditionInput
+  ) {
+    createLookup(input: $input, condition: $condition) {
+      id
+      categoryId
+      code
+      description
+      isActive
+      LookupCategory {
+        id
+        description
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLookup = /* GraphQL */ `
+  mutation UpdateLookup(
+    $input: UpdateLookupInput!
+    $condition: ModelLookupConditionInput
+  ) {
+    updateLookup(input: $input, condition: $condition) {
+      id
+      categoryId
+      code
+      description
+      isActive
+      LookupCategory {
+        id
+        description
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLookup = /* GraphQL */ `
+  mutation DeleteLookup(
+    $input: DeleteLookupInput!
+    $condition: ModelLookupConditionInput
+  ) {
+    deleteLookup(input: $input, condition: $condition) {
+      id
+      categoryId
+      code
+      description
+      isActive
+      LookupCategory {
+        id
+        description
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

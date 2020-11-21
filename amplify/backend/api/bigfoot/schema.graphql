@@ -10,9 +10,21 @@ type Address @model
 type Organization @model
 {
   id:ID! 
-  name: String
-  addressId: ID
-  isActive: Boolean
+  addressId: ID! 
+  name: String!
+  isActive: Boolean!
+  address: Address @connection(fields:["addressId"])
+}
+type Location @model
+{
+  id:ID!
+  organizationId: ID!
+  addressId: ID!
+  description: String
+  costCenterCode: String
+  isActive: Boolean  
+  organization: Organization @connection(fields:["organizationId"])
+  address: Address @connection(fields:["addressId"])
 }
 type Physician @model
 {
@@ -35,11 +47,14 @@ type PatientReferral @model
 type Patient @model
 {
   id:ID!
-  patientId:ID!
+  userId:ID!
+  luStatusId: ID!
   physicianId:ID
   careManagerId:ID
   psychiatristId: ID
-  patient: User @connection(fields:["patientId"])
+  locationId: ID
+  user: User @connection(fields:["userId"])
+  status: Lookup @connection(fields:["luStatusId"])
 }
 type User @model 
 @key(name: "byType", fields:["type"])
@@ -47,7 +62,7 @@ type User @model
   id: ID!
   cognitoId: ID
   addressId: ID
-  organizationId: ID
+  locationId: ID
   firstName: String
   lastName: String
   dob: String
@@ -56,7 +71,35 @@ type User @model
   type: Int
   isActive: Boolean
 }
+type UserRole @model
+{
+  id: ID!
+  userId:ID!
+  luRoleId:ID!
+  role: Lookup @connection(fields:["luRoleId"])
+}
+type Audit @model
+{
+  id:ID!
+  luEventId:ID!
+  initiatingUserId: ID!
+  eventDate:String!
+  event: Lookup @connection(fields:["luEventId"])
+  initiatedBy: User @connection(fields:["initiatingUserId"])
+}
+type LookupCategory @model{
+  id:ID!
+  description:String!
+  isActive:Boolean!
+}
 
-
-
-
+type Lookup @model 
+@key(name:"byCategoryId" fields:["categoryId"])
+{
+  id: ID!
+  categoryId: ID!
+  code: String
+  description: String!
+  isActive: Boolean
+  LookupCategory: LookupCategory @connection(fields:["categoryId"])
+}

@@ -40,9 +40,19 @@ export const getOrganization = /* GraphQL */ `
   query GetOrganization($id: ID!) {
     getOrganization(id: $id) {
       id
-      name
       addressId
+      name
       isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -57,9 +67,100 @@ export const listOrganizations = /* GraphQL */ `
     listOrganizations(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
         addressId
+        name
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getLocation = /* GraphQL */ `
+  query GetLocation($id: ID!) {
+    getLocation(id: $id) {
+      id
+      organizationId
+      addressId
+      description
+      costCenterCode
+      isActive
+      organization {
+        id
+        addressId
+        name
+        isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLocations = /* GraphQL */ `
+  query ListLocations(
+    $filter: ModelLocationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        organizationId
+        addressId
+        description
+        costCenterCode
+        isActive
+        organization {
+          id
+          addressId
+          name
+          isActive
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -76,9 +177,19 @@ export const getPhysician = /* GraphQL */ `
       isActive
       organization {
         id
-        name
         addressId
+        name
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -101,8 +212,8 @@ export const listPhysicians = /* GraphQL */ `
         isActive
         organization {
           id
-          name
           addressId
+          name
           isActive
           createdAt
           updatedAt
@@ -127,7 +238,7 @@ export const getPatientReferral = /* GraphQL */ `
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -165,7 +276,7 @@ export const listPatientReferrals = /* GraphQL */ `
           id
           cognitoId
           addressId
-          organizationId
+          locationId
           firstName
           lastName
           dob
@@ -187,15 +298,17 @@ export const getPatient = /* GraphQL */ `
   query GetPatient($id: ID!) {
     getPatient(id: $id) {
       id
-      patientId
+      userId
+      luStatusId
       physicianId
       careManagerId
       psychiatristId
-      patient {
+      locationId
+      user {
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -203,6 +316,22 @@ export const getPatient = /* GraphQL */ `
         phone
         type
         isActive
+        createdAt
+        updatedAt
+      }
+      status {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -220,21 +349,32 @@ export const listPatients = /* GraphQL */ `
     listPatients(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        patientId
+        userId
+        luStatusId
         physicianId
         careManagerId
         psychiatristId
-        patient {
+        locationId
+        user {
           id
           cognitoId
           addressId
-          organizationId
+          locationId
           firstName
           lastName
           dob
           email
           phone
           type
+          isActive
+          createdAt
+          updatedAt
+        }
+        status {
+          id
+          categoryId
+          code
+          description
           isActive
           createdAt
           updatedAt
@@ -252,7 +392,7 @@ export const getUser = /* GraphQL */ `
       id
       cognitoId
       addressId
-      organizationId
+      locationId
       firstName
       lastName
       dob
@@ -276,7 +416,7 @@ export const listUsers = /* GraphQL */ `
         id
         cognitoId
         addressId
-        organizationId
+        locationId
         firstName
         lastName
         dob
@@ -284,6 +424,222 @@ export const listUsers = /* GraphQL */ `
         phone
         type
         isActive
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUserRole = /* GraphQL */ `
+  query GetUserRole($id: ID!) {
+    getUserRole(id: $id) {
+      id
+      userId
+      luRoleId
+      role {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUserRoles = /* GraphQL */ `
+  query ListUserRoles(
+    $filter: ModelUserRoleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserRoles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userId
+        luRoleId
+        role {
+          id
+          categoryId
+          code
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getAudit = /* GraphQL */ `
+  query GetAudit($id: ID!) {
+    getAudit(id: $id) {
+      id
+      luEventId
+      initiatingUserId
+      eventDate
+      event {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      initiatedBy {
+        id
+        cognitoId
+        addressId
+        locationId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAudits = /* GraphQL */ `
+  query ListAudits(
+    $filter: ModelAuditFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAudits(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        luEventId
+        initiatingUserId
+        eventDate
+        event {
+          id
+          categoryId
+          code
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        initiatedBy {
+          id
+          cognitoId
+          addressId
+          locationId
+          firstName
+          lastName
+          dob
+          email
+          phone
+          type
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getLookupCategory = /* GraphQL */ `
+  query GetLookupCategory($id: ID!) {
+    getLookupCategory(id: $id) {
+      id
+      description
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLookupCategorys = /* GraphQL */ `
+  query ListLookupCategorys(
+    $filter: ModelLookupCategoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLookupCategorys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        description
+        isActive
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getLookup = /* GraphQL */ `
+  query GetLookup($id: ID!) {
+    getLookup(id: $id) {
+      id
+      categoryId
+      code
+      description
+      isActive
+      LookupCategory {
+        id
+        description
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLookups = /* GraphQL */ `
+  query ListLookups(
+    $filter: ModelLookupFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLookups(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        categoryId
+        code
+        description
+        isActive
+        LookupCategory {
+          id
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

@@ -23,6 +23,9 @@ input:-webkit-autofill {
 .md-tabs-navigation {
     padding-left:20px;
 }
+.md-tab-nav-button {
+    margin-right:20px !important;
+}
 .controlHeight {
     height: 35px;
     margin-top: 15px !important;
