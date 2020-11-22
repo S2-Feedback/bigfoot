@@ -96,7 +96,7 @@ export const seedData=async()=>{
     }})
     await runQuery(createLookup,{input:{
         categoryId: roleCategory.data.createLookupCategory.id,
-        description: 'Read Onlys',
+        description: 'Read Only',
         isActive:true
     }})
     // await runQuery(createUser,{input:{

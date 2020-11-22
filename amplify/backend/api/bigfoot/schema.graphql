@@ -26,14 +26,6 @@ type Location @model
   organization: Organization @connection(fields:["organizationId"])
   address: Address @connection(fields:["addressId"])
 }
-type Physician @model
-{
-  id:ID!
-  organizationId: ID!
-  name: String
-  isActive: Boolean
-  organization: Organization @connection(fields:["organizationId"])
-}
 type PatientReferral @model
 {
   id:ID!
@@ -44,19 +36,32 @@ type PatientReferral @model
   patientName: String!
   patientReferrer: User @connection(fields:["referredBy"])
 }
+type PatientAssignment @model
+{
+  id: ID!
+  patientId: ID!
+  patientChartId: ID!
+  assignedUserId: ID!
+  isActive: Boolean
+}
+type PatientChart @model
+{
+  id:ID!
+  patientId: ID!
+  visitDate: String!
+  patient: Patient @connection(fields:["patientId"])
+}
 type Patient @model
 {
   id:ID!
-  userId:ID!
+  patientUserId:ID!
   luStatusId: ID!
-  physicianId:ID
-  careManagerId:ID
-  psychiatristId: ID
   locationId: ID
-  user: User @connection(fields:["userId"])
+  user: User @connection(fields:["patientUserId"])
   status: Lookup @connection(fields:["luStatusId"])
 }
-type StaffAssignment @model
+
+type StaffLocationAssignment @model
 {
   id:ID!
   staffMemberId:ID!
@@ -115,3 +120,4 @@ type Lookup @model
   isActive: Boolean
   LookupCategory: LookupCategory @connection(fields:["categoryId"])
 }
+
