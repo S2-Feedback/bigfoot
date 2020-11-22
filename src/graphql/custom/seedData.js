@@ -1,111 +1,298 @@
 
-import {createAddress, deleteAddress, createUser, createOrganization, deleteOrganization, deleteLocation, createLocation, createPhysician, createLookupCategory, createLookup} from '../mutations'
-import {listAddresss,listLocations,listOrganizations} from '../queries'
+import {createAddress, deleteAddress, createUser, createOrganization, deleteOrganization, deleteLocation, createLocation, createPhysician, createLookupCategory, createLookup, deleteUser, deletePatient, createPatient, deleteLookup, deleteLookupCategory} from '../mutations'
+import {listAddresss,listLocations,listLookupCategorys,listLookups,listOrganizations, listPatients, listUsers} from '../queries'
 import { runQuery } from "../../../src/apis/gql";
-import { mdiArchiveArrowDown } from '@mdi/js';
+
 export const seedData=async()=>{
+let didRunOnce = false;
 
-   const addressId = await runQuery(listAddresss,{filter:{street:{eq:'1258 Robin Lane'}}})
-    
-   
+if (!didRunOnce) {
 
-   if (addressId.data.listAddresss.items[0]&&addressId.data.listAddresss.items[0].id){
-        const id = addressId.data.listAddresss.items[0].id
-        console.log('wtf',id)
+    const addressId = await runQuery(listAddresss,{filter:{street:{eq:'1258 Robin Lane'}}})
+    for (let i = 0; i < addressId.data.listAddresss.items.length; i++) {
+        await runQuery(deleteAddress,{input: { id: addressId.data.listAddresss.items[i].id }});
+    }
+    let address = await runQuery(createAddress,{input:{
+         street:"1258 Robin Lane",
+         city:"Baton Rouge",
+         state:"LA",
+         zipCode:"75111",
+         isActive:true
+     }})
+     const addressId2 = await runQuery(listAddresss,{filter:{street:{eq:'907 Broad St'}}})
+     for (let i = 0; i < addressId2.data.listAddresss.items.length; i++) {
+        await runQuery(deleteAddress,{input: { id: addressId2.data.listAddresss.items[i].id }});
+     }
+     let location1Address = await runQuery(createAddress,{input:{
+         street:"907 Broad St",
+         city:"Milford",
+         state:"LA",
+         zipCode:"75112",
+         isActive:true
+     }})
+     const addressId3 = await runQuery(listAddresss,{filter:{street:{eq:'874 Nexus Dr'}}})
+     for (let i = 0; i < addressId3.data.listAddresss.items.length; i++) {
+        await runQuery(deleteAddress,{input: { id: addressId3.data.listAddresss.items[i].id }});
+     }
+     let location2Address = await runQuery(createAddress,{input:{
+         street:"874 Nexus Dr",
+         city:"Stratford",
+         state:"LA",
+         zipCode:"75312",
+         isActive:true
+     }})
+     const addressId4 = await runQuery(listAddresss,{filter:{street:{eq:'101 Elm Ave'}}})
+     for (let i = 0; i < addressId4.data.listAddresss.items.length; i++) {
+         await runQuery(deleteAddress,{input: { id: addressId4.data.listAddresss.items[i].id }});
+     }
+     let patient1Address = await runQuery(createAddress,{input:{
+          street:"101 Elm Ave",
+          city:"East HartFord",
+          state:"LA",
+          zipCode:"75311",
+          isActive:true
+      }})
+      const addressId5 = await runQuery(listAddresss,{filter:{street:{eq:'8709 Spruce Rd'}}})
+      for (let i = 0; i < addressId5.data.listAddresss.items.length; i++) {
+          await runQuery(deleteAddress,{input: { id: addressId5.data.listAddresss.items[i].id }});
+      }
+      let patient2Address = await runQuery(createAddress,{input:{
+           street:"8709 Spruce Rd",
+           city:"New Haven",
+           state:"LA",
+           zipCode:"34552",
+           isActive:true
+       }})  
+       const addressId6 = await runQuery(listAddresss,{filter:{street:{eq:'5660 Fiber Optic Way'}}})
+       for (let i = 0; i < addressId6.data.listAddresss.items.length; i++) {
+           await runQuery(deleteAddress,{input: { id: addressId6.data.listAddresss.items[i].id }});
+       }
+       let patient3Address = await runQuery(createAddress,{input:{
+            street:"5660 Fiber Optic Way",
+            city:"East HartFord",
+            state:"LA",
+            zipCode:"75311",
+            isActive:true
+        }})
+        const addressId7 = await runQuery(listAddresss,{filter:{street:{eq:'24 Iron Springs Rd'}}})
+        for (let i = 0; i < addressId7.data.listAddresss.items.length; i++) {
+            await runQuery(deleteAddress,{input: { id: addressId7.data.listAddresss.items[i].id }});
+        }
+        let patient4Address = await runQuery(createAddress,{input:{
+             street:"24 Iron Springs Rd",
+             city:"Fair Fax",
+             state:"LA",
+             zipCode:"34552",
+             isActive:true
+         }})  
+         const addressId8 = await runQuery(listAddresss,{filter:{street:{eq:'660 Space Freeway'}}})
+         for (let i = 0; i < addressId8.data.listAddresss.items.length; i++) {
+             await runQuery(deleteAddress,{input: { id: addressId8.data.listAddresss.items[i].id }});
+         }
+         let patient5Address = await runQuery(createAddress,{input:{
+              street:"660 Space Freeway",
+              city:"Santa Barbara",
+              state:"LA",
+              zipCode:"79311",
+              isActive:true
+          }})
+          const addressId9 = await runQuery(listAddresss,{filter:{street:{eq:'874 Relative Way'}}})
+          for (let i = 0; i < addressId9.data.listAddresss.items.length; i++) {
+              await runQuery(deleteAddress,{input: { id: addressId9.data.listAddresss.items[i].id }});
+          }
+          let patient6Address = await runQuery(createAddress,{input:{
+               street:"874 Relative Way",
+               city:"Milford",
+               state:"LA",
+               zipCode:"34552",
+               isActive:true
+           }}) 
+           
+           
+     const organizations = await runQuery(listOrganizations,{filter:{name:{eq:'Bose Health System'}}})
+     for (let i = 0; i < organizations.data.listOrganizations.items.length; i++) {
+         const locations = await runQuery(listLocations,{filter:{organizationId:{eq:organizations.data.listOrganizations.items[i].id}}})
+         for (let j = 0; j < locations.data.listLocations.items.length; j++) {
+            const patients = await runQuery(listPatients,{filter:{locationId:{eq:locations.data.listLocations.items[j].id}}})
+            for (let k = 0; k < patients.data.listPatients.items.length; k++) {
+                await runQuery(deletePatient,{input:{id:patients.data.listPatients.items[k].id}})
+             }
+             await runQuery(deleteLocation,{input:{id:locations.data.listLocations.items[j].id}})
+         }
+         await runQuery(deleteOrganization,{input:{id:organizations.data.listOrganizations.items[i].id}})
+     }
+ 
+     let organization = await runQuery(createOrganization,{input:{
+         addressId: address.data.createAddress.id,
+         name:'Bose Health System',
+         isActive: true
+     }})
+ 
+     const locationA = await runQuery(createLocation,{input:{
+         organizationId: organization.data.createOrganization.id,
+         addressId: location1Address.data.createAddress.id,
+         description: 'Thompson Clinic',
+         isActive: true
+     }})
+     const locationB = await runQuery(createLocation,{input:{
+         organizationId: organization.data.createOrganization.id,
+         addressId: location2Address.data.createAddress.id,
+         description: 'Coleman & Sons',
+         isActive: true
+     }})
+  
+
+
+     const lookups = await runQuery(listLookups)         
+     const luCategories = await runQuery(listLookupCategorys)
+     for (let i = 0; i < lookups.data.listLookups.items.length; i++) {
+         await runQuery(deleteLookup,{input:{id: lookups.data.listLookups.items[i].id}})
+     }
+     for (let i = 0; i < luCategories.data.listLookupCategorys.items.length; i++) {
+        await runQuery(deleteLookupCategory,{input:{id: luCategories.data.listLookupCategorys.items[i].id}})
+    }
+     let roleCategory = await runQuery(createLookupCategory,{input: {
+         description:'Roles',
+         isActive:true
+     }})
+     await runQuery(createLookup,{input:{
+         categoryId: roleCategory.data.createLookupCategory.id,
+         description: 'Site Administrator',
+         isActive:true
+     }})
+     await runQuery(createLookup,{input:{
+         categoryId: roleCategory.data.createLookupCategory.id,
+         description: 'User',
+         isActive:true
+     }})     
+
+
+     const users = await runQuery(listUsers,{filter:{email:{eq:'frankbenevento123@gmail.com'}}})
+     for (let i = 0; i < users.data.listUsers.items.length; i++) {
+         await runQuery(deleteUser,{input:{id:users.data.listUsers.items[i].id}})
+     }
+       console.log('what is the p;sdlkfj;asdklfjsda', patient1Address)
+       const patientUser1 = await runQuery(createUser,{input:{
+            email: 'frankbenevento123@gmail.com',
+            firstName:'Patient',
+            lastName: 'location a',
+            phone:'(817)-598-5420',
+            addressId:patient1Address.data.createAddress.id,
+            isActive:true,
+            type:1
+        }})
+        const patientUser2 = await runQuery(createUser,{input:{
+            email: 'frankbenevento123@gmail.com',
+            firstName:'Patient2',
+            lastName: 'loc a',
+            phone:'(213)-344-9988',
+            addressId:patient2Address.data.createAddress.id,
+            isActive:true,
+            type:1
+        }})
+        const patientUser3 = await runQuery(createUser,{input:{
+            email: 'frankbenevento123@gmail.com',
+            firstName:'Patient 3',
+            lastName: 'loca A',
+            phone:'(212)-555-5220',
+            addressId:patient3Address.data.createAddress.id,
+            isActive:true,
+            type:1
+        }})
+        const patientUser4 = await runQuery(createUser,{input:{
+            email: 'frankbenevento123@gmail.com',
+            firstName:'Patient 4',
+            lastName: 'locatio B',
+            phone:'(817)-598-5420',
+            addressId:patient4Address.data.createAddress.id,
+            isActive:true,
+            type:1
+        }})
+        const patientUser5 = await runQuery(createUser,{input:{
+            email: 'frankbenevento123@gmail.com',
+            firstName:'Patient 5',
+            lastName: 'locat B',
+            phone:'(334)-565-5555',
+            addressId:patient5Address.data.createAddress.id,
+            isActive:true, 
+            type:1
+        }})
+        const patientUser6 = await runQuery(createUser,{input:{
+            email: 'frankbenevento123@gmail.com',
+            firstName:'Patient 6',
+            lastName: 'locAtion B',
+            phone:'(817)-522-3343',
+            addressId:patient6Address.data.createAddress.id,
+            isActive:true,
+            type:1
+        }})
+        const physician = await runQuery(createUser,{input:{
+            email: 'frankbenevento123@gmail.com',
+            firstName:'Phys',
+            lastName: 'Ician',
+            phone:'(817)-598-5420',
+            isActive:true,
+            type:4
+        }})
+        const careManager = await runQuery(createUser,{input:{
+            email: 'frankbenevento123@gmail.com',
+            firstName:'Care',
+            lastName: 'Manager',
+            phone:'(817)-598-5420',
+            type:1
+        }})
         
-        await runQuery(deleteAddress,{input: { id: id }});
-   }
-
-   let address = await runQuery(createAddress,{input:{
-        street:"1258 Robin Lane",
-        city:"Baton Rouge",
-        state:"LA",
-        zipCode:"75111",
-        isActive:true
-    }})
-    let location1Address = await runQuery(createAddress,{input:{
-        street:"907 Broad St",
-        city:"Milford",
-        state:"LA",
-        zipCode:"75112",
-        isActive:true
-    }})
-    let location2Address = await runQuery(createAddress,{input:{
-        street:"874 Nexus Dr",
-        city:"Stratford",
-        state:"LA",
-        zipCode:"75312",
-        isActive:true
-    }})
-
-
-    const organizationId = await runQuery(listOrganizations,{filter:{name:{eq:'Bose Health System'}}})
-    
-    if (organizationId.data.listOrganizations.items[0]&&organizationId.data.listOrganizations.items[0].id){
-         await runQuery(deleteOrganization,{input:{id:organizationId.data.listOrganizations.items[0].id}})
-    }
-
-    let organization = await runQuery(createOrganization,{input:{
-        addressId: address.data.createAddress.id,
-        name:'Bose Health System',
-        isActive: true
-    }})
-
-    const locationIds = await runQuery(listLocations,{filter:{organizationId:{eq:organization.data.createOrganization.id}}}) 
-
-    for (let i = 0; i < locationIds.data.listLocations.items.length; i++) {
-        await runQuery(deleteLocation,{input:{id:locationIds.data.listLocations.items[i].id}})
-    }
-
-    const locationA = await runQuery(createLocation,{input:{
-        organizationId: organization.data.createOrganization.id,
-        addressId: location1Address.data.createAddress.id,
-        description: 'Thompson Clinic',
-        isActive: true
-    }})
-    const locationB = await runQuery(createLocation,{input:{
-        organizationId: organization.data.createOrganization.id,
-        addressId: location2Address.data.createAddress.id,
-        description: 'Coleman & Sons',
-        isActive: true
-    }})
-    await runQuery(createPhysician,{input:{
-        organizationId: organization.data.createOrganization.id,
-        name: 'Dr. Jack Johnson',
-        isActive:true
-    }})
-    await runQuery(createPhysician,{input:{
-        organizationId: organization.data.createOrganization.id,
-        name: 'Dr. Daniel Jackson',
-        isActive:true
-    }})
-    await runQuery(createPhysician,{input:{
-        organizationId: organization.data.createOrganization.id,
-        name: 'Dr. Samantha Carter',
-        isActive:true
-    }})
-    
-    let roleCategory = await runQuery(createLookupCategory,{input: {
-        description:'Roles',
-        isActive:true
-    }})
-    await runQuery(createLookup,{input:{
-        categoryId: roleCategory.data.createLookupCategory.id,
-        description: 'Site Administrator',
-        isActive:true
-    }})
-    await runQuery(createLookup,{input:{
-        categoryId: roleCategory.data.createLookupCategory.id,
-        description: 'Read Only',
-        isActive:true
-    }})
-    // await runQuery(createUser,{input:{
-    //     locationId: locationA.data.createLocation.id,
-    //     email: 'frankbenevento123@gmail.com',
-    //     firstName:'pcp',
-    //     lastName: 'pcp',
-    //     phone:'(817)-598-5420'
-    // }})
-
+        const patient1 = await runQuery(createPatient,{input:{
+            patientUserId: patientUser1.data.createUser.id,
+            luStatusId:'1',
+            locationId:locationA.data.createLocation.id
+        }})
+        const patient2 = await runQuery(createPatient,{input:{
+            patientUserId: patientUser2.data.createUser.id,
+            luStatusId:'1',
+            locationId:locationA.data.createLocation.id
+        }})
+        const patient3 = await runQuery(createPatient,{input:{
+            patientUserId: patientUser3.data.createUser.id,
+            luStatusId:'1',
+            locationId:locationA.data.createLocation.id
+        }})
+        const patient4 = await runQuery(createPatient,{input:{
+            patientUserId: patientUser4.data.createUser.id,
+            luStatusId:'1',
+            locationId:locationB.data.createLocation.id
+        }})
+        const patient5 = await runQuery(createPatient,{input:{
+            patientUserId: patientUser5.data.createUser.id,
+            luStatusId:'1',
+            locationId:locationB.data.createLocation.id
+        }})
+        const patient6 = await runQuery(createPatient,{input:{
+            patientUserId: patientUser6.data.createUser.id,
+            luStatusId:'1',
+            locationId:locationB.data.createLocation.id
+        }})
+        
+     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     let a = await runQuery(listOrganizations)
+     console.log('organization ------',a)
+     let b = await runQuery(listLocations)
+     console.log('locations ------',b)
+     let c = await runQuery(listAddresss)
+     console.log('addresses ------', c)
+     let d = await runQuery(listUsers)
+     console.log('users ------- ', d)
+     let e = await runQuery(listPatients)
+     console.log('patients ------- ', e)
+     didRunOnce = true
+     
+}
 
 }

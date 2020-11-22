@@ -168,63 +168,6 @@ export const listLocations = /* GraphQL */ `
     }
   }
 `;
-export const getPhysician = /* GraphQL */ `
-  query GetPhysician($id: ID!) {
-    getPhysician(id: $id) {
-      id
-      organizationId
-      name
-      isActive
-      organization {
-        id
-        addressId
-        name
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listPhysicians = /* GraphQL */ `
-  query ListPhysicians(
-    $filter: ModelPhysicianFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPhysicians(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        organizationId
-        name
-        isActive
-        organization {
-          id
-          addressId
-          name
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getPatientReferral = /* GraphQL */ `
   query GetPatientReferral($id: ID!) {
     getPatientReferral(id: $id) {
@@ -238,7 +181,6 @@ export const getPatientReferral = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -246,6 +188,9 @@ export const getPatientReferral = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -276,7 +221,6 @@ export const listPatientReferrals = /* GraphQL */ `
           id
           cognitoId
           addressId
-          locationId
           firstName
           lastName
           dob
@@ -294,21 +238,162 @@ export const listPatientReferrals = /* GraphQL */ `
     }
   }
 `;
+export const getPatientChart = /* GraphQL */ `
+  query GetPatientChart($id: ID!) {
+    getPatientChart(id: $id) {
+      id
+      patientId
+      visitDate
+      patient {
+        id
+        patientUserId
+        luStatusId
+        locationId
+        user {
+          id
+          cognitoId
+          addressId
+          firstName
+          lastName
+          dob
+          email
+          phone
+          type
+          isActive
+          createdAt
+          updatedAt
+        }
+        status {
+          id
+          categoryId
+          code
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      careGivers {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPatientCharts = /* GraphQL */ `
+  query ListPatientCharts(
+    $filter: ModelPatientChartFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPatientCharts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        patientId
+        visitDate
+        patient {
+          id
+          patientUserId
+          luStatusId
+          locationId
+          createdAt
+          updatedAt
+        }
+        careGivers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPatientAssignment = /* GraphQL */ `
+  query GetPatientAssignment($id: ID!) {
+    getPatientAssignment(id: $id) {
+      id
+      patientId
+      patientChartId
+      assignedUserId
+      isActive
+      patientChart {
+        id
+        patientId
+        visitDate
+        patient {
+          id
+          patientUserId
+          luStatusId
+          locationId
+          createdAt
+          updatedAt
+        }
+        careGivers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPatientAssignments = /* GraphQL */ `
+  query ListPatientAssignments(
+    $filter: ModelPatientAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPatientAssignments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        patientId
+        patientChartId
+        assignedUserId
+        isActive
+        patientChart {
+          id
+          patientId
+          visitDate
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getPatient = /* GraphQL */ `
   query GetPatient($id: ID!) {
     getPatient(id: $id) {
       id
-      userId
+      patientUserId
       luStatusId
-      physicianId
-      careManagerId
-      psychiatristId
       locationId
       user {
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -316,6 +401,9 @@ export const getPatient = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -349,17 +437,13 @@ export const listPatients = /* GraphQL */ `
     listPatients(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        userId
+        patientUserId
         luStatusId
-        physicianId
-        careManagerId
-        psychiatristId
         locationId
         user {
           id
           cognitoId
           addressId
-          locationId
           firstName
           lastName
           dob
@@ -386,13 +470,155 @@ export const listPatients = /* GraphQL */ `
     }
   }
 `;
+export const getStaffLocationAssignment = /* GraphQL */ `
+  query GetStaffLocationAssignment($id: ID!) {
+    getStaffLocationAssignment(id: $id) {
+      id
+      staffMemberId
+      locationId
+      isPermanent
+      startDate
+      startTime
+      endDate
+      endTime
+      staffMember {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      location {
+        id
+        organizationId
+        addressId
+        description
+        costCenterCode
+        isActive
+        organization {
+          id
+          addressId
+          name
+          isActive
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      assignment {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listStaffLocationAssignments = /* GraphQL */ `
+  query ListStaffLocationAssignments(
+    $filter: ModelStaffLocationAssignmentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStaffLocationAssignments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        staffMemberId
+        locationId
+        isPermanent
+        startDate
+        startTime
+        endDate
+        endTime
+        staffMember {
+          id
+          cognitoId
+          addressId
+          firstName
+          lastName
+          dob
+          email
+          phone
+          type
+          isActive
+          createdAt
+          updatedAt
+        }
+        location {
+          id
+          organizationId
+          addressId
+          description
+          costCenterCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        assignment {
+          id
+          cognitoId
+          addressId
+          firstName
+          lastName
+          dob
+          email
+          phone
+          type
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
       cognitoId
       addressId
-      locationId
       firstName
       lastName
       dob
@@ -400,6 +626,21 @@ export const getUser = /* GraphQL */ `
       phone
       type
       isActive
+      locationAssignments {
+        items {
+          id
+          staffMemberId
+          locationId
+          isPermanent
+          startDate
+          startTime
+          endDate
+          endTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -416,7 +657,6 @@ export const listUsers = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -424,6 +664,9 @@ export const listUsers = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -512,7 +755,6 @@ export const getAudit = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -520,6 +762,9 @@ export const getAudit = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -553,7 +798,6 @@ export const listAudits = /* GraphQL */ `
           id
           cognitoId
           addressId
-          locationId
           firstName
           lastName
           dob

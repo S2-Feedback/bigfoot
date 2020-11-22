@@ -36,6 +36,15 @@ type PatientReferral @model
   patientName: String!
   patientReferrer: User @connection(fields:["referredBy"])
 }
+type PatientChart @model
+{
+  id:ID!
+  patientId: ID!
+  visitDate: String!
+  patient: Patient @connection(fields:["patientId"])
+  careGivers: [PatientAssignment] @connection(name:"CareGivers")
+}
+
 type PatientAssignment @model
 {
   id: ID!
@@ -43,13 +52,7 @@ type PatientAssignment @model
   patientChartId: ID!
   assignedUserId: ID!
   isActive: Boolean
-}
-type PatientChart @model
-{
-  id:ID!
-  patientId: ID!
-  visitDate: String!
-  patient: Patient @connection(fields:["patientId"])
+  patientChart: PatientChart @connection(name:"CareGivers")  
 }
 type Patient @model
 {
@@ -59,6 +62,7 @@ type Patient @model
   locationId: ID
   user: User @connection(fields:["patientUserId"])
   status: Lookup @connection(fields:["luStatusId"])
+  
 }
 
 type StaffLocationAssignment @model
@@ -71,8 +75,10 @@ type StaffLocationAssignment @model
   startTime: String
   endDate: String
   endTime:String
-  staffMember: User @connection(fields:["staffMemberId])
+  staffMember: User @connection(fields:["staffMemberId"])
   location: Location @connection(fields:["locationId"])
+  assignment: User @connection(name:"locationAssignment")
+
 }
 type User @model 
 @key(name: "byType", fields:["type"])
@@ -86,7 +92,8 @@ type User @model
   email: String!
   phone: String
   type: Int!
-  isActive: Boolean
+  isActive: Boolean!
+  locationAssignments: [StaffLocationAssignment] @connection(name:"locationAssignment")
 }
 type UserRole @model
 {

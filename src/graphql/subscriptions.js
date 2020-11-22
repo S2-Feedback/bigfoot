@@ -235,96 +235,6 @@ export const onDeleteLocation = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePhysician = /* GraphQL */ `
-  subscription OnCreatePhysician {
-    onCreatePhysician {
-      id
-      organizationId
-      name
-      isActive
-      organization {
-        id
-        addressId
-        name
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdatePhysician = /* GraphQL */ `
-  subscription OnUpdatePhysician {
-    onUpdatePhysician {
-      id
-      organizationId
-      name
-      isActive
-      organization {
-        id
-        addressId
-        name
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeletePhysician = /* GraphQL */ `
-  subscription OnDeletePhysician {
-    onDeletePhysician {
-      id
-      organizationId
-      name
-      isActive
-      organization {
-        id
-        addressId
-        name
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreatePatientReferral = /* GraphQL */ `
   subscription OnCreatePatientReferral {
     onCreatePatientReferral {
@@ -338,7 +248,6 @@ export const onCreatePatientReferral = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -346,6 +255,9 @@ export const onCreatePatientReferral = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -367,7 +279,6 @@ export const onUpdatePatientReferral = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -375,6 +286,9 @@ export const onUpdatePatientReferral = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -396,7 +310,6 @@ export const onDeletePatientReferral = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -404,6 +317,264 @@ export const onDeletePatientReferral = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePatientChart = /* GraphQL */ `
+  subscription OnCreatePatientChart {
+    onCreatePatientChart {
+      id
+      patientId
+      visitDate
+      patient {
+        id
+        patientUserId
+        luStatusId
+        locationId
+        user {
+          id
+          cognitoId
+          addressId
+          firstName
+          lastName
+          dob
+          email
+          phone
+          type
+          isActive
+          createdAt
+          updatedAt
+        }
+        status {
+          id
+          categoryId
+          code
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      careGivers {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePatientChart = /* GraphQL */ `
+  subscription OnUpdatePatientChart {
+    onUpdatePatientChart {
+      id
+      patientId
+      visitDate
+      patient {
+        id
+        patientUserId
+        luStatusId
+        locationId
+        user {
+          id
+          cognitoId
+          addressId
+          firstName
+          lastName
+          dob
+          email
+          phone
+          type
+          isActive
+          createdAt
+          updatedAt
+        }
+        status {
+          id
+          categoryId
+          code
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      careGivers {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePatientChart = /* GraphQL */ `
+  subscription OnDeletePatientChart {
+    onDeletePatientChart {
+      id
+      patientId
+      visitDate
+      patient {
+        id
+        patientUserId
+        luStatusId
+        locationId
+        user {
+          id
+          cognitoId
+          addressId
+          firstName
+          lastName
+          dob
+          email
+          phone
+          type
+          isActive
+          createdAt
+          updatedAt
+        }
+        status {
+          id
+          categoryId
+          code
+          description
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      careGivers {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePatientAssignment = /* GraphQL */ `
+  subscription OnCreatePatientAssignment {
+    onCreatePatientAssignment {
+      id
+      patientId
+      patientChartId
+      assignedUserId
+      isActive
+      patientChart {
+        id
+        patientId
+        visitDate
+        patient {
+          id
+          patientUserId
+          luStatusId
+          locationId
+          createdAt
+          updatedAt
+        }
+        careGivers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePatientAssignment = /* GraphQL */ `
+  subscription OnUpdatePatientAssignment {
+    onUpdatePatientAssignment {
+      id
+      patientId
+      patientChartId
+      assignedUserId
+      isActive
+      patientChart {
+        id
+        patientId
+        visitDate
+        patient {
+          id
+          patientUserId
+          luStatusId
+          locationId
+          createdAt
+          updatedAt
+        }
+        careGivers {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePatientAssignment = /* GraphQL */ `
+  subscription OnDeletePatientAssignment {
+    onDeletePatientAssignment {
+      id
+      patientId
+      patientChartId
+      assignedUserId
+      isActive
+      patientChart {
+        id
+        patientId
+        visitDate
+        patient {
+          id
+          patientUserId
+          luStatusId
+          locationId
+          createdAt
+          updatedAt
+        }
+        careGivers {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -416,17 +587,13 @@ export const onCreatePatient = /* GraphQL */ `
   subscription OnCreatePatient {
     onCreatePatient {
       id
-      userId
+      patientUserId
       luStatusId
-      physicianId
-      careManagerId
-      psychiatristId
       locationId
       user {
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -434,6 +601,9 @@ export const onCreatePatient = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -462,17 +632,13 @@ export const onUpdatePatient = /* GraphQL */ `
   subscription OnUpdatePatient {
     onUpdatePatient {
       id
-      userId
+      patientUserId
       luStatusId
-      physicianId
-      careManagerId
-      psychiatristId
       locationId
       user {
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -480,6 +646,9 @@ export const onUpdatePatient = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -508,17 +677,13 @@ export const onDeletePatient = /* GraphQL */ `
   subscription OnDeletePatient {
     onDeletePatient {
       id
-      userId
+      patientUserId
       luStatusId
-      physicianId
-      careManagerId
-      psychiatristId
       locationId
       user {
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -526,6 +691,9 @@ export const onDeletePatient = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -550,13 +718,246 @@ export const onDeletePatient = /* GraphQL */ `
     }
   }
 `;
+export const onCreateStaffLocationAssignment = /* GraphQL */ `
+  subscription OnCreateStaffLocationAssignment {
+    onCreateStaffLocationAssignment {
+      id
+      staffMemberId
+      locationId
+      isPermanent
+      startDate
+      startTime
+      endDate
+      endTime
+      staffMember {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      location {
+        id
+        organizationId
+        addressId
+        description
+        costCenterCode
+        isActive
+        organization {
+          id
+          addressId
+          name
+          isActive
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      assignment {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateStaffLocationAssignment = /* GraphQL */ `
+  subscription OnUpdateStaffLocationAssignment {
+    onUpdateStaffLocationAssignment {
+      id
+      staffMemberId
+      locationId
+      isPermanent
+      startDate
+      startTime
+      endDate
+      endTime
+      staffMember {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      location {
+        id
+        organizationId
+        addressId
+        description
+        costCenterCode
+        isActive
+        organization {
+          id
+          addressId
+          name
+          isActive
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      assignment {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteStaffLocationAssignment = /* GraphQL */ `
+  subscription OnDeleteStaffLocationAssignment {
+    onDeleteStaffLocationAssignment {
+      id
+      staffMemberId
+      locationId
+      isPermanent
+      startDate
+      startTime
+      endDate
+      endTime
+      staffMember {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      location {
+        id
+        organizationId
+        addressId
+        description
+        costCenterCode
+        isActive
+        organization {
+          id
+          addressId
+          name
+          isActive
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      assignment {
+        id
+        cognitoId
+        addressId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        type
+        isActive
+        locationAssignments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
       id
       cognitoId
       addressId
-      locationId
       firstName
       lastName
       dob
@@ -564,6 +965,21 @@ export const onCreateUser = /* GraphQL */ `
       phone
       type
       isActive
+      locationAssignments {
+        items {
+          id
+          staffMemberId
+          locationId
+          isPermanent
+          startDate
+          startTime
+          endDate
+          endTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -575,7 +991,6 @@ export const onUpdateUser = /* GraphQL */ `
       id
       cognitoId
       addressId
-      locationId
       firstName
       lastName
       dob
@@ -583,6 +998,21 @@ export const onUpdateUser = /* GraphQL */ `
       phone
       type
       isActive
+      locationAssignments {
+        items {
+          id
+          staffMemberId
+          locationId
+          isPermanent
+          startDate
+          startTime
+          endDate
+          endTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -594,7 +1024,6 @@ export const onDeleteUser = /* GraphQL */ `
       id
       cognitoId
       addressId
-      locationId
       firstName
       lastName
       dob
@@ -602,6 +1031,21 @@ export const onDeleteUser = /* GraphQL */ `
       phone
       type
       isActive
+      locationAssignments {
+        items {
+          id
+          staffMemberId
+          locationId
+          isPermanent
+          startDate
+          startTime
+          endDate
+          endTime
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -715,7 +1159,6 @@ export const onCreateAudit = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -723,6 +1166,9 @@ export const onCreateAudit = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -758,7 +1204,6 @@ export const onUpdateAudit = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -766,6 +1211,9 @@ export const onUpdateAudit = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -801,7 +1249,6 @@ export const onDeleteAudit = /* GraphQL */ `
         id
         cognitoId
         addressId
-        locationId
         firstName
         lastName
         dob
@@ -809,6 +1256,9 @@ export const onDeleteAudit = /* GraphQL */ `
         phone
         type
         isActive
+        locationAssignments {
+          nextToken
+        }
         createdAt
         updatedAt
       }
