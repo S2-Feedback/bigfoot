@@ -42,8 +42,10 @@ type PatientChart @model
   patientId: ID!
   visitDate: String!
   patient: Patient @connection(fields:["patientId"])
+  assignments: [PatientAssignment] @connection(keyName: "byPatientChartId", fields: ["id"])
 }
 type PatientAssignment @model
+@key(name: "byPatientChartId", fields: ["patientChartId"])
 {
   id: ID!
   patientId: ID!

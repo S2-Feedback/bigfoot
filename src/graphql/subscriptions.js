@@ -356,6 +356,18 @@ export const onCreatePatientChart = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      assignments {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -398,6 +410,18 @@ export const onUpdatePatientChart = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      assignments {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -439,6 +463,18 @@ export const onDeletePatientChart = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      assignments {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       createdAt
       updatedAt

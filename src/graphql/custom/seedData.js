@@ -13,7 +13,11 @@ import {
   deletePatient,
   createPatient,
   deleteLookup,
-  deleteLookupCategory
+  deleteLookupCategory,
+  createPatientChart,
+  createPatientAssignment,
+  deletePatientAssignment,
+  deletePatientChart
 } from "../mutations";
 import {
   listAddresss,
@@ -21,6 +25,8 @@ import {
   listLookupCategorys,
   listLookups,
   listOrganizations,
+  listPatientAssignments,
+  listPatientCharts,
   listPatients,
   listUsers
 } from "../queries";
@@ -245,6 +251,7 @@ export const seedData = async () => {
     });
 
     const lookups = await runQuery(listLookups);
+    console.log('lookups? ', lookups)
     const luCategories = await runQuery(listLookupCategorys);
     for (let i = 0; i < lookups.data.listLookups.items.length; i++) {
       await runQuery(deleteLookup, {
@@ -375,11 +382,10 @@ export const seedData = async () => {
         input: { id: users.data.listUsers.items[i].id }
       });
     }
-    console.log("what is the p;sdlkfj;asdklfjsda", userTypePatient);
     const patientUser1 = await runQuery(createUser, {
       input: {
         email: "frankbenevento123@gmail.com",
-        firstName: "Patient",
+        firstName: "Patient 1",
         lastName: "location a",
         phone: "(817)-598-5420",
         addressId: patient1Address.data.createAddress.id,
@@ -390,7 +396,7 @@ export const seedData = async () => {
     const patientUser2 = await runQuery(createUser, {
       input: {
         email: "frankbenevento123@gmail.com",
-        firstName: "Patient2",
+        firstName: "Patient 2",
         lastName: "loc a",
         phone: "(213)-344-9988",
         addressId: patient2Address.data.createAddress.id,
@@ -449,7 +455,7 @@ export const seedData = async () => {
         lastName: "Ician",
         phone: "(817)-598-5420",
         isActive: true,
-        type: userTypePCP
+        type: userTypePCP.data.createLookup.id
       }
     });
     const careManager = await runQuery(createUser, {
@@ -458,7 +464,7 @@ export const seedData = async () => {
         firstName: "Care",
         lastName: "Manager",
         phone: "(817)-598-5420",
-        type: userTypeCareManager
+        type: userTypeCareManager.data.createLookup.id
       }
     });
 
@@ -505,6 +511,32 @@ export const seedData = async () => {
       }
     });
 
+    const patientAssignments  = await runQuery(listPatientAssignments)
+    for (let i = 0; i < patientAssignments.data.listPatientAssignments.items.length; i++) {
+        await runQuery(deletePatientAssignment,{input:{
+            id: patientAssignments.data.listPatientAssignments.items[i].id      
+        }})
+    }
+    const patientCharts = await runQuery(listPatientCharts)
+    for (let i = 0; i < patientCharts.data.listPatientCharts.items.length; i++) {
+        await runQuery(deletePatientChart,{input:{
+            id:patientCharts.data.listPatientCharts.items[i].id
+        }})
+        
+    }
+    const patient1Chart = await runQuery(createPatientChart,{input:{
+        patientId: patient1.data.createPatient.id,
+        visitDate: new Date().toString()
+    }})
+
+    console.log('what is the patientid = ", ', patient1.data.createPatient.id)
+    const patientAssignment = await runQuery(createPatientAssignment,{input:{
+        patientId: patient1.data.createPatient.id,
+        patientChartId:patient1Chart.data.createPatientChart.id,
+        assignedUserId: physician.data.createUser.id,
+        isActive:true
+    }})
+    console.log('what is the patient assignement', patientAssignment)
     let a = await runQuery(listOrganizations);
     console.log("organization ------", a);
     let b = await runQuery(listLocations);
@@ -519,6 +551,10 @@ export const seedData = async () => {
     console.log("lookup categories ------- ", f);
     let g = await runQuery(listLookups);
     console.log("lookups ------", g);
+    let h = await runQuery(listPatientCharts)
+    console.log('patient-charts ------- ', h)
+    let i = await runQuery(listPatientAssignments)
+    console.log('patient assignments ------ ', i)
     didRunOnce = true;
   }
 };

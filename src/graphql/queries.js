@@ -272,6 +272,18 @@ export const getPatientChart = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      assignments {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+          isActive
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -295,6 +307,9 @@ export const listPatientCharts = /* GraphQL */ `
           locationId
           createdAt
           updatedAt
+        }
+        assignments {
+          nextToken
         }
         createdAt
         updatedAt
