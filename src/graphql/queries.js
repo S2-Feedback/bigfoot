@@ -188,9 +188,6 @@ export const getPatientReferral = /* GraphQL */ `
         phone
         type
         isActive
-        locationAssignments {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -275,18 +272,6 @@ export const getPatientChart = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      careGivers {
-        items {
-          id
-          patientId
-          patientChartId
-          assignedUserId
-          isActive
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -311,9 +296,6 @@ export const listPatientCharts = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        careGivers {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -329,24 +311,6 @@ export const getPatientAssignment = /* GraphQL */ `
       patientChartId
       assignedUserId
       isActive
-      patientChart {
-        id
-        patientId
-        visitDate
-        patient {
-          id
-          patientUserId
-          luStatusId
-          locationId
-          createdAt
-          updatedAt
-        }
-        careGivers {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
       createdAt
       updatedAt
     }
@@ -369,13 +333,6 @@ export const listPatientAssignments = /* GraphQL */ `
         patientChartId
         assignedUserId
         isActive
-        patientChart {
-          id
-          patientId
-          visitDate
-          createdAt
-          updatedAt
-        }
         createdAt
         updatedAt
       }
@@ -401,9 +358,6 @@ export const getPatient = /* GraphQL */ `
         phone
         type
         isActive
-        locationAssignments {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -492,9 +446,6 @@ export const getStaffLocationAssignment = /* GraphQL */ `
         phone
         type
         isActive
-        locationAssignments {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -522,23 +473,6 @@ export const getStaffLocationAssignment = /* GraphQL */ `
           isActive
           createdAt
           updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      assignment {
-        id
-        cognitoId
-        addressId
-        firstName
-        lastName
-        dob
-        email
-        phone
-        type
-        isActive
-        locationAssignments {
-          nextToken
         }
         createdAt
         updatedAt
@@ -592,20 +526,6 @@ export const listStaffLocationAssignments = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        assignment {
-          id
-          cognitoId
-          addressId
-          firstName
-          lastName
-          dob
-          email
-          phone
-          type
-          isActive
-          createdAt
-          updatedAt
-        }
         createdAt
         updatedAt
       }
@@ -626,21 +546,6 @@ export const getUser = /* GraphQL */ `
       phone
       type
       isActive
-      locationAssignments {
-        items {
-          id
-          staffMemberId
-          locationId
-          isPermanent
-          startDate
-          startTime
-          endDate
-          endTime
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -664,9 +569,6 @@ export const listUsers = /* GraphQL */ `
         phone
         type
         isActive
-        locationAssignments {
-          nextToken
-        }
         createdAt
         updatedAt
       }
@@ -762,9 +664,6 @@ export const getAudit = /* GraphQL */ `
         phone
         type
         isActive
-        locationAssignments {
-          nextToken
-        }
         createdAt
         updatedAt
       }

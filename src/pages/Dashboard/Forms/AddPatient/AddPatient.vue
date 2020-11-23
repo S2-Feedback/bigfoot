@@ -55,7 +55,12 @@ import SecondStep from "./CareManagerInfo";
 import S2Button from "@/components/S2Button.vue";
 import { mdiChevronLeftCircle, mdiSubdirectoryArrowLeft } from "@mdi/js";
 import { runQuery } from "../../../../apis/gql";
-import { createAddress, createUser, createPatient, createPatientReferral } from "../../../../graphql/mutations";
+import {
+  createAddress,
+  createUser,
+  createPatient,
+  createPatientReferral
+} from "../../../../graphql/mutations";
 import {
   CognitoUser,
   CognitoUserPool,
@@ -124,7 +129,7 @@ export default {
 
         const user = await this.$runQuery(createUser, {
           input: {
-            cognitoId: '',
+            cognitoId: "",
             addressId: addressId,
             firstName: this.wizardModel.patientInfo.firstName,
             lastName: this.wizardModel.patientInfo.lastName,
@@ -141,11 +146,12 @@ export default {
           .catch(err => {
             //console.log("errrrr", err);
           });
-        const patient = await this.$runQuery(createPatient,{input:{
-          patientId: user
-        }})
-        
-        
+        const patient = await this.$runQuery(createPatient, {
+          input: {
+            patientId: user
+          }
+        });
+
         this.triggerReferral(user);
         spinner.hide();
         this.$router.push({ name: this.returnTo });
@@ -154,19 +160,28 @@ export default {
     async triggerReferral(patientId) {
       notify("top", "right", "New Patient Created", "success", this);
       const loggedInUser = await Auth.currentAuthenticatedUser();
-      
-      await this.$runQuery(createPatientReferral,{input:{
-        patientId:patientId,
-        referredBy:loggedInUser.attributes.sub,
-        referredDate:new Date(),
-        patientEmail: this.wizardModel.patientInfo.email,
-        patientName: `${this.wizardModel.patientInfo.firstName} ${this.wizardModel.patientInfo.lastName}`
-      }}).then(()=>{
-        notify("top", "right", "BHI Referral Sent To Patient", "success", this); 
-      }).catch((err)=>{
-        notify("top", "right", err, "danger", this);
+
+      await this.$runQuery(createPatientReferral, {
+        input: {
+          patientId: patientId,
+          referredBy: loggedInUser.attributes.sub,
+          referredDate: new Date(),
+          patientEmail: this.wizardModel.patientInfo.email,
+          patientName: `${this.wizardModel.patientInfo.firstName} ${this.wizardModel.patientInfo.lastName}`
+        }
       })
-      
+        .then(() => {
+          notify(
+            "top",
+            "right",
+            "BHI Referral Sent To Patient",
+            "success",
+            this
+          );
+        })
+        .catch(err => {
+          notify("top", "right", err, "danger", this);
+        });
     }
   },
   props: {

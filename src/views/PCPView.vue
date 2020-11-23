@@ -284,19 +284,16 @@ export default {
     handlePatientViewClick(e) {
       this.$router.push({ name: "Patient View", params: { patientInfo: e } });
     },
-    handleSearchForPatient(){
-
-    },
-
+    handleSearchForPatient() {}
   },
   async mounted() {
-    const tmp = await this.$runQuery(listPatients)
-    this.tableData = tmp.data.listPatients.items
+    const tmp = await this.$runQuery(listPatients);
+    this.tableData = tmp.data.listPatients.items;
     this.fuseSearch = new Fuse(this.tableData, {
-      keys: ["lastName", "firstName", "street", "city", "state"], 
+      keys: ["lastName", "firstName", "street", "city", "state"],
       threshold: 0.3
     });
-  },
+  }
 };
 </script>
 <style>

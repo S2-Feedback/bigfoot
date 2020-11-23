@@ -8,23 +8,23 @@
           v-slot="{ passed, failed }"
           style="width:660px;"
         >
-        <div class="md-layout-item">
-          <md-field :class="[{ 'md-error': failed }, { 'md-valid': passed }]">
-            <label for="careManager">Assign Care Manager</label>
-            <md-select
-              v-model="careManager"
-              name="careManager"
-              id="careManager"
-            >
-              <md-option value="1">Fight Club</md-option>
-              <md-option value="2">Godfather</md-option>
-              <md-option value="3">Godfather II</md-option>
-              <md-option value="4">Godfather III</md-option>
-              <md-option value="5">Godfellas</md-option>
-              <md-option value="6">Pulp Fiction</md-option>
-              <md-option value="7">Scarface</md-option>
-            </md-select>
-          </md-field>
+          <div class="md-layout-item">
+            <md-field :class="[{ 'md-error': failed }, { 'md-valid': passed }]">
+              <label for="careManager">Assign Care Manager</label>
+              <md-select
+                v-model="careManager"
+                name="careManager"
+                id="careManager"
+              >
+                <md-option value="1">Fight Club</md-option>
+                <md-option value="2">Godfather</md-option>
+                <md-option value="3">Godfather II</md-option>
+                <md-option value="4">Godfather III</md-option>
+                <md-option value="5">Godfellas</md-option>
+                <md-option value="6">Pulp Fiction</md-option>
+                <md-option value="7">Scarface</md-option>
+              </md-select>
+            </md-field>
           </div>
         </ValidationProvider>
       </div>

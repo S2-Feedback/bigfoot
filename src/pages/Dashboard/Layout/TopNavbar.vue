@@ -8,20 +8,18 @@
         <h3 class="md-title">{{ $route.name }}</h3>
       </div>
       <div class="dflex-center-row" style="align-items:flex-end; width:30%;">
-          <md-field>
-            <label>Enter Search Criteria</label>
-            <md-input v-model="patientSearchText"></md-input>
-          </md-field>         
-          <svg-icon 
-              class="ml-15"
-              slot="buttonIcon"
-              type="mdi"
-              :path="mdiAccountSearch"
-          ></svg-icon>          
+        <md-field>
+          <label>Enter Search Criteria</label>
+          <md-input v-model="patientSearchText"></md-input>
+        </md-field>
+        <svg-icon
+          class="ml-15"
+          slot="buttonIcon"
+          type="mdi"
+          :path="mdiAccountSearch"
+        ></svg-icon>
       </div>
       <div class="md-toolbar-section-end">
- 
-
         <div class="md-collapse">
           <md-list>
             <!-- <md-list-item @click="handlePhoneClick">
@@ -48,9 +46,7 @@
 import SvgIcon from "@jamescoyle/vue-icon";
 import { mdiPhone } from "@mdi/js";
 import { Auth } from "aws-amplify";
-import {
-  mdiAccountSearch
-} from "@mdi/js";
+import { mdiAccountSearch } from "@mdi/js";
 export default {
   components: {
     SvgIcon
@@ -58,7 +54,7 @@ export default {
   data() {
     return {
       mdiAccountSearch: mdiAccountSearch,
-      
+
       selectedEmployee: "",
       mdiPhone: mdiPhone,
 

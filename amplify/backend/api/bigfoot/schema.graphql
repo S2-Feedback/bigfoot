@@ -42,9 +42,7 @@ type PatientChart @model
   patientId: ID!
   visitDate: String!
   patient: Patient @connection(fields:["patientId"])
-  careGivers: [PatientAssignment] @connection(name:"CareGivers")
 }
-
 type PatientAssignment @model
 {
   id: ID!
@@ -52,7 +50,6 @@ type PatientAssignment @model
   patientChartId: ID!
   assignedUserId: ID!
   isActive: Boolean
-  patientChart: PatientChart @connection(name:"CareGivers")  
 }
 type Patient @model
 {
@@ -77,11 +74,8 @@ type StaffLocationAssignment @model
   endTime:String
   staffMember: User @connection(fields:["staffMemberId"])
   location: Location @connection(fields:["locationId"])
-  assignment: User @connection(name:"locationAssignment")
-
 }
 type User @model 
-@key(name: "byType", fields:["type"])
 {
   id: ID!
   cognitoId: ID
@@ -91,9 +85,8 @@ type User @model
   dob: String
   email: String!
   phone: String
-  type: Int!
-  isActive: Boolean!
-  locationAssignments: [StaffLocationAssignment] @connection(name:"locationAssignment")
+  type: ID!
+  isActive: Boolean
 }
 type UserRole @model
 {
@@ -118,7 +111,6 @@ type LookupCategory @model{
 }
 
 type Lookup @model 
-@key(name:"byCategoryId" fields:["categoryId"])
 {
   id: ID!
   categoryId: ID!

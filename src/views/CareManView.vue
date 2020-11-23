@@ -1,7 +1,6 @@
 <template>
   <div class="dflex-center-col">
     <div class="md-layout dflex-center-row">
-
       <div
         class="md-layout-item md-medium-size-40 md-xsmall-size-100 md-size-25"
       >
@@ -17,13 +16,17 @@
             <h3 class="title">
               <animated-number :value="75"></animated-number>
             </h3>
-            <div class='dflex-center-row mt-15'>
-              <md-button class="md-primary md-simple">View Urgent Items</md-button>
+            <div class="dflex-center-row mt-15">
+              <md-button class="md-primary md-simple"
+                >View Urgent Items</md-button
+              >
             </div>
           </template>
         </stats-card>
       </div>
-      <div class="md-layout-item md-medium-size-10 md-xsmall-size-100 md-size-25"></div>
+      <div
+        class="md-layout-item md-medium-size-10 md-xsmall-size-100 md-size-25"
+      ></div>
 
       <div
         class="md-layout-item md-medium-size-40 md-xsmall-size-100 md-size-25"
@@ -40,13 +43,12 @@
             <h3 class="title">
               <animated-number :value="totalPatients"></animated-number>
             </h3>
-            <div class='dflex-center-row mt-15'>
+            <div class="dflex-center-row mt-15">
               <md-button class="md-primary md-simple">View Messages</md-button>
             </div>
           </template>
         </stats-card>
       </div>
-
     </div>
 
     <md-card
@@ -84,253 +86,274 @@
       <md-card-content>
         <nav-tabs-card>
           <template slot="content">
-            <md-tabs class="md-primary" md-alignment="left" >
-              <md-tab  id="tab-home" :md-label="`Active Patients - ${this.activePatientCount}`" >
+            <md-tabs class="md-primary" md-alignment="left">
+              <md-tab
+                id="tab-home"
+                :md-label="`Active Patients - ${this.activePatientCount}`"
+              >
                 <md-table
-                    :value="queriedData"
-                    :md-sort.sync="currentSort"
-                    :md-sort-order.sync="currentSortOrder"
-                    :md-sort-fn="customSort"
-                    class="paginated-table table-striped table-hover"
-                    style="min-height:300px; align-items:flex-start; mt-15;"
-                  >
-                    <md-table-toolbar style="margin-bottom:30px;">
-                      <md-field>
-                        <label for="pages">Per page</label>
-                        <md-select v-model="pagination.perPage" name="pages">
-                          <md-option
-                            v-for="item in pagination.perPageOptions"
-                            :key="item"
-                            :label="item"
-                            :value="item"
-                          >
-                            {{ item }}
-                          </md-option>
-                        </md-select>
-                      </md-field>
-
-                      <md-field>
-                        <md-input
-                          type="search"
-                          class="mb-3"
-                          clearable
-                          style="width: 200px"
-                          placeholder="Search records"
-                          v-model="searchQuery"
+                  :value="queriedData"
+                  :md-sort.sync="currentSort"
+                  :md-sort-order.sync="currentSortOrder"
+                  :md-sort-fn="customSort"
+                  class="paginated-table table-striped table-hover"
+                  style="min-height:300px; align-items:flex-start; mt-15;"
+                >
+                  <md-table-toolbar style="margin-bottom:30px;">
+                    <md-field>
+                      <label for="pages">Per page</label>
+                      <md-select v-model="pagination.perPage" name="pages">
+                        <md-option
+                          v-for="item in pagination.perPageOptions"
+                          :key="item"
+                          :label="item"
+                          :value="item"
                         >
-                        </md-input>
-                      </md-field>
-                    </md-table-toolbar>
+                          {{ item }}
+                        </md-option>
+                      </md-select>
+                    </md-field>
 
-                    <md-table-row slot="md-table-row" slot-scope="{ item }">
-                      <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
-                        item.patient.lastName
-                      }}</md-table-cell>
-                      <md-table-cell md-label="First Name" md-sort-by="firstName">{{
-                        item.patient.firstName
-                      }}</md-table-cell>
-                      <md-table-cell md-label="">
-                        <md-button
-                          class="md-just-icon md-success md-simple"
-                          @click.native="handlePatientViewClick(item)"
-                        >
-                          <svg-icon
-                            type="mdi"
-                            :path="mdiArrowRightDropCircle"
-                          ></svg-icon>
-                        </md-button>
-                      </md-table-cell>
-                    </md-table-row>
-                  </md-table>                
+                    <md-field>
+                      <md-input
+                        type="search"
+                        class="mb-3"
+                        clearable
+                        style="width: 200px"
+                        placeholder="Search records"
+                        v-model="searchQuery"
+                      >
+                      </md-input>
+                    </md-field>
+                  </md-table-toolbar>
+
+                  <md-table-row slot="md-table-row" slot-scope="{ item }">
+                    <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
+                      item.patient.lastName
+                    }}</md-table-cell>
+                    <md-table-cell
+                      md-label="First Name"
+                      md-sort-by="firstName"
+                      >{{ item.patient.firstName }}</md-table-cell
+                    >
+                    <md-table-cell md-label="">
+                      <md-button
+                        class="md-just-icon md-success md-simple"
+                        @click.native="handlePatientViewClick(item)"
+                      >
+                        <svg-icon
+                          type="mdi"
+                          :path="mdiArrowRightDropCircle"
+                        ></svg-icon>
+                      </md-button>
+                    </md-table-cell>
+                  </md-table-row>
+                </md-table>
               </md-tab>
 
-              <md-tab id="tab-pages" :md-label="`Ready For Psych Review - ${this.psychReviewCount}`">
+              <md-tab
+                id="tab-pages"
+                :md-label="`Ready For Psych Review - ${this.psychReviewCount}`"
+              >
                 <md-table
-                    :value="queriedData"
-                    :md-sort.sync="currentSort"
-                    :md-sort-order.sync="currentSortOrder"
-                    :md-sort-fn="customSort"
-                    class="paginated-table table-striped table-hover"
-                    style="min-height:300px; align-items:flex-start; mt-15;"
-                  >
-                    <md-table-toolbar style="margin-bottom:30px;">
-                      <md-field>
-                        <label for="pages">Per page</label>
-                        <md-select v-model="pagination.perPage" name="pages">
-                          <md-option
-                            v-for="item in pagination.perPageOptions"
-                            :key="item"
-                            :label="item"
-                            :value="item"
-                          >
-                            {{ item }}
-                          </md-option>
-                        </md-select>
-                      </md-field>
-
-                      <md-field>
-                        <md-input
-                          type="search"
-                          class="mb-3"
-                          clearable
-                          style="width: 200px"
-                          placeholder="Search records"
-                          v-model="searchQuery"
+                  :value="queriedData"
+                  :md-sort.sync="currentSort"
+                  :md-sort-order.sync="currentSortOrder"
+                  :md-sort-fn="customSort"
+                  class="paginated-table table-striped table-hover"
+                  style="min-height:300px; align-items:flex-start; mt-15;"
+                >
+                  <md-table-toolbar style="margin-bottom:30px;">
+                    <md-field>
+                      <label for="pages">Per page</label>
+                      <md-select v-model="pagination.perPage" name="pages">
+                        <md-option
+                          v-for="item in pagination.perPageOptions"
+                          :key="item"
+                          :label="item"
+                          :value="item"
                         >
-                        </md-input>
-                      </md-field>
-                    </md-table-toolbar>
+                          {{ item }}
+                        </md-option>
+                      </md-select>
+                    </md-field>
 
-                    <md-table-row slot="md-table-row" slot-scope="{ item }">
-                      <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
-                        item.patient.lastName
-                      }}</md-table-cell>
-                      <md-table-cell md-label="First Name" md-sort-by="firstName">{{
-                        item.patient.firstName
-                      }}</md-table-cell>
-                      <md-table-cell md-label="">
-                        <md-button
-                          class="md-just-icon md-success md-simple"
-                          @click.native="handlePatientViewClick(item)"
-                        >
-                          <svg-icon
-                            type="mdi"
-                            :path="mdiArrowRightDropCircle"
-                          ></svg-icon>
-                        </md-button>
-                      </md-table-cell>
-                    </md-table-row>
-                  </md-table>                
+                    <md-field>
+                      <md-input
+                        type="search"
+                        class="mb-3"
+                        clearable
+                        style="width: 200px"
+                        placeholder="Search records"
+                        v-model="searchQuery"
+                      >
+                      </md-input>
+                    </md-field>
+                  </md-table-toolbar>
+
+                  <md-table-row slot="md-table-row" slot-scope="{ item }">
+                    <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
+                      item.patient.lastName
+                    }}</md-table-cell>
+                    <md-table-cell
+                      md-label="First Name"
+                      md-sort-by="firstName"
+                      >{{ item.patient.firstName }}</md-table-cell
+                    >
+                    <md-table-cell md-label="">
+                      <md-button
+                        class="md-just-icon md-success md-simple"
+                        @click.native="handlePatientViewClick(item)"
+                      >
+                        <svg-icon
+                          type="mdi"
+                          :path="mdiArrowRightDropCircle"
+                        ></svg-icon>
+                      </md-button>
+                    </md-table-cell>
+                  </md-table-row>
+                </md-table>
               </md-tab>
 
-              <md-tab id="tab-planReview" :md-label="`Plan Needing Review - ${this.planReviewCount}`">
-                 <md-table
-                    :value="queriedData"
-                    :md-sort.sync="currentSort"
-                    :md-sort-order.sync="currentSortOrder"
-                    :md-sort-fn="customSort"
-                    class="paginated-table table-striped table-hover"
-                    style="min-height:300px; align-items:flex-start; mt-15;"
-                  >
-                    <md-table-toolbar style="margin-bottom:30px;">
-                      <md-field>
-                        <label for="pages">Per page</label>
-                        <md-select v-model="pagination.perPage" name="pages">
-                          <md-option
-                            v-for="item in pagination.perPageOptions"
-                            :key="item"
-                            :label="item"
-                            :value="item"
-                          >
-                            {{ item }}
-                          </md-option>
-                        </md-select>
-                      </md-field>
-
-                      <md-field>
-                        <md-input
-                          type="search"
-                          class="mb-3"
-                          clearable
-                          style="width: 200px"
-                          placeholder="Search records"
-                          v-model="searchQuery"
+              <md-tab
+                id="tab-planReview"
+                :md-label="`Plan Needing Review - ${this.planReviewCount}`"
+              >
+                <md-table
+                  :value="queriedData"
+                  :md-sort.sync="currentSort"
+                  :md-sort-order.sync="currentSortOrder"
+                  :md-sort-fn="customSort"
+                  class="paginated-table table-striped table-hover"
+                  style="min-height:300px; align-items:flex-start; mt-15;"
+                >
+                  <md-table-toolbar style="margin-bottom:30px;">
+                    <md-field>
+                      <label for="pages">Per page</label>
+                      <md-select v-model="pagination.perPage" name="pages">
+                        <md-option
+                          v-for="item in pagination.perPageOptions"
+                          :key="item"
+                          :label="item"
+                          :value="item"
                         >
-                        </md-input>
-                      </md-field>
-                    </md-table-toolbar>
+                          {{ item }}
+                        </md-option>
+                      </md-select>
+                    </md-field>
 
-                    <md-table-row slot="md-table-row" slot-scope="{ item }">
-                      <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
-                        item.patient.lastName
-                      }}</md-table-cell>
-                      <md-table-cell md-label="First Name" md-sort-by="firstName">{{
-                        item.patient.firstName
-                      }}</md-table-cell>
-                      <md-table-cell md-label="">
-                        <md-button
-                          class="md-just-icon md-success md-simple"
-                          @click.native="handlePatientViewClick(item)"
-                        >
-                          <svg-icon
-                            type="mdi"
-                            :path="mdiArrowRightDropCircle"
-                          ></svg-icon>
-                        </md-button>
-                      </md-table-cell>
-                    </md-table-row>
-                  </md-table>
+                    <md-field>
+                      <md-input
+                        type="search"
+                        class="mb-3"
+                        clearable
+                        style="width: 200px"
+                        placeholder="Search records"
+                        v-model="searchQuery"
+                      >
+                      </md-input>
+                    </md-field>
+                  </md-table-toolbar>
+
+                  <md-table-row slot="md-table-row" slot-scope="{ item }">
+                    <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
+                      item.patient.lastName
+                    }}</md-table-cell>
+                    <md-table-cell
+                      md-label="First Name"
+                      md-sort-by="firstName"
+                      >{{ item.patient.firstName }}</md-table-cell
+                    >
+                    <md-table-cell md-label="">
+                      <md-button
+                        class="md-just-icon md-success md-simple"
+                        @click.native="handlePatientViewClick(item)"
+                      >
+                        <svg-icon
+                          type="mdi"
+                          :path="mdiArrowRightDropCircle"
+                        ></svg-icon>
+                      </md-button>
+                    </md-table-cell>
+                  </md-table-row>
+                </md-table>
               </md-tab>
 
-
-              <md-tab id="tab-NewPatients" :md-label="`New Patients - ${this.newPatientCount}`">
+              <md-tab
+                id="tab-NewPatients"
+                :md-label="`New Patients - ${this.newPatientCount}`"
+              >
                 <md-table
-                    :value="queriedData"
-                    :md-sort.sync="currentSort"
-                    :md-sort-order.sync="currentSortOrder"
-                    :md-sort-fn="customSort"
-                    class="paginated-table table-striped table-hover"
-                    style="min-height:300px; align-items:flex-start; mt-15;"
-                  >
-                    <md-table-toolbar style="margin-bottom:30px;">
-                      <md-field>
-                        <label for="pages">Per page</label>
-                        <md-select v-model="pagination.perPage" name="pages">
-                          <md-option
-                            v-for="item in pagination.perPageOptions"
-                            :key="item"
-                            :label="item"
-                            :value="item"
-                          >
-                            {{ item }}
-                          </md-option>
-                        </md-select>
-                      </md-field>
-
-                      <md-field>
-                        <md-input
-                          type="search"
-                          class="mb-3"
-                          clearable
-                          style="width: 200px"
-                          placeholder="Search records"
-                          v-model="searchQuery"
+                  :value="queriedData"
+                  :md-sort.sync="currentSort"
+                  :md-sort-order.sync="currentSortOrder"
+                  :md-sort-fn="customSort"
+                  class="paginated-table table-striped table-hover"
+                  style="min-height:300px; align-items:flex-start; mt-15;"
+                >
+                  <md-table-toolbar style="margin-bottom:30px;">
+                    <md-field>
+                      <label for="pages">Per page</label>
+                      <md-select v-model="pagination.perPage" name="pages">
+                        <md-option
+                          v-for="item in pagination.perPageOptions"
+                          :key="item"
+                          :label="item"
+                          :value="item"
                         >
-                        </md-input>
-                      </md-field>
-                    </md-table-toolbar>
+                          {{ item }}
+                        </md-option>
+                      </md-select>
+                    </md-field>
 
-                    <md-table-row slot="md-table-row" slot-scope="{ item }">
-                      <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
-                        item.patient.lastName
-                      }}</md-table-cell>
-                      <md-table-cell md-label="First Name" md-sort-by="firstName">{{
-                        item.patient.firstName
-                      }}</md-table-cell>
-                      <md-table-cell md-label="">
-                        <md-button
-                          class="md-just-icon md-success md-simple"
-                          @click.native="handlePatientViewClick(item)"
-                        >
-                          <svg-icon
-                            type="mdi"
-                            :path="mdiArrowRightDropCircle"
-                          ></svg-icon>
-                        </md-button>
-                      </md-table-cell>
-                    </md-table-row>
-                  </md-table>
-              </md-tab> 
+                    <md-field>
+                      <md-input
+                        type="search"
+                        class="mb-3"
+                        clearable
+                        style="width: 200px"
+                        placeholder="Search records"
+                        v-model="searchQuery"
+                      >
+                      </md-input>
+                    </md-field>
+                  </md-table-toolbar>
+
+                  <md-table-row slot="md-table-row" slot-scope="{ item }">
+                    <md-table-cell md-label="Last Name" md-sort-by="lastName">{{
+                      item.patient.lastName
+                    }}</md-table-cell>
+                    <md-table-cell
+                      md-label="First Name"
+                      md-sort-by="firstName"
+                      >{{ item.patient.firstName }}</md-table-cell
+                    >
+                    <md-table-cell md-label="">
+                      <md-button
+                        class="md-just-icon md-success md-simple"
+                        @click.native="handlePatientViewClick(item)"
+                      >
+                        <svg-icon
+                          type="mdi"
+                          :path="mdiArrowRightDropCircle"
+                        ></svg-icon>
+                      </md-button>
+                    </md-table-cell>
+                  </md-table-row>
+                </md-table>
+              </md-tab>
             </md-tabs>
           </template>
-        </nav-tabs-card>        
+        </nav-tabs-card>
       </md-card-content>
-
     </md-card>
     <div>
       <div class="md-layout">
-        <div class="md-layout-item md-size-90 mx-auto" >
-          <md-card class="md-card-calendar" style="box-shadow:black 0px 0px 12px -4px;">
+        <div class="md-layout-item md-size-90 mx-auto">
+          <md-card
+            class="md-card-calendar"
+            style="box-shadow:black 0px 0px 12px -4px;"
+          >
             <md-card-content>
               <fullCalendar
                 ref="calendar"
@@ -349,7 +372,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -371,7 +393,6 @@ var today = new Date();
 var y = today.getFullYear();
 var m = today.getMonth();
 var d = today.getDate();
-
 
 export default {
   components: {
@@ -437,10 +458,10 @@ export default {
       mdiArrowRightDropCircle: mdiArrowRightDropCircle,
       mdiPlusCircle: mdiPlusCircle,
       mdiAccountSearch: mdiAccountSearch,
-      newPatientCount:80,
-      activePatientCount:104,
-      planReviewCount:40,
-      psychReviewCount:30,
+      newPatientCount: 80,
+      activePatientCount: 104,
+      planReviewCount: 40,
+      psychReviewCount: 30,
       calendarPlugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
       header: {
         center: "dayGridMonth,timeGridWeek,timeGridDay",
@@ -513,7 +534,7 @@ export default {
           url: "http://www.creative-tim.com/",
           className: "event-orange"
         }
-      ]      
+      ]
     };
   },
   methods: {

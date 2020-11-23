@@ -9,18 +9,17 @@ import { AmplifyEventBus } from "aws-amplify-vue";
 import { Auth, API, graphqlOperation } from "aws-amplify";
 import { listUsers } from "../graphql/queries";
 import { lookupValues } from "../constants/lookups";
-import { updateUser } from '../graphql/mutations';
+import { updateUser } from "../graphql/mutations";
 
 export default {
   data() {
     return {
       lookupValues: {},
-      patientId:null
+      patientId: null
     };
   },
   async mounted() {
-
-    this.patientId = this.$route.query.redirect_uri
+    this.patientId = this.$route.query.redirect_uri;
     this.lookupValues = lookupValues.userTypes;
 
     let user = {};
@@ -33,21 +32,24 @@ export default {
     AmplifyEventBus.$on("authState", async eventInfo => {
       if (eventInfo === "signedIn") {
         user = await Auth.currentAuthenticatedUser();
-        if (this.patientId){
-          this.updateUserProfile(user)
+        if (this.patientId) {
+          this.updateUserProfile(user);
         }
-        
+
         const email = user.attributes.email;
         const phoneNumber = user.attributes.phone_number;
         let items;
 
-        if(this.patientId){
-          items = await this.$runQuery(listUsers, {filter: { id: { eq: this.patientId } }});
+        if (this.patientId) {
+          items = await this.$runQuery(listUsers, {
+            filter: { id: { eq: this.patientId } }
+          });
         } else {
-          items = await this.$runQuery(listUsers, {filter: { cognitoId: { eq: user.attributes.sub } }});
+          items = await this.$runQuery(listUsers, {
+            filter: { cognitoId: { eq: user.attributes.sub } }
+          });
         }
         if (items.data.listUsers.items.length > 0) {
-          
           switch (items.data.listUsers.items[0].type) {
             case this.lookupValues.patient:
               this.$router.push({ name: "Patient Portal" });
@@ -62,7 +64,7 @@ export default {
               this.$router.push({ name: "Psychiatric Portal" });
               break;
             default:
-              this.$router.push({name: "Login"});
+              this.$router.push({ name: "Login" });
               break;
           }
         } else {
@@ -78,9 +80,15 @@ export default {
       }
     });
   },
-  methods:{
-    async updateUserProfile(cognitoUser){
-      await this.$runQuery(updateUser, {input:{id:this.patientId, cognitoId:cognitoUser.attributes.sub}},{filter:{id: {eq: this.patientId}}})
+  methods: {
+    async updateUserProfile(cognitoUser) {
+      await this.$runQuery(
+        updateUser,
+        {
+          input: { id: this.patientId, cognitoId: cognitoUser.attributes.sub }
+        },
+        { filter: { id: { eq: this.patientId } } }
+      );
     }
   }
 };

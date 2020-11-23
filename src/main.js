@@ -7,11 +7,8 @@ import awsmobile from "@/aws-exports";
 import router from "../src/routes/routes";
 import Loading from "vue-loading-overlay";
 import { runQuery } from "./apis/gql.js";
-import {seedData} from '../src/graphql/custom/seedData'
+import { seedData } from "../src/graphql/custom/seedData";
 import "vue-loading-overlay/dist/vue-loading.css";
-
-
-
 
 Amplify.configure(awsmobile);
 Vue.use(AmplifyPlugin, AmplifyModules);
@@ -27,7 +24,7 @@ Vue.prototype.$Chartist = Chartist;
 Vue.prototype.$runQuery = runQuery;
 /* eslint-disable no-new */
 
-seedData()
+seedData();
 new Vue({
   el: "#app",
   render: h => h(App),
