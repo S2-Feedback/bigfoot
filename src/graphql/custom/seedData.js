@@ -30,6 +30,7 @@ import {
   listPatients,
   listUsers
 } from "../queries";
+import {listPatientChartWithDetails} from '../custom/patient'
 import { runQuery } from "../../../src/apis/gql";
 
 export const seedData = async () => {
@@ -467,7 +468,16 @@ export const seedData = async () => {
         type: userTypeCareManager.data.createLookup.id
       }
     });
-
+    const psychiatrist = await runQuery(createUser, {
+        input: {
+          email: "frankbenevento123@gmail.com",
+          firstName: "Psy",
+          lastName: "Ciatrist",
+          phone: "(817)-344-0098",
+          type: userTypePsychiatrist.data.createLookup.id
+        }
+      });
+  
     const patient1 = await runQuery(createPatient, {
       input: {
         patientUserId: patientUser1.data.createUser.id,
@@ -528,15 +538,26 @@ export const seedData = async () => {
         patientId: patient1.data.createPatient.id,
         visitDate: new Date().toString()
     }})
-
-    console.log('what is the patientid = ", ', patient1.data.createPatient.id)
-    const patientAssignment = await runQuery(createPatientAssignment,{input:{
+    const physicianAssignment = await runQuery(createPatientAssignment,{input:{
         patientId: patient1.data.createPatient.id,
         patientChartId:patient1Chart.data.createPatientChart.id,
         assignedUserId: physician.data.createUser.id,
         isActive:true
     }})
-    console.log('what is the patient assignement', patientAssignment)
+    const careManagerAssignment = await runQuery(createPatientAssignment,{input:{
+        patientId : patient1.data.createPatient.id,
+        patientChartId:patient1Chart.data.createPatientChart.id,
+        assignedUserId: careManager.data.createUser.id,
+        isActive:true
+    }})
+    const psychiatristAssignment = await runQuery(createPatientAssignment,{input:{
+        patientId : patient1.data.createPatient.id,
+        patientChartId:patient1Chart.data.createPatientChart.id,
+        assignedUserId: psychiatrist.data.createUser.id,
+        isActive:true
+    }})
+    
+    
     let a = await runQuery(listOrganizations);
     console.log("organization ------", a);
     let b = await runQuery(listLocations);
@@ -551,7 +572,7 @@ export const seedData = async () => {
     console.log("lookup categories ------- ", f);
     let g = await runQuery(listLookups);
     console.log("lookups ------", g);
-    let h = await runQuery(listPatientCharts)
+    let h = await runQuery(listPatientChartWithDetails)
     console.log('patient-charts ------- ', h)
     let i = await runQuery(listPatientAssignments)
     console.log('patient assignments ------ ', i)

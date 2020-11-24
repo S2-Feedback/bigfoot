@@ -61,7 +61,6 @@ type Patient @model
   locationId: ID
   user: User @connection(fields:["patientUserId"])
   status: Lookup @connection(fields:["luStatusId"])
-  
 }
 
 type StaffLocationAssignment @model

@@ -23,3 +23,39 @@ export const listUsersByCognitoId = /* GraphQL */ `
     }
   }
 `;
+
+
+export const listPatientChartWithDetails = /* GraphQL */ `
+query ListPatientCharts(
+  $filter: ModelPatientChartFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPatientCharts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      patientId
+      visitDate
+      patient {
+        id
+        patientUserId
+        luStatusId
+        locationId
+        createdAt
+        updatedAt
+      }
+      assignments {
+        items {
+          id
+          patientId
+          patientChartId
+          assignedUserId
+        }
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+`;
