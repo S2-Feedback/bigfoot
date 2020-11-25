@@ -188,6 +188,16 @@ export const getPatientReferral = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -373,6 +383,16 @@ export const getPatient = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -461,6 +481,16 @@ export const getStaffLocationAssignment = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -561,6 +591,16 @@ export const getUser = /* GraphQL */ `
       phone
       type
       isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -584,6 +624,16 @@ export const listUsers = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -679,6 +729,16 @@ export const getAudit = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

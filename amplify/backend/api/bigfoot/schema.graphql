@@ -15,6 +15,7 @@ type Organization @model
   isActive: Boolean!
   address: Address @connection(fields:["addressId"])
 }
+
 type Location @model
 {
   id:ID!
@@ -62,7 +63,6 @@ type Patient @model
   user: User @connection(fields:["patientUserId"])
   status: Lookup @connection(fields:["luStatusId"])
 }
-
 type StaffLocationAssignment @model
 {
   id:ID!
@@ -80,7 +80,7 @@ type User @model
 {
   id: ID!
   cognitoId: ID
-  addressId: ID
+  addressId: ID!
   firstName: String
   lastName: String
   dob: String
@@ -88,6 +88,7 @@ type User @model
   phone: String
   type: ID!
   isActive: Boolean
+  address: Address @connection(fields:["addressId"])
 }
 type UserRole @model
 {

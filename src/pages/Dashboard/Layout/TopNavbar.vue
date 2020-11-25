@@ -57,7 +57,7 @@ export default {
 
       selectedEmployee: "",
       mdiPhone: mdiPhone,
-
+      patientSearchText: "",
       employees: [
         "Jim Halpert",
         "Dwight Schrute",

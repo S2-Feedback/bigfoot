@@ -6,7 +6,6 @@ import {
   deleteOrganization,
   deleteLocation,
   createLocation,
-  createPhysician,
   createLookupCategory,
   createLookup,
   deleteUser,
@@ -30,11 +29,11 @@ import {
   listPatients,
   listUsers
 } from "../queries";
-import {listPatientChartWithDetails} from '../custom/patient'
+import { listPatientChartWithDetails } from "../custom/patient";
 import { runQuery } from "../../../src/apis/gql";
 
 export const seedData = async () => {
-  let didRunOnce = false;
+  let didRunOnce = true;
 
   if (!didRunOnce) {
     const addressId = await runQuery(listAddresss, {
@@ -252,7 +251,7 @@ export const seedData = async () => {
     });
 
     const lookups = await runQuery(listLookups);
-    console.log('lookups? ', lookups)
+    console.log("lookups? ", lookups);
     const luCategories = await runQuery(listLookupCategorys);
     for (let i = 0; i < lookups.data.listLookups.items.length; i++) {
       await runQuery(deleteLookup, {
@@ -469,15 +468,15 @@ export const seedData = async () => {
       }
     });
     const psychiatrist = await runQuery(createUser, {
-        input: {
-          email: "frankbenevento123@gmail.com",
-          firstName: "Psy",
-          lastName: "Ciatrist",
-          phone: "(817)-344-0098",
-          type: userTypePsychiatrist.data.createLookup.id
-        }
-      });
-  
+      input: {
+        email: "frankbenevento123@gmail.com",
+        firstName: "Psy",
+        lastName: "Ciatrist",
+        phone: "(817)-344-0098",
+        type: userTypePsychiatrist.data.createLookup.id
+      }
+    });
+
     const patient1 = await runQuery(createPatient, {
       input: {
         patientUserId: patientUser1.data.createUser.id,
@@ -521,43 +520,61 @@ export const seedData = async () => {
       }
     });
 
-    const patientAssignments  = await runQuery(listPatientAssignments)
-    for (let i = 0; i < patientAssignments.data.listPatientAssignments.items.length; i++) {
-        await runQuery(deletePatientAssignment,{input:{
-            id: patientAssignments.data.listPatientAssignments.items[i].id      
-        }})
+    const patientAssignments = await runQuery(listPatientAssignments);
+    for (
+      let i = 0;
+      i < patientAssignments.data.listPatientAssignments.items.length;
+      i++
+    ) {
+      await runQuery(deletePatientAssignment, {
+        input: {
+          id: patientAssignments.data.listPatientAssignments.items[i].id
+        }
+      });
     }
-    const patientCharts = await runQuery(listPatientCharts)
-    for (let i = 0; i < patientCharts.data.listPatientCharts.items.length; i++) {
-        await runQuery(deletePatientChart,{input:{
-            id:patientCharts.data.listPatientCharts.items[i].id
-        }})
-        
+    const patientCharts = await runQuery(listPatientCharts);
+    for (
+      let i = 0;
+      i < patientCharts.data.listPatientCharts.items.length;
+      i++
+    ) {
+      await runQuery(deletePatientChart, {
+        input: {
+          id: patientCharts.data.listPatientCharts.items[i].id
+        }
+      });
     }
-    const patient1Chart = await runQuery(createPatientChart,{input:{
+    const patient1Chart = await runQuery(createPatientChart, {
+      input: {
         patientId: patient1.data.createPatient.id,
         visitDate: new Date().toString()
-    }})
-    const physicianAssignment = await runQuery(createPatientAssignment,{input:{
+      }
+    });
+    const physicianAssignment = await runQuery(createPatientAssignment, {
+      input: {
         patientId: patient1.data.createPatient.id,
-        patientChartId:patient1Chart.data.createPatientChart.id,
+        patientChartId: patient1Chart.data.createPatientChart.id,
         assignedUserId: physician.data.createUser.id,
-        isActive:true
-    }})
-    const careManagerAssignment = await runQuery(createPatientAssignment,{input:{
-        patientId : patient1.data.createPatient.id,
-        patientChartId:patient1Chart.data.createPatientChart.id,
+        isActive: true
+      }
+    });
+    const careManagerAssignment = await runQuery(createPatientAssignment, {
+      input: {
+        patientId: patient1.data.createPatient.id,
+        patientChartId: patient1Chart.data.createPatientChart.id,
         assignedUserId: careManager.data.createUser.id,
-        isActive:true
-    }})
-    const psychiatristAssignment = await runQuery(createPatientAssignment,{input:{
-        patientId : patient1.data.createPatient.id,
-        patientChartId:patient1Chart.data.createPatientChart.id,
+        isActive: true
+      }
+    });
+    const psychiatristAssignment = await runQuery(createPatientAssignment, {
+      input: {
+        patientId: patient1.data.createPatient.id,
+        patientChartId: patient1Chart.data.createPatientChart.id,
         assignedUserId: psychiatrist.data.createUser.id,
-        isActive:true
-    }})
-    
-    
+        isActive: true
+      }
+    });
+
     let a = await runQuery(listOrganizations);
     console.log("organization ------", a);
     let b = await runQuery(listLocations);
@@ -572,10 +589,10 @@ export const seedData = async () => {
     console.log("lookup categories ------- ", f);
     let g = await runQuery(listLookups);
     console.log("lookups ------", g);
-    let h = await runQuery(listPatientChartWithDetails)
-    console.log('patient-charts ------- ', h)
-    let i = await runQuery(listPatientAssignments)
-    console.log('patient assignments ------ ', i)
+    let h = await runQuery(listPatientChartWithDetails);
+    console.log("patient-charts ------- ", h);
+    let i = await runQuery(listPatientAssignments);
+    console.log("patient assignments ------ ", i);
     didRunOnce = true;
   }
 };

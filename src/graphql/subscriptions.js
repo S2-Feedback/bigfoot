@@ -255,6 +255,16 @@ export const onCreatePatientReferral = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -283,6 +293,16 @@ export const onUpdatePatientReferral = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -311,6 +331,16 @@ export const onDeletePatientReferral = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -538,6 +568,16 @@ export const onCreatePatient = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -580,6 +620,16 @@ export const onUpdatePatient = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -622,6 +672,16 @@ export const onDeletePatient = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -668,6 +728,16 @@ export const onCreateStaffLocationAssignment = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -726,6 +796,16 @@ export const onUpdateStaffLocationAssignment = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -784,6 +864,16 @@ export const onDeleteStaffLocationAssignment = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -833,6 +923,16 @@ export const onCreateUser = /* GraphQL */ `
       phone
       type
       isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -851,6 +951,16 @@ export const onUpdateUser = /* GraphQL */ `
       phone
       type
       isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -869,6 +979,16 @@ export const onDeleteUser = /* GraphQL */ `
       phone
       type
       isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -989,6 +1109,16 @@ export const onCreateAudit = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -1031,6 +1161,16 @@ export const onUpdateAudit = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -1073,6 +1213,16 @@ export const onDeleteAudit = /* GraphQL */ `
         phone
         type
         isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
