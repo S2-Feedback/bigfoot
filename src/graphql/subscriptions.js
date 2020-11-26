@@ -48,9 +48,9 @@ export const onCreateOrganization = /* GraphQL */ `
     onCreateOrganization {
       id
       addressId
-      name
+      organizationName
       isActive
-      address {
+      organizationAddress {
         id
         street
         city
@@ -70,9 +70,9 @@ export const onUpdateOrganization = /* GraphQL */ `
     onUpdateOrganization {
       id
       addressId
-      name
+      organizationName
       isActive
-      address {
+      organizationAddress {
         id
         street
         city
@@ -92,9 +92,9 @@ export const onDeleteOrganization = /* GraphQL */ `
     onDeleteOrganization {
       id
       addressId
-      name
+      organizationName
       isActive
-      address {
+      organizationAddress {
         id
         street
         city
@@ -115,15 +115,15 @@ export const onCreateLocation = /* GraphQL */ `
       id
       organizationId
       addressId
-      description
+      locationDescription
       costCenterCode
       isActive
-      organization {
+      locationOrganization {
         id
         addressId
-        name
+        organizationName
         isActive
-        address {
+        organizationAddress {
           id
           street
           city
@@ -136,7 +136,7 @@ export const onCreateLocation = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      address {
+      locationAddress {
         id
         street
         city
@@ -157,15 +157,15 @@ export const onUpdateLocation = /* GraphQL */ `
       id
       organizationId
       addressId
-      description
+      locationDescription
       costCenterCode
       isActive
-      organization {
+      locationOrganization {
         id
         addressId
-        name
+        organizationName
         isActive
-        address {
+        organizationAddress {
           id
           street
           city
@@ -178,7 +178,7 @@ export const onUpdateLocation = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      address {
+      locationAddress {
         id
         street
         city
@@ -199,13 +199,91 @@ export const onDeleteLocation = /* GraphQL */ `
       id
       organizationId
       addressId
-      description
+      locationDescription
       costCenterCode
       isActive
-      organization {
+      locationOrganization {
         id
         addressId
-        name
+        organizationName
+        isActive
+        organizationAddress {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      locationAddress {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateReferral = /* GraphQL */ `
+  subscription OnCreateReferral {
+    onCreateReferral {
+      id
+      referralUserId
+      referredByUserId
+      referringLocationId
+      referralTypeId
+      referredDate
+      sendToEmailAddress
+      referralName
+      referringLocation {
+        id
+        organizationId
+        addressId
+        locationDescription
+        costCenterCode
+        isActive
+        locationOrganization {
+          id
+          addressId
+          organizationName
+          isActive
+          createdAt
+          updatedAt
+        }
+        locationAddress {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      referringUser {
+        id
+        cognitoId
+        addressId
+        userTypeId
+        firstName
+        lastName
+        dob
+        email
+        phone
         isActive
         address {
           id
@@ -220,6 +298,301 @@ export const onDeleteLocation = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      referralType {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateReferral = /* GraphQL */ `
+  subscription OnUpdateReferral {
+    onUpdateReferral {
+      id
+      referralUserId
+      referredByUserId
+      referringLocationId
+      referralTypeId
+      referredDate
+      sendToEmailAddress
+      referralName
+      referringLocation {
+        id
+        organizationId
+        addressId
+        locationDescription
+        costCenterCode
+        isActive
+        locationOrganization {
+          id
+          addressId
+          organizationName
+          isActive
+          createdAt
+          updatedAt
+        }
+        locationAddress {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      referringUser {
+        id
+        cognitoId
+        addressId
+        userTypeId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      referralType {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteReferral = /* GraphQL */ `
+  subscription OnDeleteReferral {
+    onDeleteReferral {
+      id
+      referralUserId
+      referredByUserId
+      referringLocationId
+      referralTypeId
+      referredDate
+      sendToEmailAddress
+      referralName
+      referringLocation {
+        id
+        organizationId
+        addressId
+        locationDescription
+        costCenterCode
+        isActive
+        locationOrganization {
+          id
+          addressId
+          organizationName
+          isActive
+          createdAt
+          updatedAt
+        }
+        locationAddress {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      referringUser {
+        id
+        cognitoId
+        addressId
+        userTypeId
+        firstName
+        lastName
+        dob
+        email
+        phone
+        isActive
+        address {
+          id
+          street
+          city
+          state
+          zipCode
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      referralType {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateLookupCategory = /* GraphQL */ `
+  subscription OnCreateLookupCategory {
+    onCreateLookupCategory {
+      id
+      lookupCategoryDescription
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLookupCategory = /* GraphQL */ `
+  subscription OnUpdateLookupCategory {
+    onUpdateLookupCategory {
+      id
+      lookupCategoryDescription
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLookupCategory = /* GraphQL */ `
+  subscription OnDeleteLookupCategory {
+    onDeleteLookupCategory {
+      id
+      lookupCategoryDescription
+      isActive
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateLookup = /* GraphQL */ `
+  subscription OnCreateLookup {
+    onCreateLookup {
+      id
+      lookupCategoryId
+      lookupCode
+      lookupDescription
+      isActive
+      lookupCategory {
+        id
+        lookupCategoryDescription
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLookup = /* GraphQL */ `
+  subscription OnUpdateLookup {
+    onUpdateLookup {
+      id
+      lookupCategoryId
+      lookupCode
+      lookupDescription
+      isActive
+      lookupCategory {
+        id
+        lookupCategoryDescription
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLookup = /* GraphQL */ `
+  subscription OnDeleteLookup {
+    onDeleteLookup {
+      id
+      lookupCategoryId
+      lookupCode
+      lookupDescription
+      isActive
+      lookupCategory {
+        id
+        lookupCategoryDescription
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      cognitoId
+      addressId
+      userTypeId
+      firstName
+      lastName
+      dob
+      email
+      phone
+      isActive
       address {
         id
         street
@@ -235,25 +608,176 @@ export const onDeleteLocation = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePatientReferral = /* GraphQL */ `
-  subscription OnCreatePatientReferral {
-    onCreatePatientReferral {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
-      patientId
-      referredBy
-      referredDate
-      patientEmail
-      patientName
-      patientReferrer {
+      cognitoId
+      addressId
+      userTypeId
+      firstName
+      lastName
+      dob
+      email
+      phone
+      isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      cognitoId
+      addressId
+      userTypeId
+      firstName
+      lastName
+      dob
+      email
+      phone
+      isActive
+      address {
+        id
+        street
+        city
+        state
+        zipCode
+        isActive
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUserRole = /* GraphQL */ `
+  subscription OnCreateUserRole {
+    onCreateUserRole {
+      id
+      userId
+      luUserRoleId
+      userRole {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUserRole = /* GraphQL */ `
+  subscription OnUpdateUserRole {
+    onUpdateUserRole {
+      id
+      userId
+      luUserRoleId
+      userRole {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUserRole = /* GraphQL */ `
+  subscription OnDeleteUserRole {
+    onDeleteUserRole {
+      id
+      userId
+      luUserRoleId
+      userRole {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateAudit = /* GraphQL */ `
+  subscription OnCreateAudit {
+    onCreateAudit {
+      id
+      luEventId
+      initiatingUserId
+      eventDate
+      eventType {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      initiatingUser {
         id
         cognitoId
         addressId
+        userTypeId
         firstName
         lastName
         dob
         email
         phone
-        type
         isActive
         address {
           id
@@ -273,25 +797,39 @@ export const onCreatePatientReferral = /* GraphQL */ `
     }
   }
 `;
-export const onUpdatePatientReferral = /* GraphQL */ `
-  subscription OnUpdatePatientReferral {
-    onUpdatePatientReferral {
+export const onUpdateAudit = /* GraphQL */ `
+  subscription OnUpdateAudit {
+    onUpdateAudit {
       id
-      patientId
-      referredBy
-      referredDate
-      patientEmail
-      patientName
-      patientReferrer {
+      luEventId
+      initiatingUserId
+      eventDate
+      eventType {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      initiatingUser {
         id
         cognitoId
         addressId
+        userTypeId
         firstName
         lastName
         dob
         email
         phone
-        type
         isActive
         address {
           id
@@ -311,25 +849,39 @@ export const onUpdatePatientReferral = /* GraphQL */ `
     }
   }
 `;
-export const onDeletePatientReferral = /* GraphQL */ `
-  subscription OnDeletePatientReferral {
-    onDeletePatientReferral {
+export const onDeleteAudit = /* GraphQL */ `
+  subscription OnDeleteAudit {
+    onDeleteAudit {
       id
-      patientId
-      referredBy
-      referredDate
-      patientEmail
-      patientName
-      patientReferrer {
+      luEventId
+      initiatingUserId
+      eventDate
+      eventType {
+        id
+        lookupCategoryId
+        lookupCode
+        lookupDescription
+        isActive
+        lookupCategory {
+          id
+          lookupCategoryDescription
+          isActive
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      initiatingUser {
         id
         cognitoId
         addressId
+        userTypeId
         firstName
         lastName
         dob
         email
         phone
-        type
         isActive
         address {
           id
@@ -364,21 +916,21 @@ export const onCreatePatientChart = /* GraphQL */ `
           id
           cognitoId
           addressId
+          userTypeId
           firstName
           lastName
           dob
           email
           phone
-          type
           isActive
           createdAt
           updatedAt
         }
         status {
           id
-          categoryId
-          code
-          description
+          lookupCategoryId
+          lookupCode
+          lookupDescription
           isActive
           createdAt
           updatedAt
@@ -418,21 +970,21 @@ export const onUpdatePatientChart = /* GraphQL */ `
           id
           cognitoId
           addressId
+          userTypeId
           firstName
           lastName
           dob
           email
           phone
-          type
           isActive
           createdAt
           updatedAt
         }
         status {
           id
-          categoryId
-          code
-          description
+          lookupCategoryId
+          lookupCode
+          lookupDescription
           isActive
           createdAt
           updatedAt
@@ -472,21 +1024,21 @@ export const onDeletePatientChart = /* GraphQL */ `
           id
           cognitoId
           addressId
+          userTypeId
           firstName
           lastName
           dob
           email
           phone
-          type
           isActive
           createdAt
           updatedAt
         }
         status {
           id
-          categoryId
-          code
-          description
+          lookupCategoryId
+          lookupCode
+          lookupDescription
           isActive
           createdAt
           updatedAt
@@ -561,12 +1113,12 @@ export const onCreatePatient = /* GraphQL */ `
         id
         cognitoId
         addressId
+        userTypeId
         firstName
         lastName
         dob
         email
         phone
-        type
         isActive
         address {
           id
@@ -583,13 +1135,13 @@ export const onCreatePatient = /* GraphQL */ `
       }
       status {
         id
-        categoryId
-        code
-        description
+        lookupCategoryId
+        lookupCode
+        lookupDescription
         isActive
-        LookupCategory {
+        lookupCategory {
           id
-          description
+          lookupCategoryDescription
           isActive
           createdAt
           updatedAt
@@ -613,12 +1165,12 @@ export const onUpdatePatient = /* GraphQL */ `
         id
         cognitoId
         addressId
+        userTypeId
         firstName
         lastName
         dob
         email
         phone
-        type
         isActive
         address {
           id
@@ -635,13 +1187,13 @@ export const onUpdatePatient = /* GraphQL */ `
       }
       status {
         id
-        categoryId
-        code
-        description
+        lookupCategoryId
+        lookupCode
+        lookupDescription
         isActive
-        LookupCategory {
+        lookupCategory {
           id
-          description
+          lookupCategoryDescription
           isActive
           createdAt
           updatedAt
@@ -665,12 +1217,12 @@ export const onDeletePatient = /* GraphQL */ `
         id
         cognitoId
         addressId
+        userTypeId
         firstName
         lastName
         dob
         email
         phone
-        type
         isActive
         address {
           id
@@ -687,635 +1239,17 @@ export const onDeletePatient = /* GraphQL */ `
       }
       status {
         id
-        categoryId
-        code
-        description
+        lookupCategoryId
+        lookupCode
+        lookupDescription
         isActive
-        LookupCategory {
+        lookupCategory {
           id
-          description
+          lookupCategoryDescription
           isActive
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateStaffLocationAssignment = /* GraphQL */ `
-  subscription OnCreateStaffLocationAssignment {
-    onCreateStaffLocationAssignment {
-      id
-      staffMemberId
-      locationId
-      isPermanent
-      startDate
-      startTime
-      endDate
-      endTime
-      staffMember {
-        id
-        cognitoId
-        addressId
-        firstName
-        lastName
-        dob
-        email
-        phone
-        type
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      location {
-        id
-        organizationId
-        addressId
-        description
-        costCenterCode
-        isActive
-        organization {
-          id
-          addressId
-          name
-          isActive
-          createdAt
-          updatedAt
-        }
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateStaffLocationAssignment = /* GraphQL */ `
-  subscription OnUpdateStaffLocationAssignment {
-    onUpdateStaffLocationAssignment {
-      id
-      staffMemberId
-      locationId
-      isPermanent
-      startDate
-      startTime
-      endDate
-      endTime
-      staffMember {
-        id
-        cognitoId
-        addressId
-        firstName
-        lastName
-        dob
-        email
-        phone
-        type
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      location {
-        id
-        organizationId
-        addressId
-        description
-        costCenterCode
-        isActive
-        organization {
-          id
-          addressId
-          name
-          isActive
-          createdAt
-          updatedAt
-        }
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteStaffLocationAssignment = /* GraphQL */ `
-  subscription OnDeleteStaffLocationAssignment {
-    onDeleteStaffLocationAssignment {
-      id
-      staffMemberId
-      locationId
-      isPermanent
-      startDate
-      startTime
-      endDate
-      endTime
-      staffMember {
-        id
-        cognitoId
-        addressId
-        firstName
-        lastName
-        dob
-        email
-        phone
-        type
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      location {
-        id
-        organizationId
-        addressId
-        description
-        costCenterCode
-        isActive
-        organization {
-          id
-          addressId
-          name
-          isActive
-          createdAt
-          updatedAt
-        }
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
-      id
-      cognitoId
-      addressId
-      firstName
-      lastName
-      dob
-      email
-      phone
-      type
-      isActive
-      address {
-        id
-        street
-        city
-        state
-        zipCode
-        isActive
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
-      id
-      cognitoId
-      addressId
-      firstName
-      lastName
-      dob
-      email
-      phone
-      type
-      isActive
-      address {
-        id
-        street
-        city
-        state
-        zipCode
-        isActive
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
-      id
-      cognitoId
-      addressId
-      firstName
-      lastName
-      dob
-      email
-      phone
-      type
-      isActive
-      address {
-        id
-        street
-        city
-        state
-        zipCode
-        isActive
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateUserRole = /* GraphQL */ `
-  subscription OnCreateUserRole {
-    onCreateUserRole {
-      id
-      userId
-      luRoleId
-      role {
-        id
-        categoryId
-        code
-        description
-        isActive
-        LookupCategory {
-          id
-          description
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateUserRole = /* GraphQL */ `
-  subscription OnUpdateUserRole {
-    onUpdateUserRole {
-      id
-      userId
-      luRoleId
-      role {
-        id
-        categoryId
-        code
-        description
-        isActive
-        LookupCategory {
-          id
-          description
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteUserRole = /* GraphQL */ `
-  subscription OnDeleteUserRole {
-    onDeleteUserRole {
-      id
-      userId
-      luRoleId
-      role {
-        id
-        categoryId
-        code
-        description
-        isActive
-        LookupCategory {
-          id
-          description
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateAudit = /* GraphQL */ `
-  subscription OnCreateAudit {
-    onCreateAudit {
-      id
-      luEventId
-      initiatingUserId
-      eventDate
-      event {
-        id
-        categoryId
-        code
-        description
-        isActive
-        LookupCategory {
-          id
-          description
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      initiatedBy {
-        id
-        cognitoId
-        addressId
-        firstName
-        lastName
-        dob
-        email
-        phone
-        type
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateAudit = /* GraphQL */ `
-  subscription OnUpdateAudit {
-    onUpdateAudit {
-      id
-      luEventId
-      initiatingUserId
-      eventDate
-      event {
-        id
-        categoryId
-        code
-        description
-        isActive
-        LookupCategory {
-          id
-          description
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      initiatedBy {
-        id
-        cognitoId
-        addressId
-        firstName
-        lastName
-        dob
-        email
-        phone
-        type
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteAudit = /* GraphQL */ `
-  subscription OnDeleteAudit {
-    onDeleteAudit {
-      id
-      luEventId
-      initiatingUserId
-      eventDate
-      event {
-        id
-        categoryId
-        code
-        description
-        isActive
-        LookupCategory {
-          id
-          description
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      initiatedBy {
-        id
-        cognitoId
-        addressId
-        firstName
-        lastName
-        dob
-        email
-        phone
-        type
-        isActive
-        address {
-          id
-          street
-          city
-          state
-          zipCode
-          isActive
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateLookupCategory = /* GraphQL */ `
-  subscription OnCreateLookupCategory {
-    onCreateLookupCategory {
-      id
-      description
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateLookupCategory = /* GraphQL */ `
-  subscription OnUpdateLookupCategory {
-    onUpdateLookupCategory {
-      id
-      description
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteLookupCategory = /* GraphQL */ `
-  subscription OnDeleteLookupCategory {
-    onDeleteLookupCategory {
-      id
-      description
-      isActive
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateLookup = /* GraphQL */ `
-  subscription OnCreateLookup {
-    onCreateLookup {
-      id
-      categoryId
-      code
-      description
-      isActive
-      LookupCategory {
-        id
-        description
-        isActive
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateLookup = /* GraphQL */ `
-  subscription OnUpdateLookup {
-    onUpdateLookup {
-      id
-      categoryId
-      code
-      description
-      isActive
-      LookupCategory {
-        id
-        description
-        isActive
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteLookup = /* GraphQL */ `
-  subscription OnDeleteLookup {
-    onDeleteLookup {
-      id
-      categoryId
-      code
-      description
-      isActive
-      LookupCategory {
-        id
-        description
-        isActive
         createdAt
         updatedAt
       }
